@@ -22,7 +22,7 @@ See the complete list of icons at [Craftwork](https://craftwork.design/downloads
 2. Install the dependencies
 
    ```c
-   npm
+   npm install
    ```
 
 3. Build the plugin
@@ -35,6 +35,6 @@ See the complete list of icons at [Craftwork](https://craftwork.design/downloads
 
 5. Go to `Menu > Plugins > Development > New Plugin...`
 
-6. Choose `basil/manifest.json`
+6. Choose `basil-plugin/manifest.json`
 
 7. Run the plugin by going to `Menu > Plugins > Development > Basil Icons`

@@ -6,7 +6,7 @@ Basil icons plugin provides a collection of simply beautiful open source icons f
 
 Over 500 Outline and Solid icons grouped in 9 of the most used categories to help you in search of what you need. Also includes some icons sourced from my favourite libraries.
 
-## Install the [Basil Icons Plugin](https://www.figma.com/c/plugin/744047966581015514/Feather) in Figma.
+<!-- ## Install the [Basil Icons Plugin](https://www.figma.com/c/plugin/744047966581015514/Feather) in Figma. -->
 
 See the complete list of icons at [Craftwork](https://craftwork.design/downloads/basil).
 

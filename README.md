@@ -28,7 +28,7 @@ See the complete list of icons at [Craftwork](https://craftwork.design/downloads
 3. Build the plugin
 
    ```
-   npm build
+   npm run build
    ```
 
 4. Open the [Figma desktop app](https://www.figma.com/downloads/)

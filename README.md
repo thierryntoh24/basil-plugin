@@ -2,7 +2,7 @@
 
 Craftwork icons plugin provides a free and growing collection of the cuttiest open source icons from [Craftwork](https://craftwork.desisgn).
 
-![Cover](./src/Screenshot.png)
+![Cover](Screenshot.png)
 
 Over 650 and growing icons in 3 packs and various commonly used categories to help you in search of what you need.
 

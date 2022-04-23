@@ -1,110 +1,147 @@
-body {
-    font-family: 'Pulp Display', 'Inter', sans-serif;
-    margin: 0;
-    padding: 0;
-}
-
-button {
-    padding: 8px;
-    color: #333;
-    border: none;
-    border-radius: 2px;
-    background: transparent;
-    appearance: none;
-    outline: none;
-}
-
-button:hover {
-    background: rgba(0, 0, 0, 0.06)
-}
-
-button:focus,
-button:active {
-    box-shadow: inset 0 0 0 2px #18A0FB;
-}
-
-input {
-    border: none;
-    outline: none;
-    width: 100%;
-    height: 40px;
-    padding: 0 20 0 36px;
-    font-family: inherit;
-    font-size: 13px;
-}
-
-a {
-    color: #333;
-    text-decoration: none;
-}
-
-.toggle {
-    position: relative;
-    width: 26px;
-    display: inline-block;
-    background: white;
-}
-
-.checkbox {
-    display: none;
-}
-
-.label {
-    display: block;
-    overflow: hidden;
-    cursor: pointer;
-    border: 1.5px solid black;
-    border-radius: 20px;
-}
-
-.inner {
-    display: block;
-    width: 200%;
-    margin-left: -100%;
-}
-
-.inner::before,
-.inner::after {
-    float: left;
-    width: 50%;
-    height: 12px;
-    box-sizing: border-box;
-}
-
-.inner::after {
-    content: '';
-    background-color: #333;
-}
-
-.switch {
-    display: block;
-    width: 7.5px;
-    height: 7px;
-    margin: 4px;
-    background: black;
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    right: 8px;
-    border-radius: 50%;
-    transition: all 0.2s ease-in 0s;
-}
-
-.checkbox:checked+.label .inner {
-    margin-left: 0;
-}
-
-.checkbox:checked+.label .switch {
-    right: 0;
-    background: white;
-}
-
-.brr {
-    background: white;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding-right: 4px;
-    font-size: 12px;
-    color: #333;
-}
+    body {
+        font-family: 'Pulp Display', 'Inter', sans-serif;
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+    
+    button {
+        padding: 8px;
+        border: none;
+        border-radius: 2px;
+        background: transparent;
+        appearance: none;
+        outline: none;
+    }
+    
+    button:hover {
+        background: rgba(0, 0, 0, 0.06)
+    }
+    
+    button:focus,
+    button:active {
+        box-shadow: inset 0 0 0 2px #18A0FB;
+    }
+    
+    .tabs {
+        margin-left: auto;
+        display: flex;
+        align-items: center;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        box-sizing: border-box;
+        background-color: #fff;
+        padding: 8px;
+        border-bottom: 1px solid rgba(0, 0, 0, 0.03);
+        gap: 2%;
+    }
+    
+    .tabs .pack {
+        padding: 6px 10px;
+        border-radius: 6px;
+        border: .5px solid rgba(0, 0, 0, 0.1);
+        color: #333;
+        font-size: 13px;
+        text-align: center;
+        cursor: pointer;
+        flex-grow: 1;
+    }
+    
+    .tabs .pack:hover,
+    .pack.active {
+        color: #fff;
+        background-color: #141414;
+    }
+    
+    .tabs .pack:focus {
+        outline: none;
+    }
+    
+    .search-select {
+        background-color: #fff;
+        padding: 8px;
+        display: flex;
+        justify-content: space-between;
+        border: none;
+        align-items: center;
+    }
+    
+    .search-icon {
+        padding: 6px;
+    }
+    
+    input {
+        border: none;
+        background-color: transparent;
+        color: black;
+        outline: none;
+        width: 100%;
+        height: 34px;
+        padding-right: 8px;
+        border-radius: 6px;
+        font-family: inherit;
+        font-size: 13px;
+        font-weight: 400;
+    }
+    
+    a {
+        color: #333;
+        text-decoration: none;
+    }
+    
+    .brr {
+        position: relative;
+        width: 68%;
+        display: flex;
+        background: rgba(0, 0, 0, 0.05);
+        border-radius: 6px;
+        justify-content: flex-start;
+        align-items: center;
+        color: #000;
+    }
+    
+    .style {
+        width: 24%;
+        position: relative;
+        user-select: none;
+    }
+    
+    .select-field {
+        width: 100%;
+        padding: 8px;
+        display: flex;
+        background: rgba(0, 0, 0, 0.05);
+        justify-content: space-between;
+        align-items: center;
+        border-radius: 6px;
+        cursor: pointer;
+        font-size: 13px;
+        font-weight: 400;
+    }
+    
+    .style-options {
+        position: absolute;
+        width: 115%;
+        padding: 2px;
+        top: 115%;
+        margin-right: 0;
+        color: #333;
+        background-color: white;
+        border: rgba(0, 0, 0, 0.1);
+        box-shadow: 3px 3px 6px 6px rgba(0, 0, 0, 0.05);
+        border-radius: 6px;
+    }
+    
+    .style-options .option {
+        display: block;
+        padding: 6px;
+        cursor: pointer;
+        border-radius: 6px;
+        font-size: 13px;
+    }
+    
+    .style-options .option:hover,
+    .option.active {
+        background-color: rgba(0, 0, 0, 0.03);
+        color: black;
+    }

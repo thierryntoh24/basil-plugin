@@ -1,14 +1,14 @@
-# Basil Icons Plugin
+# Craftwork Icons Plugin
 
-Basil icons plugin provides a collection of simply beautiful open source icons from [Craftwork](https://craftwork.desisgn), with inspiration from [Feather Icons](https://feathericons.com).
+Craftwork icons plugin provides a free and growing collection of the cuttiest open source icons from [Craftwork](https://craftwork.desisgn).
 
 ![Cover](./src/Screenshot.png)
 
-Over 500 Outline and Solid icons grouped in 9 of the most used categories to help you in search of what you need. Also includes some icons sourced from my favourite libraries.
+Over 650 and growing icons in 3 packs and various commonly used categories to help you in search of what you need. Also includes some icons sourced from my favourite libraries.
 
-### Install the [Basil Icons Plugin](https://www.figma.com/community/plugin/1047665302404244638) in Figma.
+### Install the [Craftwork Icons Plugin](https://www.figma.com/community/plugin/1047665302404244638) in Figma.
 
-See the complete list of icons at [Craftwork](https://craftwork.design/downloads/basil).
+See the complete list of icons at [Icons by Craftwork](https://icons.craftwork.design).
 
 ## Local development
 
@@ -35,6 +35,6 @@ See the complete list of icons at [Craftwork](https://craftwork.design/downloads
 
 5. Go to `Menu > Plugins > Development > New Plugin...`
 
-6. Choose `basil-plugin/manifest.json`
+6. Choose `craftwork-plugin/manifest.json`
 
-7. Run the plugin by going to `Menu > Plugins > Development > Basil Icons`
+7. Run the plugin by going to `Menu > Plugins > Development > Craftwork Icons`

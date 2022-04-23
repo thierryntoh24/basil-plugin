@@ -1,62 +1,101 @@
 import * as React from "react";
 import icons from "./icons";
-import Icons from "../basil-icons/icons";
-
-const ICON_COUNT = icons.filter(icon => icon.style != 'Solid').length;
+import { Basil, Edge } from "../icons/icons";
 
 interface SearchInputProps extends React.HTMLProps<HTMLDivElement> {
-  value: string;
+  value: string
   onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
-  onCheck: (event: React.ChangeEvent<HTMLInputElement>) => void;
+  packs: string[]
+  activePack: string
+  setActivePack: React.Dispatch<React.SetStateAction<string>>
+  isSelected: string
+  setSelected: React.Dispatch<React.SetStateAction<string>>
 }
 
-function SearchInput({ value, onChange, onCheck, ...props }: SearchInputProps) {
+function SearchInput({ value, packs, activePack, isSelected, onChange, setSelected, setActivePack, ...props }: SearchInputProps) {
+
+  const
+    [isDropped, setIsDropped] = React.useState(false),
+    styles: { [key: string]: string[] } = {
+      'Basil': ['Outline', 'Solid'],
+      'Edge': ['Regular', 'Thin', 'Medium'],
+      'Clickons': ['Stroke', 'Fill'],
+    }
+
+  let state: string;
+
   return (
-    
-    <div
-      style={{
-        position: "relative",
-        padding: 8,
-      }}
-      {...props}
-    >
-      <div
-        style={{
-          position: "absolute",
-          top: 0,
-          left: 0,
-          padding: 8,
-        }}
-      >
-        <svg
-          viewBox="0 0 32 32"
-          width={32}
-          height={32}
-          fill="none"
-          dangerouslySetInnerHTML={{ __html: Icons.Outline.Search }}
-        />
+    <>
+      <div className="tabs">
+        {
+          packs.map(pack => (<>
+            <div className={`pack ${activePack === pack ? state = 'active' : null}`} onClick={() => { setActivePack(pack); setSelected(styles[pack][0]); }}>
+              {`${pack} (${icons.filter(icon => icon.pack === pack).length})`}
+            </div>
+          </>
+          ))
+        }
+
       </div>
 
-      <div className="brr">
-        <input
-          autoFocus
-          type="search"
-          value={value}
-          onChange={onChange}
-          placeholder={`Search ${ICON_COUNT} icons -> Toggle for mode`}
-        />
-        <div className="toggle">
-          <input type="checkbox" className="checkbox" name="style" id="style" onChange={onCheck} />
-          <label htmlFor="style" className="label">
-            <span className="inner" />
-            <span className="switch" />
-          </label>
+      <div
+        className="search-select"
+        {...props}
+      >
+        <div className="style" onClick={() => setIsDropped(!isDropped)}>
+          <div className="select-field">
+            {isSelected}
+
+            <svg
+              className="dropdown-icon"
+              viewBox="0 0 20 20"
+              width={18}
+              height={18}
+              fill="none"
+              dangerouslySetInnerHTML={{ __html: Basil.Outline.CarDown }}
+            />
+          </div>
+
+          {
+            isDropped && (
+              <div className="style-options">
+                {styles[activePack].map(style => (
+                  <div className='option' onClick={() => {
+                    setIsDropped(!isDropped);
+                    setSelected(style)
+                  }}>
+                    {style}
+                  </div>
+                ))}
+              </div>
+            )
+          }
+        </div>
+
+        <div className="brr">
+          <div
+            className="search-icon"
+          >
+            <svg
+              viewBox="0 0 22 22"
+              width={20}
+              height={20}
+              fill="none"
+              dangerouslySetInnerHTML={{ __html: Edge.Thin.Search }}
+            />
+          </div>
+
+          <input
+            autoFocus
+            type="search"
+            value={value}
+            onChange={onChange}
+            placeholder={`Search all ${icons.length} icons`}
+          />
         </div>
       </div>
-    </div>
+    </>
   );
 }
-
-
 export default SearchInput;
 

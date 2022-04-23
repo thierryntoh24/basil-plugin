@@ -15,8 +15,8 @@ See the complete list of icons at [Icons by Craftwork](https://icons.craftwork.d
 1. Clone the repository
 
    ```shell
-   git clone https://github.com/thierryntoh24/basil-plugin.git
-   cd basil-plugin
+   git clone https://github.com/thierryntoh24/craftwork-plugin.git
+   cd craftwork-plugin
    ```
 
 2. Install the dependencies

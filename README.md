@@ -15,7 +15,7 @@ See the complete list of icons at [Craftwork](https://craftwork.design/downloads
 1. Clone the repository
 
    ```shell
-   git clone https://github.com/thierryntoh24/basil-plugin.git
+   git clone https://github.com/thierryntoh24/craftwork-plugin/tree/basil.git
    cd basil-plugin
    ```
 

@@ -8,118 +8,79 @@ import "./ui.css";
 
 function App() {
 
-  //For the pills
-  const
-    [query, setQuery] = React.useState(""),
-    [activePack, setActivePack] = React.useState<string>('Basil'),
-    [isSelected, setSelected] = React.useState('Outline'),
-    packs = [...new Set(icons.map(icon => icon.pack))],
+  //For the toggle
+  let check: string;
+  const [checked, setChecked] = React.useState(false);
+  checked ? (check = "Solid") : (check = "Outline");
 
-    //For search 
-    fuse = new Fuse(icons, {
-      keys: ["name", "tags"],
-      shouldSort: true,
-      findAllMatches: true,
-      threshold: 0.2,
-      location: 0,
-      distance: 100,
-      minMatchCharLength: 1,
-    }),
+  const [query, setQuery] = React.useState("");
 
-    results = query.trim() ? fuse.search(query.trim()).map((icon) => icon.item) : icons;
+  //For search functionality
+  const fuse = new Fuse(icons, {
+    keys: ["name", "tags"],
+    shouldSort: true,
+    findAllMatches: true,
+    threshold: 0.2,
+    location: 0,
+    distance: 100,
+    minMatchCharLength: 1,
+  });
 
-  React.useEffect(() => {
-    setQuery('')
-  }, [activePack])
+  const results = query.trim() ? fuse.search(query.trim()).map((icon) => icon.item) : icons;
+
+  const categories = [...new Set(results.map((icon) => icon.category))];
 
   return (
     <div className="wrapper-div">
       <SearchInput
-        key={activePack}
-        
         value={query}
         onChange={(event) => setQuery(event.target.value)}
-
-        packs={packs}
-        activePack={activePack}
-        setActivePack={setActivePack}
-
-        isSelected={isSelected}
-        setSelected={setSelected}
-
+        onCheck={() => setChecked(!checked)}
         style={{
           position: "sticky",
           top: 0,
-          borderBottom: "1px solid rgba(0, 0, 0, 0.03)",
+          borderBottom: "1px solid rgba(0, 0, 0, 0.1)",
         }}
       />
-
       <div style={{ padding: 8, paddingTop: 4 }} id="results">
-        {
-          !query.trim() ? (
-            <>
-              {
-                [...new Set(icons.filter(icon => icon.pack === activePack).map(icon => icon.category))].map((category) => (
-                  <>
-                    <p style={{ paddingLeft: 8, fontSize: 14 }}>{category}</p>
-                    <div
-                      style={{
-                        display: "grid",
-                        gridTemplateColumns: "repeat(6, 1fr)",
-                        gridGap: 4,
-                      }}
-                    >
-                      {results.filter((icon) => (icon.pack === activePack) && (icon.category == category)).map((icon) => icon.paths.filter(path =>
-                        path.style === isSelected).map(path => (
-                          <IconButton
-                            name={icon.name}
-                            contents={path.path}
-                            id={path.id}
-                            pack={icon.pack}
-                            category={category}
-                          />
-                        )))}
-                    </div>
-                  </>
-                ))
-              }
-            </>
-          ) : (<>
-            {
-              results ? (
-                [...new Set(results.map(icon => icon.pack))].map(pack => (<>
-                  <p style={{ paddingLeft: 8, fontSize: 14 }}>{pack}</p>
-
-                  <div
-                    style={{
-                      display: "grid",
-                      gridTemplateColumns: "repeat(6, 1fr)",
-                      gridGap: 4,
-                    }}
-                  >
-                    {results.filter(icon => icon.pack === pack).map((icon) => icon.paths.map(path => (
-                      <IconButton
-                        name={icon.name}
-                        contents={path.path}
-                        id={path.id}
-                        pack={icon.pack}
-                        category={icon.category}
-                      />
-                    )))}
-                  </div>
-                </>))) : (<p style={{ paddingLeft: 8, fontSize: 14 }}>{'No results found, please try another keyword'}</p>)
-            }
-          </>)
-        }
+        <div
+          style={{
+            fontSize: 12,
+            color: "rgba(0, 0, 0, 0.5)",
+          }}
+        >
+          {/* <p>Search is currently unavailable. Working on it :)</p> */}
+        </div>
+        {categories.map((cat) => (
+          <>
+            <p style={{ paddingLeft: 8, fontSize: 14 }}>{cat}</p>
+            <div
+              style={{
+                display: "grid",
+                gridTemplateColumns: "repeat(6, 1fr)",
+                gridGap: 4,
+              }}
+            >
+              {results
+                .filter((icon) => icon.category == cat && icon.style == check)
+                .map((icon) => (
+                  <IconButton
+                    name={icon.name}
+                    contents={icon.content}
+                    cat={icon.category}
+                    style={icon.style}
+                  />
+                ))}
+            </div>
+          </>
+        ))}
       </div>
 
       <div
         style={{
           marginTop: 2,
-          marginBottom: 0,
           padding: 8,
           fontSize: 12,
-          positon: 'fixed',
           color: "rgba(0, 0, 0, 0.5)",
           display: "flex",
           justifyContent: "space-between",
@@ -127,7 +88,7 @@ function App() {
         }}
       >
         <p>
-          <a href="http://icons.craftwork.design">Craftwork Icons, v{version}</a>
+          Basil Icons from <a href="http://craftwork.design">Craftwork, v{version}</a>
         </p>
         <p>
           By <a href="http://thierryntoh.webflow.com">Thiérry Ntoh</a>

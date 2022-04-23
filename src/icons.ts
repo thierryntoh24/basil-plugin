@@ -1,765 +1,739 @@
-import { Basil, Edge, Clickons } from "../icons/icons"
+import Icons from "../basil-icons/icons"
 
-export interface Icon {
-    name: string
-    paths: {
-        id: number
-        style: string
-        path: string
-    }[]
-    pack: string
-    category?: string
-    tags?: string[]
-    toSVG: (id: number) => string
-}
-
-class icon implements Icon {
-    name: string
-    paths: {
-        id: number
-        style: string
-        path: string
-    }[]
-    pack: string
-    category?: string
-    tags?: string[]
-
-    constructor(name: string, paths: { id: number, style: string, path: string }[], pack: string, category?: string, tags?: string[]) {
-        this.name = name
-        this.paths = paths
-        this.pack = pack
-        this.category = category
-        this.tags = tags
-    }
-
-    toSVG(id: number): string {
-        for (const path of this.paths) {
-            if (path.id === id)
-                return ('<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24s 24" fill="none">' + path.path + '</svg>')
-        }
-    };
-}
-
-const icons: Icon[] = []
+//Icons arrays
+const icons = []
+export const version = 1.0;
 
 //Push individual icons into array
-icons.push(
 
-    //Basil
-    //#General
-    new icon('Home', [{ id: 1, style: 'Outline', path: Basil.Outline.Home }, { id: 2, style: 'Solid', path: Basil.Solid.Home }], 'Basil', 'General', ['House']),
-    new icon('Suitcase', [{ id: 1, style: 'Outline', path: Basil.Outline.Bag }, { id: 2, style: 'Solid', path: Basil.Solid.Bag }], 'Basil', 'General'),
-    new icon('Pie Chart', [{ id: 1, style: 'Outline', path: Basil.Outline.ChartPie }, { id: 2, style: 'Solid', path: Basil.Solid.ChartPie }], 'Basil', 'General'),
-    new icon('Pie Chart-Alt', [{ id: 1, style: 'Outline', path: Basil.Outline.ChartPieAlt }, { id: 2, style: 'Solid', path: Basil.Solid.ChartPieAlt }], 'Basil', 'General'),
-    new icon('Box', [{ id: 1, style: 'Outline', path: Basil.Outline.Box }, { id: 2, style: 'Solid', path: Basil.Solid.Box }], 'Basil', 'General'),
-    new icon('Card', [{ id: 1, style: 'Outline', path: Basil.Outline.Card }, { id: 2, style: 'Solid', path: Basil.Solid.Card }], 'Basil', 'General', ['Credit Card', 'CC']),
-    new icon('Shopping Cart', [{ id: 1, style: 'Outline', path: Basil.Outline.ShopCart }, { id: 2, style: 'Solid', path: Basil.Solid.ShopCart }], 'Basil', 'General'),
-    new icon('Wallet', [{ id: 1, style: 'Outline', path: Basil.Outline.Wallet }, { id: 2, style: 'Solid', path: Basil.Solid.Wallet }], 'Basil', 'General'),
-    new icon('Bank', [{ id: 1, style: 'Outline', path: Basil.Outline.Bank }, { id: 2, style: 'Solid', path: Basil.Solid.Bank }], 'Basil', 'General', ['Temple']),
-    new icon('Sun', [{ id: 1, style: 'Outline', path: Basil.Outline.Sun }, { id: 2, style: 'Solid', path: Basil.Solid.Sun }], 'Basil', 'General', ['Light', 'Brightness', 'Day']),
-    new icon('Moon', [{ id: 1, style: 'Outline', path: Basil.Outline.Moon }, { id: 2, style: 'Solid', path: Basil.Solid.Moon }], 'Basil', 'General', ['Dark', 'Night']),
-    new icon('Palette', [{ id: 1, style: 'Outline', path: Basil.Outline.Palette }, { id: 2, style: 'Solid', path: Basil.Solid.Palette }], 'Basil', 'General', ['Cookie']),
-    new icon('Flask', [{ id: 1, style: 'Outline', path: Basil.Outline.Flask }, { id: 2, style: 'Solid', path: Basil.Solid.Flask }], 'Basil', 'General', ['Beaker', 'Flat Bottom']),
-    new icon('Flask-Alt', [{ id: 1, style: 'Outline', path: Basil.Outline.FlaskAlt }, { id: 2, style: 'Solid', path: Basil.Solid.FlaskAlt }], 'Basil', 'General', ['Beaker', 'Round Bottom']),
-    new icon('Shopping Basket', [{ id: 1, style: 'Outline', path: Basil.Outline.ShopBasket }, { id: 2, style: 'Solid', path: Basil.Solid.ShopBasket }], 'Basil', 'General'),
-    new icon('Shopping Bag', [{ id: 1, style: 'Outline', path: Basil.Outline.ShopBag }, { id: 2, style: 'Solid', path: Basil.Solid.ShopBag }], 'Basil', 'General'),
-    new icon('Pulse', [{ id: 1, style: 'Outline', path: Basil.Outline.Pulse }, { id: 2, style: 'Solid', path: Basil.Solid.Pulse }], 'Basil', 'General', ['Heartbeat']),
-    new icon('Umbrella', [{ id: 1, style: 'Outline', path: Basil.Outline.Umbrella }, { id: 2, style: 'Solid', path: Basil.Solid.Umbrella }], 'Basil', 'General'),
-    new icon('Calender', [{ id: 1, style: 'Outline', path: Basil.Outline.Calender }, { id: 2, style: 'Solid', path: Basil.Solid.Calender }], 'Basil', 'General'),
-    new icon('Filter', [{ id: 1, style: 'Outline', path: Basil.Outline.Filter }, { id: 2, style: 'Solid', path: Basil.Solid.Filter }], 'Basil', 'General', ['Funnel']),
-    new icon('Medikit', [{ id: 1, style: 'Outline', path: Basil.Outline.Medikit }, { id: 2, style: 'Solid', path: Basil.Solid.Medikit }], 'Basil', 'General', ['First Aid', 'Bag']),
-    new icon('Clock', [{ id: 1, style: 'Outline', path: Basil.Outline.Clock }, { id: 2, style: 'Solid', path: Basil.Solid.Clock }], 'Basil', 'General', ['Time']),
-    new icon('Alarm', [{ id: 1, style: 'Outline', path: Basil.Outline.Alarm }, { id: 2, style: 'Solid', path: Basil.Solid.Alarm }], 'Basil', 'General', ['Time']),
-    new icon('Timer', [{ id: 1, style: 'Outline', path: Basil.Outline.Timer }, { id: 2, style: 'Solid', path: Basil.Solid.Timer }], 'Basil', 'General', ['Stopwatch', 'Time']),
+export const pushSVG = (name: string, content: string, category: string, style?: string, tags?: string[]) => {
+    icons.push({
+        name: name,
+        content: content,
+        category: category,
 
-    //#Status
-    new icon('Lock', [{ id: 1, style: 'Outline', path: Basil.Outline.Lock }, { id: 2, style: 'Solid', path: Basil.Solid.Lock }], 'Basil', 'Status'),
-    new icon('Unlocked', [{ id: 1, style: 'Outline', path: Basil.Outline.Unlock }, { id: 2, style: 'Solid', path: Basil.Solid.Unlock }], 'Basil', 'Status'),
-    new icon('Lock-Time', [{ id: 1, style: 'Outline', path: Basil.Outline.LockTime }, { id: 2, style: 'Solid', path: Basil.Solid.LockTime }], 'Basil', 'Status'),
-    new icon('Eye', [{ id: 1, style: 'Outline', path: Basil.Outline.Eye }, { id: 2, style: 'Solid', path: Basil.Solid.Eye }], 'Basil', 'Status', ['Password']),
-    new icon('Eye-Closed', [{ id: 1, style: 'Outline', path: Basil.Outline.EyeClosed }, { id: 2, style: 'Solid', path: Basil.Solid.EyeClosed }], 'Basil', 'Status', ['Password']),
-    new icon('Key', [{ id: 1, style: 'Outline', path: Basil.Outline.Key }, { id: 2, style: 'Solid', path: Basil.Solid.Key }], 'Basil', 'Status'),
-    new icon('Pin', [{ id: 1, style: 'Outline', path: Basil.Outline.Pin }, { id: 2, style: 'Solid', path: Basil.Solid.Pin }], 'Basil', 'Status'),
-    new icon('Lightning', [{ id: 1, style: 'Outline', path: Basil.Outline.Lightn }, { id: 2, style: 'Solid', path: Basil.Solid.Lightn }], 'Basil', 'Status', ['Shock', 'Bolt', 'Flash']),
-    new icon('Lightning-Alt', [{ id: 1, style: 'Outline', path: Basil.Outline.LightnAlt }, { id: 2, style: 'Solid', path: Basil.Solid.LightnAlt }], 'Basil', 'Status', ['Shock', 'Bolt', 'Flash']),
-    new icon('Shield', [{ id: 1, style: 'Outline', path: Basil.Outline.Shield }, { id: 2, style: 'Solid', path: Basil.Solid.Shield }], 'Basil', 'Status'),
-    new icon('Info-Rectangle', [{ id: 1, style: 'Outline', path: Basil.Outline.InfoRect }, { id: 2, style: 'Solid', path: Basil.Solid.InfoRect }], 'Basil', 'Status'),
-    new icon('Info-Circle', [{ id: 1, style: 'Outline', path: Basil.Outline.InfoCic }, { id: 2, style: 'Solid', path: Basil.Solid.InfoCic }], 'Basil', 'Status'),
-    new icon('Info-Triangle', [{ id: 1, style: 'Outline', path: Basil.Outline.InfoTri }, { id: 2, style: 'Solid', path: Basil.Solid.InfoTri }], 'Basil', 'Status'),
-    new icon('Checked Box', [{ id: 1, style: 'Outline', path: Basil.Outline.CheckedBox }, { id: 2, style: 'Solid', path: Basil.Solid.CheckedBox }], 'Basil', 'Status', ['Confirm']),
-    new icon('Star', [{ id: 1, style: 'Outline', path: Basil.Outline.Star }, { id: 2, style: 'Solid', path: Basil.Solid.Star }], 'Basil', 'Status', ['Rating']),
-    new icon('Star-Half', [{ id: 1, style: 'Outline', path: Basil.Outline.StarHalf }, { id: 2, style: 'Solid', path: Basil.Solid.StarHalf }], 'Basil', 'Status', ['Rating']),
-    new icon('Diamond', [{ id: 1, style: 'Outline', path: Basil.Outline.Diamond }, { id: 2, style: 'Solid', path: Basil.Solid.Diamond }], 'Basil', 'Status'),
-    new icon('Bell', [{ id: 1, style: 'Outline', path: Basil.Outline.Notif }, { id: 2, style: 'Solid', path: Basil.Solid.Notif }], 'Basil', 'Status', ['Notification']),
-    new icon('Notifications-On', [{ id: 1, style: 'Outline', path: Basil.Outline.NotifOn }, { id: 2, style: 'Solid', path: Basil.Solid.NotifOn }], 'Basil', 'Status', ['Bell', 'Alarm', 'Ring']),
-    new icon('Notifications-Off', [{ id: 1, style: 'Outline', path: Basil.Outline.NotifOff }, { id: 2, style: 'Solid', path: Basil.Solid.NotifOff }], 'Basil', 'Status', ['Bell', 'Alarm']),
-    new icon('Heart', [{ id: 1, style: 'Outline', path: Basil.Outline.Heart }, { id: 2, style: 'Solid', path: Basil.Solid.Heart }], 'Basil', 'Status', ['Love', 'Rate']),
-    new icon('Heart-Off', [{ id: 1, style: 'Outline', path: Basil.Outline.HeartOff }, { id: 2, style: 'Solid', path: Basil.Solid.HeartOff }], 'Basil', 'Status'),
-    new icon('Heart-Plus', [{ id: 1, style: 'Outline', path: Basil.Outline.HeartPlus }, { id: 2, style: 'Solid', path: Basil.Solid.Group23 }], 'Basil', 'Status'),
-    new icon('Heartbeat', [{ id: 1, style: 'Outline', path: Basil.Outline.Heartbeat }, { id: 2, style: 'Solid', path: Basil.Solid.Heartbeat }], 'Basil', 'Status', ['Pulse']),
-    new icon('Fire', [{ id: 1, style: 'Outline', path: Basil.Outline.Fire }, { id: 2, style: 'Solid', path: Basil.Solid.Fire }], 'Basil', 'Status', ['Flame']),
-    new icon('Power Button', [{ id: 1, style: 'Outline', path: Basil.Outline.PowerBtn }, { id: 2, style: 'Solid', path: Basil.Solid.PowerBtn }], 'Basil', 'Status', ['On', 'Off']),
-    new icon('Lightbulb-Alt', [{ id: 1, style: 'Outline', path: Basil.Outline.LightAlt }, { id: 2, style: 'Solid', path: Basil.Solid.LightAlt }], 'Basil', 'Status'),
-    new icon('Lightbulb', [{ id: 1, style: 'Outline', path: Basil.Outline.Light }, { id: 2, style: 'Solid', path: Basil.Solid.Light }], 'Basil', 'Status'),
-    new icon('Lightbulb-Off', [{ id: 1, style: 'Outline', path: Basil.Outline.LightOff }, { id: 2, style: 'Solid', path: Basil.Solid.LightOff }], 'Basil', 'Status'),
-    new icon('Award', [{ id: 1, style: 'Outline', path: Basil.Outline.Award }, { id: 2, style: 'Solid', path: Basil.Solid.Award }], 'Basil', 'Status', ['Medal', 'Badge']),
-    new icon('Hourglass', [{ id: 1, style: 'Outline', path: Basil.Outline.SandWatch }, { id: 2, style: 'Solid', path: Basil.Solid.SandWatch }], 'Basil', 'Status', ['Sandwatch', 'Time']),
-    new icon('Present', [{ id: 1, style: 'Outline', path: Basil.Outline.Present }, { id: 2, style: 'Solid', path: Basil.Solid.Present }], 'Basil', 'Status', ['Gift']),
-    new icon('Toggle-On', [{ id: 1, style: 'Outline', path: Basil.Outline.ToggleOn }, { id: 2, style: 'Solid', path: Basil.Solid.ToggleOn }], 'Basil', 'Status', ['Switch']),
-    new icon('Toggle-Off', [{ id: 1, style: 'Outline', path: Basil.Outline.ToggleOff }, { id: 2, style: 'Solid', path: Basil.Solid.ToggleOff }], 'Basil', 'Status', ['Switch']),
-    new icon('Graduation Hat', [{ id: 1, style: 'Outline', path: Basil.Outline.Uni }, { id: 2, style: 'Solid', path: Basil.Solid.Uni }], 'Basil', 'Status'),
-    new icon('Bookmark', [{ id: 1, style: 'Outline', path: Basil.Outline.BookmarkStat }, { id: 2, style: 'Solid', path: Basil.Solid.BookmarkStat }], 'Basil', 'Status'),
-    new icon('Book-Open', [{ id: 1, style: 'Outline', path: Basil.Outline.BookOpen }, { id: 2, style: 'Solid', path: Basil.Solid.BookOpen }], 'Basil', 'Status'),
+        style: style,
+        tags: tags,
 
-    //Communication
-    new icon('Envelope', [{ id: 1, style: 'Outline', path: Basil.Outline.Envelope }, { id: 2, style: 'Solid', path: Basil.Solid.Envelope }], 'Basil', 'Communication', ['Mail', 'Email']),
-    new icon('Envelope-Open', [{ id: 1, style: 'Outline', path: Basil.Outline.EnvelopeOpen }, { id: 2, style: 'Solid', path: Basil.Solid.EnvelopeOpen }], 'Basil', 'Communication', ['Email']),
-    new icon('Phonebook', [{ id: 1, style: 'Outline', path: Basil.Outline.Contacts }, { id: 2, style: 'Solid', path: Basil.Solid.Contacts }], 'Basil', 'Communication', ['Contacts']),
-    new icon('User', [{ id: 1, style: 'Outline', path: Basil.Outline.User }, { id: 2, style: 'Solid', path: Basil.Solid.User }], 'Basil', 'Communication'),
-    new icon('User-Timer', [{ id: 1, style: 'Outline', path: Basil.Outline.UserClock }, { id: 2, style: 'Solid', path: Basil.Solid.UserClock }], 'Basil', 'Communication'),
-    new icon('User-Add', [{ id: 1, style: 'Outline', path: Basil.Outline.UserPlus }, { id: 2, style: 'Solid', path: Basil.Solid.UserPlus }], 'Basil', 'Communication'),
-    new icon('User-Block', [{ id: 1, style: 'Outline', path: Basil.Outline.UserBlock }, { id: 2, style: 'Solid', path: Basil.Solid.UserBlock }], 'Basil', 'Communication'),
-    new icon('Thumbs-Up', [{ id: 1, style: 'Outline', path: Basil.Outline.Like }, { id: 2, style: 'Solid', path: Basil.Solid.Like }], 'Basil', 'Communication', ['Like']),
-    new icon('Thumbs-Down', [{ id: 1, style: 'Outline', path: Basil.Outline.Dislike }, { id: 2, style: 'Solid', path: Basil.Solid.Dislike }], 'Basil', 'Communication', ['Dislike']),
-    new icon('Chat', [{ id: 1, style: 'Outline', path: Basil.Outline.Chat }, { id: 2, style: 'Solid', path: Basil.Solid.Chat }], 'Basil', 'Communication', ['Comment', 'Speech Bubble', 'Message']),
-    new icon('Comment', [{ id: 1, style: 'Outline', path: Basil.Outline.Comment }, { id: 2, style: 'Solid', path: Basil.Solid.Comment }], 'Basil', 'Communication', ['Chat', 'Speech Bubble']),
-    new icon('Comment-Add', [{ id: 1, style: 'Outline', path: Basil.Outline.CommentPlus }, { id: 2, style: 'Solid', path: Basil.Solid.CommentPlus }], 'Basil', 'Communication', ['Chat', 'Speech Bubble', 'Message']),
-    new icon('Comment-Delete', [{ id: 1, style: 'Outline', path: Basil.Outline.CommentMinus }, { id: 2, style: 'Solid', path: Basil.Solid.CommentMinus }], 'Basil', 'Communication', ['Chat', 'Speech Bubble', 'Message']),
-    new icon('Comment-Block', [{ id: 1, style: 'Outline', path: Basil.Outline.CommentBlock }, { id: 2, style: 'Solid', path: Basil.Solid.CommentBlock }], 'Basil', 'Communication', ['Chat', 'Speech Bubble', 'Message']),
-    new icon('Phone', [{ id: 1, style: 'Outline', path: Basil.Outline.Phone }, { id: 2, style: 'Solid', path: Basil.Solid.Phone }], 'Basil', 'Communication', ['Chat', 'Speech Bubble', 'Message']),
-    new icon('Phone-Miss', [{ id: 1, style: 'Outline', path: Basil.Outline.PhoneMiss }, { id: 2, style: 'Solid', path: Basil.Solid.PhoneMiss }], 'Basil', 'Communication', ['Missed Call']),
-    new icon('Phone-Cancel', [{ id: 1, style: 'Outline', path: Basil.Outline.PhoneOff }, { id: 2, style: 'Solid', path: Basil.Solid.PhoneOff }], 'Basil', 'Communication', ['Call Rejected', 'Disconnected']),
-    new icon('Phone-Incoming', [{ id: 1, style: 'Outline', path: Basil.Outline.PhoneIn }, { id: 2, style: 'Solid', path: Basil.Solid.PhoneIn }], 'Basil', 'Communication', ['Incoming Call']),
-    new icon('Phone-Outgoing', [{ id: 1, style: 'Outline', path: Basil.Outline.PhoneOut }, { id: 2, style: 'Solid', path: Basil.Solid.PhoneOut }], 'Basil', 'Communication', ['Outgoing Call']),
-    new icon('Send', [{ id: 1, style: 'Outline', path: Basil.Outline.Send }, { id: 2, style: 'Solid', path: Basil.Solid.Send }], 'Basil', 'Communication'),
-    new icon('Share', [{ id: 1, style: 'Outline', path: Basil.Outline.Share }, { id: 2, style: 'Solid', path: Basil.Solid.Share }], 'Basil', 'Communication'),
-    new icon('Forward', [{ id: 1, style: 'Outline', path: Basil.Outline.Forward }, { id: 2, style: 'Solid', path: Basil.Solid.Forward }], 'Basil', 'Communication', ['Share', 'Right']),
-    new icon('Reply', [{ id: 1, style: 'Outline', path: Basil.Outline.Reply }, { id: 2, style: 'Solid', path: Basil.Solid.Reply }], 'Basil', 'Communication', ['Left']),
-    new icon('Megaphone', [{ id: 1, style: 'Outline', path: Basil.Outline.Bullhorn }, { id: 2, style: 'Solid', path: Basil.Solid.Bullhorn }], 'Basil', 'Communication', ['Bullhorn', 'Loudspeaker']),
-    new icon('Share-Box', [{ id: 1, style: 'Outline', path: Basil.Outline.ShareBox }, { id: 2, style: 'Solid', path: Basil.Solid.ShareBox }], 'Basil', 'Communication'),
+        toSvg: () => {
+            if (category == 'Feather Icons')
+                return ('<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">' + content + '</svg>')
+            else
+                return ('<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">' + content + '</svg>')
+        },
+    })
+}
 
-    //Media
-    new icon('Headset', [{ id: 1, style: 'Outline', path: Basil.Outline.Headset }, { id: 2, style: 'Solid', path: Basil.Solid.Headset }], 'Basil', 'Media', ['Headphones']),
-    new icon('Headphones', [{ id: 1, style: 'Outline', path: Basil.Outline.HeadPs }, { id: 2, style: 'Solid', path: Basil.Solid.HeadPs }], 'Basil', 'Media'),
-    new icon('Play', [{ id: 1, style: 'Outline', path: Basil.Outline.Play }, { id: 2, style: 'Solid', path: Basil.Solid.Play }], 'Basil', 'Media'),
-    new icon('Pause', [{ id: 1, style: 'Outline', path: Basil.Outline.Pause }, { id: 2, style: 'Solid', path: Basil.Solid.Pause }], 'Basil', 'Media'),
-    new icon('Foward', [{ id: 1, style: 'Outline', path: Basil.Outline.FastFWD }, { id: 2, style: 'Solid', path: Basil.Solid.FastFWD }], 'Basil', 'Media'),
-    new icon('Rewind', [{ id: 1, style: 'Outline', path: Basil.Outline.FastRWD }, { id: 2, style: 'Solid', path: Basil.Solid.FastRWD }], 'Basil', 'Media'),
-    new icon('Next', [{ id: 1, style: 'Outline', path: Basil.Outline.SkipNext }, { id: 2, style: 'Solid', path: Basil.Solid.SkipNext }], 'Basil', 'Media'),
-    new icon('Previous', [{ id: 1, style: 'Outline', path: Basil.Outline.SkipPrev }, { id: 2, style: 'Solid', path: Basil.Solid.SkipPrev }], 'Basil', 'Media'),
-    new icon('Microphone', [{ id: 1, style: 'Outline', path: Basil.Outline.Mic }, { id: 2, style: 'Solid', path: Basil.Solid.Mic }], 'Basil', 'Media'),
-    new icon('Microphone-Off', [{ id: 1, style: 'Outline', path: Basil.Outline.MicOff }, { id: 2, style: 'Solid', path: Basil.Solid.MicOff }], 'Basil', 'Media'),
-    new icon('Music Note', [{ id: 1, style: 'Outline', path: Basil.Outline.Music }, { id: 2, style: 'Solid', path: Basil.Solid.Music }], 'Basil', 'Media'),
-    new icon('Volume-Up', [{ id: 1, style: 'Outline', path: Basil.Outline.VolUp }, { id: 2, style: 'Solid', path: Basil.Solid.VolUp }], 'Basil', 'Media', ['Speaker', 'Sound']),
-    new icon('Volume-Down', [{ id: 1, style: 'Outline', path: Basil.Outline.VolDown }, { id: 2, style: 'Solid', path: Basil.Solid.VolDown }], 'Basil', 'Media', ['Speaker', 'Sound']),
-    new icon('Volume-Off', [{ id: 1, style: 'Outline', path: Basil.Outline.VolOff }, { id: 2, style: 'Solid', path: Basil.Solid.VolOff }], 'Basil', 'Media', ['Speaker', 'Sound']),
-    new icon('Shuffle', [{ id: 1, style: 'Outline', path: Basil.Outline.Shuffle }, { id: 2, style: 'Solid', path: Basil.Solid.Shuffle }], 'Basil', 'Media'),
+//Icon Initialisations
 
-    //Files
-    new icon('File', [{ id: 1, style: 'Outline', path: Basil.Outline.File }, { id: 2, style: 'Solid', path: Basil.Solid.File }], 'Basil', 'Files'),
-    new icon('File-Text', [{ id: 1, style: 'Outline', path: Basil.Outline.Document }, { id: 2, style: 'Solid', path: Basil.Solid.Document }], 'Basil', 'Files', ['Word', 'Document']),
-    new icon('File-Image', [{ id: 1, style: 'Outline', path: Basil.Outline.Pic }, { id: 2, style: 'Solid', path: Basil.Solid.Pic }], 'Basil', 'Files', ['Picture']),
-    new icon('File-User', [{ id: 1, style: 'Outline', path: Basil.Outline.FileUser }, { id: 2, style: 'Solid', path: Basil.Solid.FileUser }], 'Basil', 'Files'),
-    new icon('File-Upload', [{ id: 1, style: 'Outline', path: Basil.Outline.FileUL }, { id: 2, style: 'Solid', path: Basil.Solid.FileUL }], 'Basil', 'Files'),
-    new icon('File-Download', [{ id: 1, style: 'Outline', path: Basil.Outline.FileDL }, { id: 2, style: 'Solid', path: Basil.Solid.FileDL }], 'Basil', 'Files'),
-    new icon('Invoice', [{ id: 1, style: 'Outline', path: Basil.Outline.Invoice }, { id: 2, style: 'Solid', path: Basil.Solid.Invoice }], 'Basil', 'Files', ['Order']),
-    new icon('Clipboard', [{ id: 1, style: 'Outline', path: Basil.Outline.Clip }, { id: 2, style: 'Solid', path: Basil.Solid.Clip }], 'Basil', 'Files'),
-    new icon('Clipboard-Alt', [{ id: 1, style: 'Outline', path: Basil.Outline.ClipAlt }, { id: 2, style: 'Solid', path: Basil.Solid.ClipAlt }], 'Basil', 'Files'),
-    new icon('Image', [{ id: 1, style: 'Outline', path: Basil.Outline.Image }, { id: 2, style: 'Solid', path: Basil.Solid.Image }], 'Basil', 'Files', ['Picture']),
-    new icon('Folder', [{ id: 1, style: 'Outline', path: Basil.Outline.Folder }, { id: 2, style: 'Solid', path: Basil.Solid.Folder }], 'Basil', 'Files'),
-    new icon('Folder-Open', [{ id: 1, style: 'Outline', path: Basil.Outline.FolderOpen }, { id: 2, style: 'Solid', path: Basil.Solid.FolderOpen }], 'Basil', 'Files'),
-    new icon('Folder-Lock', [{ id: 1, style: 'Outline', path: Basil.Outline.FolderLock }, { id: 2, style: 'Solid', path: Basil.Solid.FolderLock }], 'Basil', 'Files'),
-    new icon('Folder-Add', [{ id: 1, style: 'Outline', path: Basil.Outline.FolderPlus }, { id: 2, style: 'Solid', path: Basil.Solid.FolderPlus }], 'Basil', 'Files'),
-    new icon('Folder-Delete', [{ id: 1, style: 'Outline', path: Basil.Outline.FolderDelete }, { id: 2, style: 'Solid', path: Basil.Solid.FolderDelete }], 'Basil', 'Files'),
-    new icon('Folder-User', [{ id: 1, style: 'Outline', path: Basil.Outline.FolderUser }, { id: 2, style: 'Solid', path: Basil.Solid.FolderUser }], 'Basil', 'Files'),
-    new icon('Folder-Block', [{ id: 1, style: 'Outline', path: Basil.Outline.FolderBlock }, { id: 2, style: 'Solid', path: Basil.Solid.FolderBlock }], 'Basil', 'Files'),
-    new icon('Book', [{ id: 1, style: 'Outline', path: Basil.Outline.Book }, { id: 2, style: 'Solid', path: Basil.Solid.Book }], 'Basil', 'Files'),
-    new icon('Book-Check', [{ id: 1, style: 'Outline', path: Basil.Outline.BookCheck }, { id: 2, style: 'Solid', path: Basil.Solid.BookCheck }], 'Basil', 'Files'),
-    new icon('Book-Mark', [{ id: 1, style: 'Outline', path: Basil.Outline.Bookmark }, { id: 2, style: 'Solid', path: Basil.Solid.Bookmark }], 'Basil', 'Files'),
-    new icon('Cloud', [{ id: 1, style: 'Outline', path: Basil.Outline.Cloud }, { id: 2, style: 'Solid', path: Basil.Solid.Cloud }], 'Basil', 'Files'),
-    new icon('Cloud-Check', [{ id: 1, style: 'Outline', path: Basil.Outline.CloudCheck }, { id: 2, style: 'Solid', path: Basil.Solid.CloudCheck }], 'Basil', 'Files'),
-    new icon('Cloud-Upload', [{ id: 1, style: 'Outline', path: Basil.Outline.CloudUL }, { id: 2, style: 'Solid', path: Basil.Solid.CloudUL }], 'Basil', 'Files'),
-    new icon('Cloud-Download', [{ id: 1, style: 'Outline', path: Basil.Outline.CloudDL }, { id: 2, style: 'Solid', path: Basil.Solid.CloudDL }], 'Basil', 'Files'),
-    new icon('Cloud-Off', [{ id: 1, style: 'Outline', path: Basil.Outline.CloudOff }, { id: 2, style: 'Solid', path: Basil.Solid.CloudOff }], 'Basil', 'Files'),
-    new icon('Copy', [{ id: 1, style: 'Outline', path: Basil.Outline.Copy }, { id: 2, style: 'Solid', path: Basil.Solid.Copy }], 'Basil', 'Files', ['Duplicate']),
-    new icon('Upload', [{ id: 1, style: 'Outline', path: Basil.Outline.Upload }, { id: 2, style: 'Solid', path: Basil.Solid.Upload }], 'Basil', 'Files'),
-    new icon('Download', [{ id: 1, style: 'Outline', path: Basil.Outline.Download }, { id: 2, style: 'Solid', path: Basil.Solid.Download }], 'Basil', 'Files'),
+///Outline
 
-    //Interface
-    new icon('Caret-Left', [{ id: 1, style: 'Outline', path: Basil.Outline.CarLeft }, { id: 2, style: 'Solid', path: Basil.Solid.CarLeft }], 'Basil', 'Interface', ['Chevron', 'Arrow']),
-    new icon('Caret-Right', [{ id: 1, style: 'Outline', path: Basil.Outline.CarRight }, { id: 2, style: 'Solid', path: Basil.Solid.CarRight }], 'Basil', 'Interface', ['Chevron', 'Arrow']),
-    new icon('Caret-Up', [{ id: 1, style: 'Outline', path: Basil.Outline.CarUp }, { id: 2, style: 'Solid', path: Basil.Solid.CarUp }], 'Basil', 'Interface', ['Chevron', 'Arrow']),
-    new icon('Caret-Down', [{ id: 1, style: 'Outline', path: Basil.Outline.CarDown }, { id: 2, style: 'Solid', path: Basil.Solid.CarDown }], 'Basil', 'Interface', ['Chevron', 'Arrow']),
-    new icon('Arrow-Left', [{ id: 1, style: 'Outline', path: Basil.Outline.ArrLeft }, { id: 2, style: 'Solid', path: Basil.Solid.ArrLeft }], 'Basil', 'Interface'),
-    new icon('Arrow-Right', [{ id: 1, style: 'Outline', path: Basil.Outline.ArrRight }, { id: 2, style: 'Solid', path: Basil.Solid.ArrRight }], 'Basil', 'Interface'),
-    new icon('Arrow-Up', [{ id: 1, style: 'Outline', path: Basil.Outline.ArrUp }, { id: 2, style: 'Solid', path: Basil.Solid.ArrUp }], 'Basil', 'Interface'),
-    new icon('Arrow-Down', [{ id: 1, style: 'Outline', path: Basil.Outline.ArrDown }, { id: 2, style: 'Solid', path: Basil.Solid.ArrDown }], 'Basil', 'Interface'),
-    new icon('Check', [{ id: 1, style: 'Outline', path: Basil.Outline.Check }, { id: 2, style: 'Solid', path: Basil.Solid.Check }], 'Basil', 'Interface', ['Confirm', 'Approve']),
-    new icon('Refresh', [{ id: 1, style: 'Outline', path: Basil.Outline.Refresh }, { id: 2, style: 'Solid', path: Basil.Solid.Refresh }], 'Basil', 'Interface', ['Reload']),
-    new icon('Menu', [{ id: 1, style: 'Outline', path: Basil.Outline.Menu }, { id: 2, style: 'Solid', path: Basil.Solid.Menu }], 'Basil', 'Interface', ['Bars', 'Lines']),
-    new icon('Search', [{ id: 1, style: 'Outline', path: Basil.Outline.Search }, { id: 2, style: 'Solid', path: Basil.Solid.Search }], 'Basil', 'Interface', ['Magnifying Glass']),
-    new icon('Hotspot', [{ id: 1, style: 'Outline', path: Basil.Outline.Hotspot }, { id: 2, style: 'Solid', path: Basil.Solid.Hotspot }], 'Basil', 'Interface', ['Shockwaves']),
-    new icon('Attach', [{ id: 1, style: 'Outline', path: Basil.Outline.Attach }, { id: 2, style: 'Solid', path: Basil.Solid.Attach }], 'Basil', 'Interface', ['Link']),
-    new icon('Menu-Alt-1', [{ id: 1, style: 'Outline', path: Basil.Outline.Other1 }, { id: 2, style: 'Solid', path: Basil.Solid.Other1 }], 'Basil', 'Interface', ['Dots']),
-    new icon('Menu-Alt-2', [{ id: 1, style: 'Outline', path: Basil.Outline.Other2 }, { id: 2, style: 'Solid', path: Basil.Solid.Other2 }], 'Basil', 'Interface', ['Dots']),
-    new icon('Expand', [{ id: 1, style: 'Outline', path: Basil.Outline.Expand }, { id: 2, style: 'Solid', path: Basil.Solid.Expand }], 'Basil', 'Interface', ['Maximise', 'Focus']),
-    new icon('Collapse', [{ id: 1, style: 'Outline', path: Basil.Outline.Collapse }, { id: 2, style: 'Solid', path: Basil.Solid.Collapse }], 'Basil', 'Interface', ['Minimise', 'Shrink']),
-    new icon('Exchange', [{ id: 1, style: 'Outline', path: Basil.Outline.Exchange }, { id: 2, style: 'Solid', path: Basil.Solid.Exchange }], 'Basil', 'Interface', ['Arrows-left-right']),
-    new icon('Sort', [{ id: 1, style: 'Outline', path: Basil.Outline.Sort }, { id: 2, style: 'Solid', path: Basil.Solid.Sort }], 'Basil', 'Interface', ['Arrows-up-down']),
-    new icon('Plus', [{ id: 1, style: 'Outline', path: Basil.Outline.Plus }, { id: 2, style: 'Solid', path: Basil.Solid.Plus }], 'Basil', 'Interface', ['Add']),
-    new icon('X', [{ id: 1, style: 'Outline', path: Basil.Outline.Cross }, { id: 2, style: 'Solid', path: Basil.Solid.Cross }], 'Basil', 'Interface', ['Close', 'Cancel', 'MultiPly']),
-    new icon('Move', [{ id: 1, style: 'Outline', path: Basil.Outline.Move }, { id: 2, style: 'Solid', path: Basil.Solid.Move }], 'Basil', 'Interface'),
-    new icon('Bluetooth', [{ id: 1, style: 'Outline', path: Basil.Outline.BlueTt }, { id: 2, style: 'Solid', path: Basil.Solid.BlueTt }], 'Basil', 'Interface'),
-    new icon('At-Sign', [{ id: 1, style: 'Outline', path: Basil.Outline.AtSign }, { id: 2, style: 'Solid', path: Basil.Solid.AtSign }], 'Basil', 'Interface', ['Mention']),
-    new icon('Login', [{ id: 1, style: 'Outline', path: Basil.Outline.Login }, { id: 2, style: 'Solid', path: Basil.Solid.Login }], 'Basil', 'Interface', ['Signin']),
-    new icon('Logout', [{ id: 1, style: 'Outline', path: Basil.Outline.Logout }, { id: 2, style: 'Solid', path: Basil.Solid.Logout }], 'Basil', 'Interface', ['Signout']),
-    new icon('Save', [{ id: 1, style: 'Outline', path: Basil.Outline.Save }, { id: 2, style: 'Solid', path: Basil.Solid.Save }], 'Basil', 'Interface', ['Floppy Disk']),
-    new icon('Edit', [{ id: 1, style: 'Outline', path: Basil.Outline.Edit }, { id: 2, style: 'Solid', path: Basil.Solid.Edit }], 'Basil', 'Interface'),
-    new icon('Edit-Alt', [{ id: 1, style: 'Outline', path: Basil.Outline.EditAlt }, { id: 2, style: 'Solid', path: Basil.Solid.EditAlt }], 'Basil', 'Interface', ['pen']),
-    new icon('Layout', [{ id: 1, style: 'Outline', path: Basil.Outline.Layout }, { id: 2, style: 'Solid', path: Basil.Solid.Layout }], 'Basil', 'Interface', ['Menu', 'Grid', 'Squares']),
-    new icon('Rows', [{ id: 1, style: 'Outline', path: Basil.Outline.Rows }, { id: 2, style: 'Solid', path: Basil.Solid.Rows }], 'Basil', 'Interface'),
-    new icon('Columns', [{ id: 1, style: 'Outline', path: Basil.Outline.Cols }, { id: 2, style: 'Solid', path: Basil.Solid.Cols }], 'Basil', 'Interface', ['pause', 'Bars']),
-    new icon('Apps', [{ id: 1, style: 'Outline', path: Basil.Outline.Apps }, { id: 2, style: 'Solid', path: Basil.Solid.Apps }], 'Basil', 'Interface', ['Menu', 'Grid']),
-    new icon('Settings', [{ id: 1, style: 'Outline', path: Basil.Outline.SettingsAlt }, { id: 2, style: 'Solid', path: Basil.Solid.SettingsAlt }], 'Basil', 'Interface', ['Gear']),
-    new icon('Settings-Alt', [{ id: 1, style: 'Outline', path: Basil.Outline.Settings }, { id: 2, style: 'Solid', path: Basil.Solid.Settings }], 'Basil', 'Interface', ['Gear']),
-    new icon('Trash', [{ id: 1, style: 'Outline', path: Basil.Outline.Trash }, { id: 2, style: 'Solid', path: Basil.Solid.Trash }], 'Basil', 'Interface', ['Bin']),
-    new icon('Trash-Alt', [{ id: 1, style: 'Outline', path: Basil.Outline.TrashAlt }, { id: 2, style: 'Solid', path: Basil.Solid.TrashAlt }], 'Basil', 'Interface', ['Bin']),
-    new icon('Cancel', [{ id: 1, style: 'Outline', path: Basil.Outline.Cancel }, { id: 2, style: 'Solid', path: Basil.Solid.Cancel }], 'Basil', 'Interface', ['Close', 'X']),
-    new icon('Add', [{ id: 1, style: 'Outline', path: Basil.Outline.Add }, { id: 2, style: 'Solid', path: Basil.Solid.Add }], 'Basil', 'Interface', ['plus']),
-    new icon('Zoom-In', [{ id: 1, style: 'Outline', path: Basil.Outline.ZoomIn }, { id: 2, style: 'Solid', path: Basil.Solid.ZoomIn }], 'Basil', 'Interface', ['Maginfy']),
-    new icon('Zoom-Out', [{ id: 1, style: 'Outline', path: Basil.Outline.ZoomOut }, { id: 2, style: 'Solid', path: Basil.Solid.ZoomOut }], 'Basil', 'Interface', ['Magnify']),
-    new icon('Stack', [{ id: 1, style: 'Outline', path: Basil.Outline.Stack }, { id: 2, style: 'Solid', path: Basil.Solid.Stack }], 'Basil', 'Interface', ['Layers']),
-    new icon('Cursor', [{ id: 1, style: 'Outline', path: Basil.Outline.Cursor }, { id: 2, style: 'Solid', path: Basil.Solid.Cursor }], 'Basil', 'Interface'),
-    new icon('Backspace', [{ id: 1, style: 'Outline', path: Basil.Outline.Backspace }, { id: 2, style: 'Solid', path: Basil.Solid.Backspace }], 'Basil', 'Interface', ['Clear']),
-    new icon('Sliders', [{ id: 1, style: 'Outline', path: Basil.Outline.SettingAdj }, { id: 2, style: 'Solid', path: Basil.Solid.SettingAdj }], 'Basil', 'Interface', ['Tools', 'Customise', 'Settings']),
-    new icon('History', [{ id: 1, style: 'Outline', path: Basil.Outline.History }, { id: 2, style: 'Solid', path: Basil.Solid.History }], 'Basil', 'Interface'),
+//General
+pushSVG('Home', Icons.Outline.Home, 'General', 'Outline')
+pushSVG('Bag', Icons.Outline.Bag, 'General', 'Outline', ['Suitcase'])
+pushSVG('Pie Chart', Icons.Outline.ChartPie, 'General', 'Outline')
+pushSVG('Pie Chart-Alt', Icons.Outline.ChartPieAlt, 'General', 'Outline')
+pushSVG('Box', Icons.Outline.Box, 'General', 'Outline')
+pushSVG('Card', Icons.Outline.Card, 'General', 'Outline')
+pushSVG('Shopping Cart', Icons.Outline.ShopCart, 'General', 'Outline')
+pushSVG('Wallet', Icons.Outline.Wallet, 'General', 'Outline')
+pushSVG('Bank', Icons.Outline.Bank, 'General', 'Outline', ['Temple'])
+pushSVG('Sun', Icons.Outline.Sun, 'General', 'Outline', ['Light', 'Bright', 'Day'])
+pushSVG('Moon', Icons.Outline.Moon, 'General', 'Outline', ['Dark', 'Night'])
+pushSVG('Pallete', Icons.Outline.Palette, 'General', 'Outline', ['Cookie'])
+pushSVG('Flask', Icons.Outline.Flask, 'General', 'Outline', ['Beaker'])
+pushSVG('Flask-Alt', Icons.Outline.FlaskAlt, 'General', 'Outline')
+pushSVG('Shopping Basket', Icons.Outline.ShopBasket, 'General', 'Outline')
+pushSVG('Shopping Bag', Icons.Outline.ShopBag, 'General', 'Outline')
+pushSVG('Pulse', Icons.Outline.Pulse, 'General', 'Outline', ['Heartbeat'])
+pushSVG('Umbrella', Icons.Outline.Umbrella, 'General', 'Outline', ['Rain'])
+pushSVG('Calender', Icons.Outline.Calender, 'General', 'Outline')
+pushSVG('Filter', Icons.Outline.Filter, 'General', 'Outline', ['Funnel'])
+pushSVG('Medikit', Icons.Outline.Medikit, 'General', 'Outline', ['First Aid'])
+pushSVG('Clock', Icons.Outline.Clock, 'General', 'Outline')
+pushSVG('Alarm', Icons.Outline.Alarm, 'General', 'Outline')
+pushSVG('Timer', Icons.Outline.Timer, 'General', 'Outline', ['Stopwatch'])
 
-    //Devices
-    new icon('Printer', [{ id: 1, style: 'Outline', path: Basil.Outline.Printer }, { id: 2, style: 'Solid', path: Basil.Solid.Printer }], 'Basil', 'Devices'),
-    new icon('Monitor', [{ id: 1, style: 'Outline', path: Basil.Outline.Desktop }, { id: 2, style: 'Solid', path: Basil.Solid.Desktop }], 'Basil', 'Devices', ['Desktop', 'Television', 'iMac']),
-    new icon('Smartphone', [{ id: 1, style: 'Outline', path: Basil.Outline.MobileP }, { id: 2, style: 'Solid', path: Basil.Solid.MobileP }], 'Basil', 'Devices', ['Android', 'iPhone']),
-    new icon('Watch', [{ id: 1, style: 'Outline', path: Basil.Outline.Watch }, { id: 2, style: 'Solid', path: Basil.Solid.Watch }], 'Basil', 'Devices'),
-    new icon('Gamepad', [{ id: 1, style: 'Outline', path: Basil.Outline.Gamepad }, { id: 2, style: 'Solid', path: Basil.Solid.Gamepad }], 'Basil', 'Devices', ['Controller', 'Joystick']),
-    new icon('Server', [{ id: 1, style: 'Outline', path: Basil.Outline.Server }, { id: 2, style: 'Solid', path: Basil.Solid.Server }], 'Basil', 'Devices', ['Storage', 'Drives']),
-    new icon('Processor', [{ id: 1, style: 'Outline', path: Basil.Outline.Processor }, { id: 2, style: 'Solid', path: Basil.Solid.Processor }], 'Basil', 'Devices', ['Chip', 'CPU']),
-    new icon('Mouse-Alt', [{ id: 1, style: 'Outline', path: Basil.Outline.MouseAlt }, { id: 2, style: 'Solid', path: Basil.Solid.MouseAlt }], 'Basil', 'Devices'),
-    new icon('Mouse', [{ id: 1, style: 'Outline', path: Basil.Outline.Mouse }, { id: 2, style: 'Solid', path: Basil.Solid.Mouse }], 'Basil', 'Devices'),
-    new icon('Binoculars', [{ id: 1, style: 'Outline', path: Basil.Outline.Binos }, { id: 2, style: 'Solid', path: Basil.Solid.Binos }], 'Basil', 'Devices'),
-    new icon('Battery-Empty', [{ id: 1, style: 'Outline', path: Basil.Outline.BattEmpty }, { id: 2, style: 'Solid', path: Basil.Solid.BattFull1 }], 'Basil', 'Devices'),
-    new icon('Battery-Low', [{ id: 1, style: 'Outline', path: Basil.Outline.BattLow }, { id: 2, style: 'Solid', path: Basil.Solid.BattLow }], 'Basil', 'Devices'),
-    new icon('Battery-Quater', [{ id: 1, style: 'Outline', path: Basil.Outline.BattQuat }, { id: 2, style: 'Solid', path: Basil.Solid.BattQuat }], 'Basil', 'Devices'),
-    new icon('Battery-Half', [{ id: 1, style: 'Outline', path: Basil.Outline.BattHalf }, { id: 2, style: 'Solid', path: Basil.Solid.BattHalf }], 'Basil', 'Devices'),
-    new icon('Battery-Most', [{ id: 1, style: 'Outline', path: Basil.Outline.BattMost }, { id: 2, style: 'Solid', path: Basil.Solid.BattMost }], 'Basil', 'Devices'),
-    new icon('Battery-Full', [{ id: 1, style: 'Outline', path: Basil.Outline.BattFull }, { id: 2, style: 'Solid', path: Basil.Solid.BattFull }], 'Basil', 'Devices'),
-    new icon('Camera', [{ id: 1, style: 'Outline', path: Basil.Outline.Camera }, { id: 2, style: 'Solid', path: Basil.Solid.Camera }], 'Basil', 'Devices'),
-    new icon('Video', [{ id: 1, style: 'Outline', path: Basil.Outline.Video }, { id: 2, style: 'Solid', path: Basil.Solid.Video }], 'Basil', 'Devices', ['Recorder']),
-    new icon('Dialpad', [{ id: 1, style: 'Outline', path: Basil.Outline.Dialpad }, { id: 2, style: 'Solid', path: Basil.Solid.Dialpad }], 'Basil', 'Devices'),
+//Status
+pushSVG('Lock', Icons.Outline.Lock, 'Status', 'Outline')
+pushSVG('Unlock', Icons.Outline.Unlock, 'Status', 'Outline')
+pushSVG('Lock-Time', Icons.Outline.LockTime, 'Status', 'Outline')
+pushSVG('Eye', Icons.Outline.Eye, 'Status', 'Outline', ['Password'])
+pushSVG('Eye-Closed', Icons.Outline.EyeClosed, 'Status', 'Outline', ['Password'])
+pushSVG('Key', Icons.Outline.Key, 'Status', 'Outline')
+pushSVG('Pin', Icons.Outline.Pin, 'Status', 'Outline')
+pushSVG('Lightening', Icons.Outline.Lightn, 'Status', 'Outline', ['Shock'])
+pushSVG('Lightening-Alt', Icons.Outline.LightnAlt, 'Status', 'Outline')
+pushSVG('Shield', Icons.Outline.Shield, 'Status', 'Outline')
+pushSVG('Info-Rectangle', Icons.Outline.InfoRect, 'Status', 'Outline')
+pushSVG('Info-Circle', Icons.Outline.InfoCic, 'Status', 'Outline')
+pushSVG('Info-Triangle', Icons.Outline.InfoTri, 'Status', 'Outline', ['Warning'])
+pushSVG('Checked Box', Icons.Outline.CheckedBox, 'Status', 'Outline')
+pushSVG('Star', Icons.Outline.Star, 'Status', 'Outline', ['Rate'])
+pushSVG('Star-Half', Icons.Outline.StarHalf, 'Status', 'Outline', ['Rate'])
+pushSVG('Diamond', Icons.Outline.Diamond, 'Status', 'Outline')
+pushSVG('Notification', Icons.Outline.Notif, 'Status', 'Outline', ['Bell'])
+pushSVG('Notification-On', Icons.Outline.NotifOn, 'Status', 'Outline', ['Bell', 'Alarm', 'Ring'])
+pushSVG('Notification-Off', Icons.Outline.NotifOff, 'Status', 'Outline', ['Bell', 'Alarm'])
+pushSVG('Heart', Icons.Outline.Heart, 'Status', 'Outline', ['Love'])
+pushSVG('Heart-Off', Icons.Outline.HeartOff, 'Status', 'Outline')
+pushSVG('Heart-Plus', Icons.Outline.HeartPlus, 'Status', 'Outline')
+pushSVG('Heartbeat', Icons.Outline.Heartbeat, 'Status', 'Outline')
+pushSVG('FIre', Icons.Outline.Fire, 'Status', 'Outline', ['Flame'])
+pushSVG('Power Button', Icons.Outline.PowerBtn, 'Status', 'Outline', ['Off'])
+pushSVG('Lightbulb-Alt', Icons.Outline.LightAlt, 'Status', 'Outline')
+pushSVG('Lightbulb', Icons.Outline.Light, 'Status', 'Outline')
+pushSVG('Lightbulb-Off', Icons.Outline.LightOff, 'Status', 'Outline')
+pushSVG('Award', Icons.Outline.Award, 'Status', 'Outline', ['Badge'])
+pushSVG('Sand Watch', Icons.Outline.SandWatch, 'Status', 'Outline', ['Houglass'])
+pushSVG('Present', Icons.Outline.Present, 'Status', 'Outline', ['Gift'])
+pushSVG('Toggle-On', Icons.Outline.ToggleOn, 'Status', 'Outline', ['Switch'])
+pushSVG('Toggle-Off', Icons.Outline.ToggleOff, 'Status', 'Outline', ['Switch'])
+pushSVG('University', Icons.Outline.Uni, 'Status', 'Outline', ['Graduation'])
+pushSVG('Bookmark', Icons.Outline.BookmarkStat, 'Status', 'Outline')
+pushSVG('Book-Open', Icons.Outline.BookOpen, 'Status', 'Outline')
 
-    //Location
-    new icon('Location', [{ id: 1, style: 'Outline', path: Basil.Outline.Location }, { id: 2, style: 'Solid', path: Basil.Solid.Location }], 'Basil', 'Navigation'),
-    new icon('Location-Check', [{ id: 1, style: 'Outline', path: Basil.Outline.LocationCheck }, { id: 2, style: 'Solid', path: Basil.Solid.LocationCheck }], 'Basil', 'Navigation'),
-    new icon('Location-Plus', [{ id: 1, style: 'Outline', path: Basil.Outline.LocationPlus }, { id: 2, style: 'Solid', path: Basil.Solid.LocationPlus }], 'Basil', 'Navigation'),
-    new icon('Location-Question', [{ id: 1, style: 'Outline', path: Basil.Outline.LocationQtn }, { id: 2, style: 'Solid', path: Basil.Solid.LocationQtn }], 'Basil', 'Navigation'),
-    new icon('Exlore', [{ id: 1, style: 'Outline', path: Basil.Outline.Explore }, { id: 2, style: 'Solid', path: Basil.Solid.Explore }], 'Basil', 'Navigation', ['Compass', 'Safari']),
-    new icon('Current Location', [{ id: 1, style: 'Outline', path: Basil.Outline.CurrLocation }, { id: 2, style: 'Solid', path: Basil.Solid.CurrLocation }], 'Basil', 'Navigation', ['Mark', 'Crosshair', 'point', 'Target']),
-    new icon('Globe', [{ id: 1, style: 'Outline', path: Basil.Outline.Globe }, { id: 2, style: 'Solid', path: Basil.Solid.Globe }], 'Basil', 'Navigation', ['World']),
-    new icon('Map Location', [{ id: 1, style: 'Outline', path: Basil.Outline.MapLocation }, { id: 2, style: 'Solid', path: Basil.Solid.MapLocation }], 'Basil', 'Navigation'),
+//Communication
+pushSVG('Envelope', Icons.Outline.Envelope, 'Communication', 'Outline', ['Mail'])
+pushSVG('Envelope-Open', Icons.Outline.EnvelopeOpen, 'Communication', 'Outline', ['Mail'])
+pushSVG('Contacts', Icons.Outline.Contacts, 'Communication', 'Outline', ['Phone', 'Book'])
+pushSVG('User', Icons.Outline.User, 'Communication', 'Outline')
+pushSVG('User-Clock', Icons.Outline.UserClock, 'Communication', 'Outline')
+pushSVG('User-Plus', Icons.Outline.UserPlus, 'Communication', 'Outline')
+pushSVG('User-Block', Icons.Outline.UserBlock, 'Communication', 'Outline')
+pushSVG('Like', Icons.Outline.Like, 'Communication', 'Outline', ['Thumbs-up'])
+pushSVG('Disike', Icons.Outline.Dislike, 'Communication', 'Outline', ['Thumbs-Down'])
+pushSVG('Chat', Icons.Outline.Chat, 'Communication', 'Outline', ['Comment', 'Bubble'])
+pushSVG('Comment', Icons.Outline.Comment, 'Communication', 'Outline', ['Chat', 'Bubble'])
+pushSVG('Comment-Plus', Icons.Outline.CommentPlus, 'Communication', 'Outline', ['Chat', 'Bubble'])
+pushSVG('Comment-Minus', Icons.Outline.CommentMinus, 'Communication', 'Outline', ['Chat', 'Bubble'])
+pushSVG('Comment-Block', Icons.Outline.CommentBlock, 'Communication', 'Outline', ['Chat', 'Bubble'])
+pushSVG('Phone', Icons.Outline.Phone, 'Communication', 'Outline')
+pushSVG('Phone-Miss', Icons.Outline.PhoneMiss, 'Communication', 'Outline', ['Missed-call'])
+pushSVG('Phone-Off', Icons.Outline.PhoneOff, 'Communication', 'Outline', ['Call Blocked'])
+pushSVG('Phone-In', Icons.Outline.PhoneIn, 'Communication', 'Outline', ['Call'])
+pushSVG('Phone-Out', Icons.Outline.PhoneOut, 'Communication', 'Outline', ['Call'])
+pushSVG('Send', Icons.Outline.Send, 'Communication', 'Outline')
+pushSVG('Share', Icons.Outline.Share, 'Communication', 'Outline')
+pushSVG('Forward', Icons.Outline.Forward, 'Communication', 'Outline')
+pushSVG('Reply', Icons.Outline.Reply, 'Communication', 'Outline', ['Back'])
+pushSVG('Bullhorn', Icons.Outline.Bullhorn, 'Communication', 'Outline', ['Loudspeaker'])
+pushSVG('Share-Box', Icons.Outline.ShareBox, 'Communication', 'Outline')
 
-    //Brands
-    new icon('Apple', [{ id: 1, style: 'Outline', path: Basil.Outline.Apple }, { id: 2, style: 'Solid', path: Basil.Solid.Apple }], 'Basil', 'Brands'),
-    new icon('Dribble', [{ id: 1, style: 'Outline', path: Basil.Outline.Dribble }, { id: 2, style: 'Solid', path: Basil.Solid.Dribble }], 'Basil', 'Brands'),
-    new icon('Google Drive', [{ id: 1, style: 'Outline', path: Basil.Outline.GoogleDrive }, { id: 2, style: 'Solid', path: Basil.Solid.GoogleDrive }], 'Basil', 'Brands'),
-    new icon('YouTube', [{ id: 1, style: 'Outline', path: Basil.Outline.YT }, { id: 2, style: 'Solid', path: Basil.Solid.YT }], 'Basil', 'Brands', ['Google']),
-    new icon('Skype', [{ id: 1, style: 'Outline', path: Basil.Outline.Skype }, { id: 2, style: 'Solid', path: Basil.Solid.Skype }], 'Basil', 'Brands'),
-    new icon('Pinterest', [{ id: 1, style: 'Outline', path: Basil.Outline.Pinterest }, { id: 2, style: 'Solid', path: Basil.Solid.Pinterest }], 'Basil', 'Brands'),
-    new icon('Google Chrome', [{ id: 1, style: 'Outline', path: Basil.Outline.Chrome }, { id: 2, style: 'Solid', path: Basil.Solid.Chrome }], 'Basil', 'Brands'),
-    new icon('Facebook', [{ id: 1, style: 'Outline', path: Basil.Outline.FB }, { id: 2, style: 'Solid', path: Basil.Solid.FB }], 'Basil', 'Brands', ['Meta']),
-    new icon('Tumblr', [{ id: 1, style: 'Outline', path: Basil.Outline.Tumblr }, { id: 2, style: 'Solid', path: Basil.Solid.Tumblr }], 'Basil', 'Brands'),
-    new icon('Snapchat', [{ id: 1, style: 'Outline', path: Basil.Outline.Snap }, { id: 2, style: 'Solid', path: Basil.Solid.Snap }], 'Basil', 'Brands'),
-    new icon('Linkedin', [{ id: 1, style: 'Outline', path: Basil.Outline.Linkedin }, { id: 2, style: 'Solid', path: Basil.Solid.Linkedin }], 'Basil', 'Brands'),
-    new icon('Figma', [{ id: 1, style: 'Outline', path: Basil.Outline.Figma }, { id: 2, style: 'Solid', path: Basil.Solid.Figma }], 'Basil', 'Brands'),
-    new icon('Sketch', [{ id: 1, style: 'Outline', path: Basil.Outline.Sketch }, { id: 2, style: 'Solid', path: Basil.Solid.Sketch }], 'Basil', 'Brands', ['Diamond']),
-    new icon('Twitter', [{ id: 1, style: 'Outline', path: Basil.Outline.Twitter }, { id: 2, style: 'Solid', path: Basil.Solid.Twitter }], 'Basil', 'Brands', ['Bird app']),
-    new icon('VK Ontakte', [{ id: 1, style: 'Outline', path: Basil.Outline.VK }, { id: 2, style: 'Solid', path: Basil.Solid.VK }], 'Basil', 'Brands'),
-    new icon('Google Play', [{ id: 1, style: 'Outline', path: Basil.Outline.GooglePlay }, { id: 2, style: 'Solid', path: Basil.Solid.GooglePlay }], 'Basil', 'Brands', ['Store']),
-    new icon('App Store', [{ id: 1, style: 'Outline', path: Basil.Outline.AppStore }, { id: 2, style: 'Solid', path: Basil.Solid.AppStore }], 'Basil', 'Brands'),
-    new icon('Twitch', [{ id: 1, style: 'Outline', path: Basil.Outline.Twitch }, { id: 2, style: 'Solid', path: Basil.Solid.Twitch }], 'Basil', 'Brands'),
-    new icon('Google', [{ id: 1, style: 'Outline', path: Basil.Outline.Google }, { id: 2, style: 'Solid', path: Basil.Solid.Google }], 'Basil', 'Brands'),
-    new icon('Telegram', [{ id: 1, style: 'Outline', path: Basil.Outline.Telegram }, { id: 2, style: 'Solid', path: Basil.Solid.Telegram }], 'Basil', 'Brands'),
-    new icon('Whatsapp', [{ id: 1, style: 'Outline', path: Basil.Outline.Whatsapp }, { id: 2, style: 'Solid', path: Basil.Solid.Whatsapp }], 'Basil', 'Brands', ['Meta']),
-    new icon('Viber', [{ id: 1, style: 'Outline', path: Basil.Outline.Viber }, { id: 2, style: 'Solid', path: Basil.Solid.Viber }], 'Basil', 'Brands'),
-    new icon('Messenger', [{ id: 1, style: 'Outline', path: Basil.Outline.Messenger }, { id: 2, style: 'Solid', path: Basil.Solid.Messenger }], 'Basil', 'Brands', ['Meta']),
-    new icon('Group 151', [{ id: 1, style: 'Outline', path: Basil.Outline.Group151 }, { id: 2, style: 'Solid', path: Basil.Solid.Wechat }], 'Basil', 'Brands'),
-    new icon('Reddit', [{ id: 1, style: 'Outline', path: Basil.Outline.Reddit }, { id: 2, style: 'Solid', path: Basil.Solid.Reddit }], 'Basil', 'Brands'),
-    new icon('QQ', [{ id: 1, style: 'Outline', path: Basil.Outline.QQ }, { id: 2, style: 'Solid', path: Basil.Solid.QQ }], 'Basil', 'Brands'),
-    new icon('Android', [{ id: 1, style: 'Outline', path: Basil.Outline.Android }, { id: 2, style: 'Solid', path: Basil.Solid.Android }], 'Basil', 'Brands', ['Google']),
-    new icon('Dropbox', [{ id: 1, style: 'Outline', path: Basil.Outline.Dropbox }, { id: 2, style: 'Solid', path: Basil.Solid.Dropbox }], 'Basil', 'Brands'),
-    new icon('Gmail', [{ id: 1, style: 'Outline', path: Basil.Outline.Gmail }, { id: 2, style: 'Solid', path: Basil.Solid.Gmail }], 'Basil', 'Brands', ['Google']),
-    new icon('Google Alt', [{ id: 1, style: 'Outline', path: Basil.Outline.GoogleAlt }, { id: 2, style: 'Solid', path: Basil.Solid.GoogleAlt }], 'Basil', 'Brands'),
-    new icon('Slack', [{ id: 1, style: 'Outline', path: Basil.Outline.Slack }, { id: 2, style: 'Solid', path: Basil.Solid.Slack }], 'Basil', 'Brands'),
-    new icon('Photoshop', [{ id: 1, style: 'Outline', path: Basil.Outline.PS }, { id: 2, style: 'Solid', path: Basil.Solid.PS }], 'Basil', 'Brands', ['PS', 'Adobe']),
-    new icon('Illustrator', [{ id: 1, style: 'Outline', path: Basil.Outline.AI }, { id: 2, style: 'Solid', path: Basil.Solid.AI }], 'Basil', 'Brands', ['AI', 'Adobe']),
-    new icon('XD', [{ id: 1, style: 'Outline', path: Basil.Outline.XD }, { id: 2, style: 'Solid', path: Basil.Solid.XD }], 'Basil', 'Brands', ['AI', 'Adobe']),
-    new icon('After Effects', [{ id: 1, style: 'Outline', path: Basil.Outline.AE }, { id: 2, style: 'Solid', path: Basil.Solid.AE }], 'Basil', 'Brands', ['AE', 'Adobe']),
-    new icon('Indesign', [{ id: 1, style: 'Outline', path: Basil.Outline.ID }, { id: 2, style: 'Solid', path: Basil.Solid.ID }], 'Basil', 'Brands', ['ID', 'Adobe']),
-    new icon('Lightroom', [{ id: 1, style: 'Outline', path: Basil.Outline.LR }, { id: 2, style: 'Solid', path: Basil.Solid.LR }], 'Basil', 'Brands', ['LR', 'Adobe']),
-    new icon('Premiere', [{ id: 1, style: 'Outline', path: Basil.Outline.PR }, { id: 2, style: 'Solid', path: Basil.Solid.PR }], 'Basil', 'Brands', ['PR', 'Adobe']),
-    new icon('Indesign-1', [{ id: 1, style: 'Outline', path: Basil.Outline.ID1 }, { id: 2, style: 'Solid', path: Basil.Solid.ID1 }], 'Basil', 'Brands', ['ID', 'Adobe']),
-    new icon('Behance', [{ id: 1, style: 'Outline', path: Basil.Outline.Behance }, { id: 2, style: 'Solid', path: Basil.Solid.Behance }], 'Basil', 'Brands', ['Adobe']),
-    new icon('Windows', [{ id: 1, style: 'Outline', path: Basil.Outline.Windows }, { id: 2, style: 'Solid', path: Basil.Solid.Windows }], 'Basil', 'Brands'),
-    new icon('Asana', [{ id: 1, style: 'Outline', path: Basil.Outline.Asana }, { id: 2, style: 'Solid', path: Basil.Solid.Asana }], 'Basil', 'Brands'),
-    new icon('Trello', [{ id: 1, style: 'Outline', path: Basil.Outline.Trello }, { id: 2, style: 'Solid', path: Basil.Solid.Trello }], 'Basil', 'Brands'),
-    new icon('Medium', [{ id: 1, style: 'Outline', path: Basil.Outline.Medium }, { id: 2, style: 'Solid', path: Basil.Solid.Medium }], 'Basil', 'Brands'),
-    new icon('Notion', [{ id: 1, style: 'Outline', path: Basil.Outline.Notion }, { id: 2, style: 'Solid', path: Basil.Solid.Notion }], 'Basil', 'Brands'),
-    new icon('Craftwork', [{ id: 1, style: 'Solid', path: Basil.Solid.Craftwork }], 'Basil', 'Brands'),
+//Media
+pushSVG('Headset', Icons.Outline.Headset, 'Media', 'Outline')
+pushSVG('Headphones', Icons.Outline.HeadPs, 'Media', 'Outline')
+pushSVG('Play', Icons.Outline.Play, 'Media', 'Outline')
+pushSVG('Pause', Icons.Outline.Pause, 'Media', 'Outline')
+pushSVG('Fast-Forward', Icons.Outline.FastFWD, 'Media', 'Outline')
+pushSVG('Fast-Rewind', Icons.Outline.FastRWD, 'Media', 'Outline')
+pushSVG('Skip-Next', Icons.Outline.SkipNext, 'Media', 'Outline')
+pushSVG('Skip-Previous', Icons.Outline.SkipPrev, 'Media', 'Outline')
+pushSVG('Microphone', Icons.Outline.Mic, 'Media', 'Outline')
+pushSVG('Microphone-Off', Icons.Outline.MicOff, 'Media', 'Outline')
+pushSVG('Music', Icons.Outline.Music, 'Media', 'Outline', ['Note'])
+pushSVG('Volume-Up', Icons.Outline.VolUp, 'Media', 'Outline', ['Speaker'])
+pushSVG('Volume-Down', Icons.Outline.VolDown, 'Media', 'Outline', ['Speaker'])
+pushSVG('Volume-Off', Icons.Outline.VolOff, 'Media', 'Outline', ['Speaker'])
+pushSVG('Shuffle', Icons.Outline.Shuffle, 'Media', 'Outline')
+
+//Files
+pushSVG('File', Icons.Outline.File, 'Files', 'Outline')
+pushSVG('Document', Icons.Outline.Document, 'Files', 'Outline')
+pushSVG('Picture', Icons.Outline.Pic, 'Files', 'Outline')
+pushSVG('File-User', Icons.Outline.FileUser, 'Files', 'Outline')
+pushSVG('File-Upload', Icons.Outline.FileUL, 'Files', 'Outline')
+pushSVG('File-Download', Icons.Outline.FileDL, 'Files', 'Outline')
+pushSVG('Invoice', Icons.Outline.Invoice, 'Files', 'Outline')
+pushSVG('Clipboard', Icons.Outline.Clip, 'Files', 'Outline')
+pushSVG('Clipboard-Alt', Icons.Outline.ClipAlt, 'Files', 'Outline')
+pushSVG('Image', Icons.Outline.Image, 'Files', 'Outline', ['Picture'])
+pushSVG('Folder', Icons.Outline.Folder, 'Files', 'Outline')
+pushSVG('Folder-Open', Icons.Outline.FolderOpen, 'Files', 'Outline')
+pushSVG('Folder-Locked', Icons.Outline.FolderLock, 'Files', 'Outline')
+pushSVG('Folder-Plus', Icons.Outline.FolderPlus, 'Files', 'Outline')
+pushSVG('Folder-Delete', Icons.Outline.FolderDelete, 'Files', 'Outline')
+pushSVG('Folder-User', Icons.Outline.FolderUser, 'Files', 'Outline')
+pushSVG('Folder-Blocked', Icons.Outline.FolderBlock, 'Files', 'Outline')
+pushSVG('Book', Icons.Outline.Book, 'Files', 'Outline')
+pushSVG('Book-Checked', Icons.Outline.BookCheck, 'Files', 'Outline')
+pushSVG('Bookmarked', Icons.Outline.Bookmark, 'Files', 'Outline')
+pushSVG('Cloud', Icons.Outline.Cloud, 'Files', 'Outline')
+pushSVG('Cloud-Checked', Icons.Outline.CloudCheck, 'Files', 'Outline')
+pushSVG('Cloud-Upload', Icons.Outline.CloudUL, 'Files', 'Outline')
+pushSVG('Cloud-Download', Icons.Outline.CloudDL, 'Files', 'Outline')
+pushSVG('Cloud-Off', Icons.Outline.CloudOff, 'Files', 'Outline')
+pushSVG('Copy', Icons.Outline.Copy, 'Files', 'Outline', ['Duplicate'])
+pushSVG('Upload', Icons.Outline.Upload, 'Files', 'Outline')
+pushSVG('Download', Icons.Outline.Download, 'Files', 'Outline')
+
+//Interface
+pushSVG('Caret-Left', Icons.Outline.CarLeft, 'Interface', 'Outline')
+pushSVG('Caret-Right', Icons.Outline.CarRight, 'Interface', 'Outline')
+pushSVG('Caret-Up', Icons.Outline.CarUp, 'Interface', 'Outline')
+pushSVG('Caret-Down', Icons.Outline.CarDown, 'Interface', 'Outline')
+pushSVG('Arrow-Left', Icons.Outline.ArrLeft, 'Interface', 'Outline')
+pushSVG('Arrow-Right', Icons.Outline.ArrRight, 'Interface', 'Outline')
+pushSVG('Arrow-Up', Icons.Outline.ArrUp, 'Interface', 'Outline')
+pushSVG('Arrow-Down', Icons.Outline.ArrDown, 'Interface', 'Outline')
+pushSVG('Check', Icons.Outline.Check, 'Interface', 'Outline', ['Correct'])
+pushSVG('Refresh', Icons.Outline.Refresh, 'Interface', 'Outline')
+pushSVG('Menu', Icons.Outline.Menu, 'Interface', 'Outline', ['Lines', 'Bars'])
+pushSVG('Search', Icons.Outline.Search, 'Interface', 'Outline', ['Wave'])
+pushSVG('Hotspot', Icons.Outline.Hotspot, 'Interface', 'Outline')
+pushSVG('Attach', Icons.Outline.Attach, 'Interface', 'Outline', ['Link'])
+pushSVG('Other-1', Icons.Outline.Other1, 'Interface', 'Outline', ['Menu', 'Dots'])
+pushSVG('Other-2', Icons.Outline.Other2, 'Interface', 'Outline', ['Menu', 'Dots'])
+pushSVG('Expand', Icons.Outline.Expand, 'Interface', 'Outline', ['Maximise'])
+pushSVG('Collapse', Icons.Outline.Collapse, 'Interface', 'Outline', ['Minimise', 'Shrink'])
+pushSVG('Exchange', Icons.Outline.Exchange, 'Interface', 'Outline')
+pushSVG('Sort', Icons.Outline.Sort, 'Interface', 'Outline')
+pushSVG('Plus', Icons.Outline.Plus, 'Interface', 'Outline', ['Add'])
+pushSVG('Cross', Icons.Outline.Cross, 'Interface', 'Outline', ['X', 'Cancel'])
+pushSVG('Move', Icons.Outline.Move, 'Interface', 'Outline')
+pushSVG('Bluetooth', Icons.Outline.BlueTt, 'Interface', 'Outline')
+pushSVG('At-Sign', Icons.Outline.AtSign, 'Interface', 'Outline', ['Mention'])
+pushSVG('Login', Icons.Outline.Login, 'Interface', 'Outline', ['Signin'])
+pushSVG('Logout', Icons.Outline.Logout, 'Interface', 'Outline', ['Signout'])
+pushSVG('Save', Icons.Outline.Save, 'Interface', 'Outline', ['Floppy', 'Disk'])
+pushSVG('Edit', Icons.Outline.Edit, 'Interface', 'Outline')
+pushSVG('Edit-Alt', Icons.Outline.EditAlt, 'Interface', 'Outline', ['Pencil'])
+pushSVG('Layout', Icons.Outline.Layout, 'Interface', 'Outline', ['Menu', 'Grid', 'Squares'])
+pushSVG('Rows', Icons.Outline.Rows, 'Interface', 'Outline')
+pushSVG('Columns', Icons.Outline.Cols, 'Interface', 'Outline', ['Bars'])
+pushSVG('Apps', Icons.Outline.Apps, 'Interface', 'Outline', ['Grid', 'Menu'])
+pushSVG('Settings-Alt', Icons.Outline.SettingsAlt, 'Interface', 'Outline')
+pushSVG('Settings', Icons.Outline.Settings, 'Interface', 'Outline')
+pushSVG('Trash', Icons.Outline.Trash, 'Interface', 'Outline', ['Bin'])
+pushSVG('Trash-Alt', Icons.Outline.TrashAlt, 'Interface', 'Outline')
+pushSVG('Cancel', Icons.Outline.Cancel, 'Interface', 'Outline', ['X', 'Cross'])
+pushSVG('Add', Icons.Outline.Add, 'Interface', 'Outline', ['Plus'])
+pushSVG('Zoom-In', Icons.Outline.ZoomIn, 'Interface', 'Outline', ['Magnify'])
+pushSVG('Zoom-Out', Icons.Outline.ZoomOut, 'Interface', 'Outline', ['Magnify'])
+pushSVG('Stack', Icons.Outline.Stack, 'Interface', 'Outline', ['Layers'])
+pushSVG('Cursor', Icons.Outline.Cursor, 'Interface', 'Outline')
+pushSVG('Backspace', Icons.Outline.Backspace, 'Interface', 'Outline')
+pushSVG('Settings-Adjust', Icons.Outline.SettingAdj, 'Interface', 'Outline', ['Tools'])
+pushSVG('History', Icons.Outline.History, 'Interface', 'Outline')
+
+//Devices
+pushSVG('Printer', Icons.Outline.Printer, 'Devices', 'Outline')
+pushSVG('Desktop', Icons.Outline.Desktop, 'Devices', 'Outline', ['Monitor', 'iMac'])
+pushSVG('Mobile Phone', Icons.Outline.MobileP, 'Devices', 'Outline', ['Android', 'iPhone'])
+pushSVG('Watch', Icons.Outline.Watch, 'Devices', 'Outline')
+pushSVG('Gamepad', Icons.Outline.Gamepad, 'Devices', 'Outline', ['Controller', 'Joystick'])
+pushSVG('Server', Icons.Outline.Server, 'Devices', 'Outline', ['Drives'])
+pushSVG('Processor', Icons.Outline.Processor, 'Devices', 'Outline', ['CPU'])
+pushSVG('Mouse-Alt', Icons.Outline.MouseAlt, 'Devices', 'Outline')
+pushSVG('Mouse', Icons.Outline.Mouse, 'Devices', 'Outline')
+pushSVG('Binoculars', Icons.Outline.Binos, 'Devices', 'Outline')
+pushSVG('Battery-Empty', Icons.Outline.BattEmpty, 'Devices', 'Outline')
+pushSVG('Ballety-Low', Icons.Outline.BattLow, 'Devices', 'Outline')
+pushSVG('Battery-Quater', Icons.Outline.BattQuat, 'Devices', 'Outline')
+pushSVG('Battery-Half', Icons.Outline.BattHalf, 'Devices', 'Outline')
+pushSVG('Battery-Most', Icons.Outline.BattMost, 'Devices', 'Outline')
+pushSVG('Battery-Full', Icons.Outline.BattFull, 'Devices', 'Outline')
+pushSVG('Camera', Icons.Outline.Camera, 'Devices', 'Outline')
+pushSVG('Video', Icons.Outline.Video, 'Devices', 'Outline', ['Recorder'])
+pushSVG('Dialpad', Icons.Outline.Dialpad, 'Devices', 'Outline')
+
+//Location
+pushSVG('Location', Icons.Outline.Location, 'Navigation', 'Outline')
+pushSVG('Location-Check', Icons.Outline.LocationCheck, 'Navigation', 'Outline')
+pushSVG('Location-Plus', Icons.Outline.LocationPlus, 'Navigation', 'Outline')
+pushSVG('Location-Question', Icons.Outline.LocationQtn, 'Navigation', 'Outline')
+pushSVG('Explore', Icons.Outline.Explore, 'Navigation', 'Outline', ['Compass'])
+pushSVG('Current Location', Icons.Outline.CurrLocation, 'Navigation', 'Outline', ['Point'])
+pushSVG('Navigation', Icons.Outline.Navgation, 'Navigation', 'Outline')
+pushSVG('Globe', Icons.Outline.Globe, 'Navigation', 'Outline')
+pushSVG('Map Location', Icons.Outline.MapLocation, 'Navigation', 'Outline')
+
+///Brands
+pushSVG('Apple', Icons.Outline.Apple, 'Brands', 'Outline')
+pushSVG('Dribble', Icons.Outline.Dribble, 'Brands', 'Outline')
+pushSVG('Google Drive', Icons.Outline.GoogleDrive, 'Brands', 'Outline')
+pushSVG('YouTube', Icons.Outline.YT, 'Brands', 'Outline', ['Google'])
+pushSVG('Skype', Icons.Outline.Skype, 'Brands', 'Outline')
+pushSVG('Pinterest', Icons.Outline.Pinterest, 'Brands', 'Outline')
+pushSVG('Google Chrome', Icons.Outline.Chrome, 'Brands', 'Outline')
+pushSVG('Facebook', Icons.Outline.FB, 'Brands', 'Outline', ['Meta'])
+pushSVG('Tumblr', Icons.Outline.Tumblr, 'Brands', 'Outline')
+pushSVG('Snapchat', Icons.Outline.Snap, 'Brands', 'Outline')
+pushSVG('Linkedin', Icons.Outline.Linkedin, 'Brands', 'Outline')
+pushSVG('Figma', Icons.Outline.Figma, 'Brands', 'Outline')
+pushSVG('Sketch', Icons.Outline.Sketch, 'Brands', 'Outline')
+pushSVG('Twitter', Icons.Outline.Twitter, 'Brands', 'Outline', ['Birdapp'])
+pushSVG('VK Ontakte', Icons.Outline.VK, 'Brands', 'Outline')
+pushSVG('Google Play', Icons.Outline.GooglePlay, 'Brands', 'Outline')
+pushSVG('App Store', Icons.Outline.AppStore, 'Brands', 'Outline', ['Store'])
+pushSVG('Twitch', Icons.Outline.Twitch, 'Brands', 'Outline')
+pushSVG('Google', Icons.Outline.Google, 'Brands', 'Outline')
+pushSVG('Telegram', Icons.Outline.Telegram, 'Brands', 'Outline')
+pushSVG('Whatsapp', Icons.Outline.Whatsapp, 'Brands', 'Outline', ['Meta'])
+pushSVG('Viber', Icons.Outline.Viber, 'Brands', 'Outline')
+pushSVG('Messenger', Icons.Outline.Messenger, 'Brands', 'Outline', ['Meta'])
+pushSVG('Group 151', Icons.Outline.Group151, 'Brands', 'Outline')
+pushSVG('Reddit', Icons.Outline.Reddit, 'Brands', 'Outline')
+pushSVG('QQ', Icons.Outline.QQ, 'Brands', 'Outline')
+pushSVG('Android', Icons.Outline.Android, 'Brands', 'Outline', ['Google'])
+pushSVG('Dropbox', Icons.Outline.Dropbox, 'Brands', 'Outline')
+pushSVG('Gmail', Icons.Outline.Gmail, 'Brands', 'Outline', ['Google'])
+pushSVG('Google Alt', Icons.Outline.GoogleAlt, 'Brands', 'Outline')
+pushSVG('Slack', Icons.Outline.Slack, 'Brands', 'Outline')
+pushSVG('Adobe Photoshop', Icons.Outline.PS, 'Brands', 'Outline', ['PS'])
+pushSVG('Adobe Illustrator', Icons.Outline.AI, 'Brands', "Outline", ["AI"])
+pushSVG('Adobe Expirience Design', Icons.Outline.XD, 'Brands', "Outline", ['XD'])
+pushSVG('Adobe After Effects', Icons.Outline.AE, 'Brands', "Outline", ['AE'])
+pushSVG('Adobe Indesign', Icons.Outline.ID, 'Brands', "Outline", ['ID'])
+pushSVG('Adobe Lightroom', Icons.Outline.LR, 'Brands', "Outline", ['LR'])
+pushSVG('Adobe Premiere', Icons.Outline.PR, 'Brands', 'Outline', ['PR'])
+pushSVG('Adobe Indesign-1', Icons.Outline.ID1, 'Brands', "Outline", ['ID'])
+pushSVG('Behance', Icons.Outline.Behance, 'Brands', 'Outline', ['Adobe'])
+pushSVG('Windows', Icons.Outline.Windows, 'Brands', 'Outline', ['Miscrosoft'])
+pushSVG('Asana', Icons.Outline.Asana, 'Brands', 'Outline')
+pushSVG('Trello', Icons.Outline.Trello, 'Brands', 'Outline')
+pushSVG('Medium', Icons.Outline.Medium, 'Brands', 'Outline')
+pushSVG('Notion', Icons.Outline.Notion, 'Brands', 'Outline')
+
+///Solid
+
+//General
+pushSVG('Home', Icons.Solid.Home, 'General', 'Solid')
+pushSVG('Bag', Icons.Solid.Bag, 'General', 'Solid', ['Suitcase'])
+pushSVG('Pie Chart', Icons.Solid.ChartPie, 'General', 'Solid')
+pushSVG('Pie Chart-Alt', Icons.Solid.ChartPieAlt, 'General', 'Solid')
+pushSVG('Box', Icons.Solid.Box, 'General', 'Solid')
+pushSVG('Card', Icons.Solid.Card, 'General', 'Solid')
+pushSVG('Shopping Cart', Icons.Solid.ShopCart, 'General', 'Solid')
+pushSVG('Wallet', Icons.Solid.Wallet, 'General', 'Solid')
+pushSVG('Bank', Icons.Solid.Bank, 'General', 'Solid', ['Temple'])
+pushSVG('Sun', Icons.Solid.Sun, 'General', 'Solid', ['Light', 'Bright', 'Day'])
+pushSVG('Moon', Icons.Solid.Moon, 'General', 'Solid', ['Dark', 'Night'])
+pushSVG('Pallete', Icons.Solid.Palette, 'General', 'Solid', ['Cookie'])
+pushSVG('Flask', Icons.Solid.Flask, 'General', 'Solid', ['Beaker'])
+pushSVG('Flask-Alt', Icons.Solid.FlaskAlt, 'General', 'Solid')
+pushSVG('Shopping Basket', Icons.Solid.ShopBasket, 'General', 'Solid')
+pushSVG('Shopping Bag', Icons.Solid.ShopBag, 'General', 'Solid')
+pushSVG('Pulse', Icons.Solid.Pulse, 'General', 'Solid', ['Heartbeat'])
+pushSVG('Umbrella', Icons.Solid.Umbrella, 'General', 'Solid', ['Rain'])
+pushSVG('Calender', Icons.Solid.Calender, 'General', 'Solid')
+pushSVG('Filter', Icons.Solid.Filter, 'General', 'Solid', ['Funnel'])
+pushSVG('Medikit', Icons.Solid.Medikit, 'General', 'Solid', ['First Aid'])
+pushSVG('Clock', Icons.Solid.Clock, 'General', 'Solid')
+pushSVG('Alarm', Icons.Solid.Alarm, 'General', 'Solid')
+pushSVG('Timer', Icons.Solid.Timer, 'General', 'Solid', ['Stopwatch'])
+
+//Status
+pushSVG('Lock', Icons.Solid.Lock, 'Status', 'Solid')
+pushSVG('Unlock', Icons.Solid.Unlock, 'Status', 'Solid')
+pushSVG('Lock-Time', Icons.Solid.LockTime, 'Status', 'Solid')
+pushSVG('Eye', Icons.Solid.Eye, 'Status', 'Solid', ['Password'])
+pushSVG('Eye-Closed', Icons.Solid.EyeClosed, 'Status', 'Solid', ['Password'])
+pushSVG('Key', Icons.Solid.Key, 'Status', 'Solid')
+pushSVG('Pin', Icons.Solid.Pin, 'Status', 'Solid')
+pushSVG('Lightening', Icons.Solid.Lightn, 'Status', 'Solid', ['Shock'])
+pushSVG('Lightening-Alt', Icons.Solid.LightnAlt, 'Status', 'Solid')
+pushSVG('Shield', Icons.Solid.Shield, 'Status', 'Solid')
+pushSVG('Info-Rectangle', Icons.Solid.InfoRect, 'Status', 'Solid')
+pushSVG('Info-Circle', Icons.Solid.InfoCic, 'Status', 'Solid')
+pushSVG('Info-Triangle', Icons.Solid.InfoTri, 'Status', 'Solid', ['Warning'])
+pushSVG('Checked Box', Icons.Solid.CheckedBox, 'Status', 'Solid')
+pushSVG('Star', Icons.Solid.Star, 'Status', 'Solid', ['Rate'])
+pushSVG('Star-Half', Icons.Solid.StarHalf, 'Status', 'Solid', ['Rate'])
+pushSVG('Diamond', Icons.Solid.Diamond, 'Status', 'Solid')
+pushSVG('Notification', Icons.Solid.Notif, 'Status', 'Solid', ['Bell'])
+pushSVG('Notification-On', Icons.Solid.NotifOn, 'Status', 'Solid', ['Bell', 'Alarm', 'Ring'])
+pushSVG('Notification-Off', Icons.Solid.NotifOff, 'Status', 'Solid', ['Bell', 'Alarm'])
+pushSVG('Heart', Icons.Solid.Heart, 'Status', 'Solid', ['Love'])
+pushSVG('Heart-Off', Icons.Solid.HeartOff, 'Status', 'Solid')
+pushSVG('Heart-Plus', Icons.Solid.Group23, 'Status', 'Solid')
+pushSVG('Heartbeat', Icons.Solid.Heartbeat, 'Status', 'Solid')
+pushSVG('Fire', Icons.Solid.Fire, 'Status', 'Solid', ['Flame'])
+pushSVG('Power Button', Icons.Solid.PowerBtn, 'Status', 'Solid', ['Off'])
+pushSVG('Lightbulb-Alt', Icons.Solid.LightAlt, 'Status', 'Solid')
+pushSVG('Lightbulb', Icons.Solid.Light, 'Status', 'Solid')
+pushSVG('Lightbulb-Off', Icons.Solid.LightOff, 'Status', 'Solid')
+pushSVG('Award', Icons.Solid.Award, 'Status', 'Solid', ['Badge'])
+pushSVG('Sand Watch', Icons.Solid.SandWatch, 'Status', 'Solid', ['Houglass'])
+pushSVG('Present', Icons.Solid.Present, 'Status', 'Solid', ['Gift'])
+pushSVG('Toggle-On', Icons.Solid.ToggleOn, 'Status', 'Solid', ['Switch'])
+pushSVG('Toggle-Off', Icons.Solid.ToggleOff, 'Status', 'Solid', ['Switch'])
+pushSVG('University', Icons.Solid.Uni, 'Status', 'Solid', ['Graduation'])
+pushSVG('Bookmark', Icons.Solid.BookmarkStat, 'Status', 'Solid')
+pushSVG('Book-Open', Icons.Solid.BookOpen, 'Status', 'Solid')
+
+//Communication
+pushSVG('Envelope', Icons.Solid.Envelope, 'Communication', 'Solid', ['Mail'])
+pushSVG('Envelope-Open', Icons.Solid.EnvelopeOpen, 'Communication', 'Solid', ['Mail'])
+pushSVG('Contacts', Icons.Solid.Contacts, 'Communication', 'Solid', ['Phone', 'Book'])
+pushSVG('User', Icons.Solid.User, 'Communication', 'Solid')
+pushSVG('User-Clock', Icons.Solid.UserClock, 'Communication', 'Solid')
+pushSVG('User-Plus', Icons.Solid.UserPlus, 'Communication', 'Solid')
+pushSVG('User-Block', Icons.Solid.UserBlock, 'Communication', 'Solid')
+pushSVG('Like', Icons.Solid.Like, 'Communication', 'Solid', ['Thumbs-up'])
+pushSVG('Disike', Icons.Solid.Dislike, 'Communication', 'Solid', ['Thumbs-Down'])
+pushSVG('Chat', Icons.Solid.Chat, 'Communication', 'Solid', ['Comment', 'Bubble'])
+pushSVG('Comment', Icons.Solid.Comment, 'Communication', 'Solid', ['Chat', 'Bubble'])
+pushSVG('Comment-Plus', Icons.Solid.CommentPlus, 'Communication', 'Solid', ['Chat', 'Bubble'])
+pushSVG('Comment-Minus', Icons.Solid.CommentMinus, 'Communication', 'Solid', ['Chat', 'Bubble'])
+pushSVG('Comment-Block', Icons.Solid.CommentBlock, 'Communication', 'Solid', ['Chat', 'Bubble'])
+pushSVG('Phone', Icons.Solid.Phone, 'Communication', 'Solid')
+pushSVG('Phone-Miss', Icons.Solid.PhoneMiss, 'Communication', 'Solid', ['Missed-call'])
+pushSVG('Phone-Off', Icons.Solid.PhoneOff, 'Communication', 'Solid', ['Call Blocked'])
+pushSVG('Phone-In', Icons.Solid.PhoneIn, 'Communication', 'Solid', ['Call'])
+pushSVG('Phone-Out', Icons.Solid.PhoneOut, 'Communication', 'Solid', ['Call'])
+pushSVG('Send', Icons.Solid.Send, 'Communication', 'Solid')
+pushSVG('Share', Icons.Solid.Share, 'Communication', 'Solid')
+pushSVG('Forward', Icons.Solid.Forward, 'Communication', 'Solid')
+pushSVG('Reply', Icons.Solid.Reply, 'Communication', 'Solid', ['Back'])
+pushSVG('Bullhorn', Icons.Solid.Bullhorn, 'Communication', 'Solid', ['Loudspeaker'])
+pushSVG('Share-Box', Icons.Solid.ShareBox, 'Communication', 'Solid')
+
+//Media
+pushSVG('Headset', Icons.Solid.Headset, 'Media', 'Solid')
+pushSVG('Headphones', Icons.Solid.HeadPs, 'Media', 'Solid')
+pushSVG('Play', Icons.Solid.Play, 'Media', 'Solid')
+pushSVG('Pause', Icons.Solid.Pause, 'Media', 'Solid')
+pushSVG('Fast-Forward', Icons.Solid.FastFWD, 'Media', 'Solid')
+pushSVG('Fast-Rewind', Icons.Solid.FastRWD, 'Media', 'Solid')
+pushSVG('Skip-Next', Icons.Solid.SkipNext, 'Media', 'Solid')
+pushSVG('Skip-Previous', Icons.Solid.SkipPrev, 'Media', 'Solid')
+pushSVG('Microphone', Icons.Solid.Mic, 'Media', 'Solid')
+pushSVG('Microphone-Off', Icons.Solid.MicOff, 'Media', 'Solid')
+pushSVG('Music', Icons.Solid.Music, 'Media', 'Solid', ['Note'])
+pushSVG('Volume-Up', Icons.Solid.VolUp, 'Media', 'Solid', ['Speaker'])
+pushSVG('Volume-Down', Icons.Solid.VolDown, 'Media', 'Solid', ['Speaker'])
+pushSVG('Volume-Off', Icons.Solid.VolOff, 'Media', 'Solid', ['Speaker'])
+pushSVG('Shuffle', Icons.Solid.Shuffle, 'Media', 'Solid')
+
+//Files
+pushSVG('File', Icons.Solid.File, 'Files', 'Solid')
+pushSVG('Document', Icons.Solid.Document, 'Files', 'Solid')
+pushSVG('Picture', Icons.Solid.Pic, 'Files', 'Solid')
+pushSVG('File-User', Icons.Solid.FileUser, 'Files', 'Solid')
+pushSVG('File-Upload', Icons.Solid.FileUL, 'Files', 'Solid')
+pushSVG('File-Download', Icons.Solid.FileDL, 'Files', 'Solid')
+pushSVG('Invoice', Icons.Solid.Invoice, 'Files', 'Solid')
+pushSVG('Clipboard', Icons.Solid.Clip, 'Files', 'Solid')
+pushSVG('Clipboard-Alt', Icons.Solid.ClipAlt, 'Files', 'Solid')
+pushSVG('Image', Icons.Solid.Image, 'Files', 'Solid', ['Picture'])
+pushSVG('Folder', Icons.Solid.Folder, 'Files', 'Solid')
+pushSVG('Folder-Open', Icons.Solid.FolderOpen, 'Files', 'Solid')
+pushSVG('Folder-Locked', Icons.Solid.FolderLock, 'Files', 'Solid')
+pushSVG('Folder-Plus', Icons.Solid.FolderPlus, 'Files', 'Solid')
+pushSVG('Folder-Delete', Icons.Solid.FolderDelete, 'Files', 'Solid')
+pushSVG('Folder-User', Icons.Solid.FolderUser, 'Files', 'Solid')
+pushSVG('Folder-Blocked', Icons.Solid.FolderBlock, 'Files', 'Solid')
+pushSVG('Book', Icons.Solid.Book, 'Files', 'Solid')
+pushSVG('Book-Checked', Icons.Solid.BookCheck, 'Files', 'Solid')
+pushSVG('Bookmarked', Icons.Solid.Bookmark, 'Files', 'Solid')
+pushSVG('Cloud', Icons.Solid.Cloud, 'Files', 'Solid')
+pushSVG('Cloud-Checked', Icons.Solid.CloudCheck, 'Files', 'Solid')
+pushSVG('Cloud-Upload', Icons.Solid.CloudUL, 'Files', 'Solid')
+pushSVG('Cloud-Download', Icons.Solid.CloudDL, 'Files', 'Solid')
+pushSVG('Cloud-Off', Icons.Solid.CloudOff, 'Files', 'Solid')
+pushSVG('Copy', Icons.Solid.Copy, 'Files', 'Solid', ['Duplicate'])
+pushSVG('Upload', Icons.Solid.Upload, 'Files', 'Solid')
+pushSVG('Download', Icons.Solid.Download, 'Files', 'Solid')
+
+//Interface
+pushSVG('Caret-Left', Icons.Solid.CarLeft, 'Interface', 'Solid')
+pushSVG('Caret-Right', Icons.Solid.CarRight, 'Interface', 'Solid')
+pushSVG('Caret-Up', Icons.Solid.CarUp, 'Interface', 'Solid')
+pushSVG('Caret-Down', Icons.Solid.CarDown, 'Interface', 'Solid')
+pushSVG('Arrow-Left', Icons.Solid.ArrLeft, 'Interface', 'Solid')
+pushSVG('Arrow-Right', Icons.Solid.ArrRight, 'Interface', 'Solid')
+pushSVG('Arrow-Up', Icons.Solid.ArrUp, 'Interface', 'Solid')
+pushSVG('Arrow-Down', Icons.Solid.ArrDown, 'Interface', 'Solid')
+pushSVG('Check', Icons.Solid.Check, 'Interface', 'Solid', ['Correct'])
+pushSVG('Refresh', Icons.Solid.Refresh, 'Interface', 'Solid')
+pushSVG('Menu', Icons.Solid.Menu, 'Interface', 'Solid', ['Lines', 'Bars'])
+pushSVG('Search', Icons.Solid.Search, 'Interface', 'Solid', ['Magnify'])
+pushSVG('Hotspot', Icons.Solid.Hotspot, 'Interface', 'Solid', ['Waves'])
+pushSVG('Attach', Icons.Solid.Attach, 'Interface', 'Solid', ['Link'])
+pushSVG('Other-1', Icons.Solid.Other1, 'Interface', 'Solid', ['Menu', 'Dots'])
+pushSVG('Other-2', Icons.Solid.Other2, 'Interface', 'Solid', ['Menu', 'Dots'])
+pushSVG('Expand', Icons.Solid.Expand, 'Interface', 'Solid', ['Maximise'])
+pushSVG('Collapse', Icons.Solid.Collapse, 'Interface', 'Solid', ['Minimise', 'Shrink'])
+pushSVG('Exchange', Icons.Solid.Exchange, 'Interface', 'Solid')
+pushSVG('Sort', Icons.Solid.Sort, 'Interface', 'Solid')
+pushSVG('Plus', Icons.Solid.Plus, 'Interface', 'Solid', ['Add'])
+pushSVG('Cross', Icons.Solid.Cross, 'Interface', 'Solid', ['X', 'Cancel'])
+pushSVG('Move', Icons.Solid.Move, 'Interface', 'Solid')
+pushSVG('Bluetooth', Icons.Solid.BlueTt, 'Interface', 'Solid')
+pushSVG('At-Sign', Icons.Solid.AtSign, 'Interface', 'Solid', ['Mention'])
+pushSVG('Login', Icons.Solid.Login, 'Interface', 'Solid', ['Signin'])
+pushSVG('Logout', Icons.Solid.Logout, 'Interface', 'Solid', ['Signout'])
+pushSVG('Save', Icons.Solid.Save, 'Interface', 'Solid', ['Floppy', 'Diskette'])
+pushSVG('Edit', Icons.Solid.Edit, 'Interface', 'Solid')
+pushSVG('Edit-Alt', Icons.Solid.EditAlt, 'Interface', 'Solid', ['Pencil'])
+pushSVG('Layout', Icons.Solid.Layout, 'Interface', 'Solid', ['Menu', 'Grid', 'Squares'])
+pushSVG('Rows', Icons.Solid.Rows, 'Interface', 'Solid')
+pushSVG('Columns', Icons.Solid.Cols, 'Interface', 'Solid', ['Bars'])
+pushSVG('Apps', Icons.Solid.Apps, 'Interface', 'Solid', ['Grid', 'Menu'])
+pushSVG('Settings-Alt', Icons.Solid.SettingsAlt, 'Interface', 'Solid')
+pushSVG('Settings', Icons.Solid.Settings, 'Interface', 'Solid')
+pushSVG('Trash', Icons.Solid.Trash, 'Interface', 'Solid', ['Bin'])
+pushSVG('Trash-Alt', Icons.Solid.TrashAlt, 'Interface', 'Solid')
+pushSVG('Cancel', Icons.Solid.Cancel, 'Interface', 'Solid', ['X', 'Cross'])
+pushSVG('Add', Icons.Solid.Add, 'Interface', 'Solid', ['Plus'])
+pushSVG('Zoom-In', Icons.Solid.ZoomIn, 'Interface', 'Solid', ['Magnify'])
+pushSVG('Zoom-Out', Icons.Solid.ZoomOut, 'Interface', 'Solid', ['Magnify'])
+pushSVG('Stack', Icons.Solid.Stack, 'Interface', 'Solid', ['Layers'])
+pushSVG('Cursor', Icons.Solid.Cursor, 'Interface', 'Solid')
+pushSVG('Backspace', Icons.Solid.Backspace, 'Interface', 'Solid')
+pushSVG('Settings-Adjust', Icons.Solid.SettingAdj, 'Interface', 'Solid', ['Tools'])
+pushSVG('History', Icons.Solid.History, 'Interface', 'Solid')
+
+//Devices
+pushSVG('Printer', Icons.Solid.Printer, 'Devices', 'Solid')
+pushSVG('Desktop', Icons.Solid.Desktop, 'Devices', 'Solid', ['Monitor', 'iMac'])
+pushSVG('Mobile Phone', Icons.Solid.MobileP, 'Devices', 'Solid', ['Android', 'iPhone'])
+pushSVG('Watch', Icons.Solid.Watch, 'Devices', 'Solid')
+pushSVG('Gamepad', Icons.Solid.Gamepad, 'Devices', 'Solid', ['Controller', 'Joystick'])
+pushSVG('Server', Icons.Solid.Server, 'Devices', 'Solid', ['Drives'])
+pushSVG('Processor', Icons.Solid.Processor, 'Devices', 'Solid', ['CPU'])
+pushSVG('Mouse-Alt', Icons.Solid.MouseAlt, 'Devices', 'Solid')
+pushSVG('Mouse', Icons.Solid.Mouse, 'Devices', 'Solid')
+pushSVG('Binoculars', Icons.Solid.Binos, 'Devices', 'Solid')
+pushSVG('Battery-Empty', Icons.Solid.BattFull1, 'Devices', 'Solid')
+pushSVG('Ballety-Low', Icons.Solid.BattLow, 'Devices', 'Solid')
+pushSVG('Battery-Quater', Icons.Solid.BattQuat, 'Devices', 'Solid')
+pushSVG('Battery-Half', Icons.Solid.BattHalf, 'Devices', 'Solid')
+pushSVG('Battery-Most', Icons.Solid.BattMost, 'Devices', 'Solid')
+pushSVG('Battery-Full', Icons.Solid.BattFull, 'Devices', 'Solid')
+pushSVG('Camera', Icons.Solid.Camera, 'Devices', 'Solid')
+pushSVG('Video', Icons.Solid.Video, 'Devices', 'Solid', ['Recorder'])
+pushSVG('Dialpad', Icons.Solid.Dialpad, 'Devices', 'Solid')
+
+//Location
+pushSVG('Location', Icons.Solid.Location, 'Navigation', 'Solid')
+pushSVG('Location-Check', Icons.Solid.LocationCheck, 'Navigation', 'Solid')
+pushSVG('Location-Plus', Icons.Solid.LocationPlus, 'Navigation', 'Solid')
+pushSVG('Location-Question', Icons.Solid.LocationQtn, 'Navigation', 'Solid')
+pushSVG('Explore', Icons.Solid.Explore, 'Navigation', 'Solid', ['Compass'])
+pushSVG('Current Location', Icons.Solid.CurrLocation, 'Navigation', 'Solid', ['Point'])
+pushSVG('Navigation', Icons.Solid.Navgation, 'Navigation', 'Solid')
+pushSVG('Globe', Icons.Solid.Globe, 'Navigation', 'Solid')
+pushSVG('Map Location', Icons.Solid.MapLocation, 'Navigation', 'Solid')
+
+///Brands
+pushSVG('Apple', Icons.Solid.Apple, 'Brands', 'Solid')
+pushSVG('Dribble', Icons.Solid.Dribble, 'Brands', 'Solid')
+pushSVG('Google Drive', Icons.Solid.GoogleDrive, 'Brands', 'Solid')
+pushSVG('YouTube', Icons.Solid.YT, 'Brands', 'Solid', ['Google'])
+pushSVG('Skype', Icons.Solid.Skype, 'Brands', 'Solid')
+pushSVG('Pinterest', Icons.Solid.Pinterest, 'Brands', 'Solid')
+pushSVG('Google Chrome', Icons.Solid.Chrome, 'Brands', 'Solid')
+pushSVG('Facebook', Icons.Solid.FB, 'Brands', 'Solid', ['Meta'])
+pushSVG('Tumblr', Icons.Solid.Tumblr, 'Brands', 'Solid')
+pushSVG('Snapchat', Icons.Solid.Snap, 'Brands', 'Solid')
+pushSVG('Linkedin', Icons.Solid.Linkedin, 'Brands', 'Solid')
+pushSVG('Figma', Icons.Solid.Figma, 'Brands', 'Solid')
+pushSVG('Sketch', Icons.Solid.Sketch, 'Brands', 'Solid')
+pushSVG('Twitter', Icons.Solid.Twitter, 'Brands', 'Solid', ['Birdapp'])
+pushSVG('VK Ontakte', Icons.Solid.VK, 'Brands', 'Solid')
+pushSVG('Google Play', Icons.Solid.GooglePlay, 'Brands', 'Solid')
+pushSVG('App Store', Icons.Solid.AppStore, 'Brands', 'Solid', ['Store'])
+pushSVG('Twitch', Icons.Solid.Twitch, 'Brands', 'Solid')
+pushSVG('Google', Icons.Solid.Google, 'Brands', 'Solid')
+pushSVG('Telegram', Icons.Solid.Telegram, 'Brands', 'Solid')
+pushSVG('Whatsapp', Icons.Solid.Whatsapp, 'Brands', 'Solid', ['Meta'])
+pushSVG('Viber', Icons.Solid.Viber, 'Brands', 'Solid')
+pushSVG('Messenger', Icons.Solid.Messenger, 'Brands', 'Solid', ['Meta'])
+pushSVG('Group 151', Icons.Solid.Wechat, 'Brands', 'Solid')
+pushSVG('Reddit', Icons.Solid.Reddit, 'Brands', 'Solid')
+pushSVG('QQ', Icons.Solid.QQ, 'Brands', 'Solid')
+pushSVG('Android', Icons.Solid.Android, 'Brands', 'Solid', ['Google'])
+pushSVG('Dropbox', Icons.Solid.Dropbox, 'Brands', 'Solid')
+pushSVG('Gmail', Icons.Solid.Gmail, 'Brands', 'Solid', ['Google'])
+pushSVG('Google Alt', Icons.Solid.GoogleAlt, 'Brands', 'Solid')
+pushSVG('Slack', Icons.Solid.Slack, 'Brands', 'Solid')
+pushSVG('Adobe Photoshop', Icons.Solid.PS, 'Brands', 'Solid', ['PS'])
+pushSVG('Adobe Illustrator', Icons.Solid.AI, 'Brands', "Solid", ["AI"])
+pushSVG('Adobe Expirience Design', Icons.Solid.XD, 'Brands', "Solid", ['XD'])
+pushSVG('Adobe After Effects', Icons.Solid.AE, 'Brands', "Solid", ['AE'])
+pushSVG('Adobe Indesign', Icons.Solid.ID, 'Brands', "Solid", ['ID'])
+pushSVG('Adobe Lightroom', Icons.Solid.LR, 'Brands', "Solid", ['LR'])
+pushSVG('Adobe Premiere', Icons.Solid.PR, 'Brands', 'Solid', ['PR'])
+pushSVG('Adobe Indesign-1', Icons.Solid.ID1, 'Brands', "Solid", ['ID'])
+pushSVG('Behance', Icons.Solid.Behance, 'Brands', 'Solid', ['Adobe'])
+pushSVG('Windows', Icons.Solid.Windows, 'Brands', 'Solid', ['Miscrosoft'])
+pushSVG('Asana', Icons.Solid.Asana, 'Brands', 'Solid')
+pushSVG('Trello', Icons.Solid.Trello, 'Brands', 'Solid')
+pushSVG('Medium', Icons.Solid.Medium, 'Brands', 'Solid')
+pushSVG('Notion', Icons.Solid.Notion, 'Brands', 'Solid')
+pushSVG('Craftwork', Icons.Solid.Craftwork, 'Brands', 'Solid')
 
 
-    //Edge
-    new icon('Arrow-Right', [{ id: 1, style: 'Thin', path: Edge.Thin.ArrowRight }, { id: 2, style: 'Regular', path: Edge.Regular.ArrowRight }, { id: 3, style: 'Medium', path: Edge.Medium.ArrowRight }], 'Edge', null),
-    new icon('Arrow-Left', [{ id: 1, style: 'Thin', path: Edge.Thin.ArrowLeft }, { id: 2, style: 'Regular', path: Edge.Regular.ArrowLeft }, { id: 3, style: 'Medium', path: Edge.Medium.ArrowLeft }], 'Edge', null),
-    new icon('Arrow-Up', [{ id: 1, style: 'Thin', path: Edge.Thin.ArrowUp }, { id: 2, style: 'Regular', path: Edge.Regular.ArrowUp }, { id: 3, style: 'Medium', path: Edge.Medium.ArrowUp }], 'Edge', null),
-    new icon('Arrow-Down', [{ id: 1, style: 'Thin', path: Edge.Thin.ArrowDwn }, { id: 2, style: 'Regular', path: Edge.Regular.ArrowDwn }, { id: 3, style: 'Medium', path: Edge.Medium.ArrowDwn }], 'Edge', null),
-    new icon('Caret-Right', [{ id: 1, style: 'Thin', path: Edge.Thin.ChevRight }, { id: 2, style: 'Regular', path: Edge.Regular.ChevRight }, { id: 3, style: 'Medium', path: Edge.Medium.ChevRight }], 'Edge', null, ['Chevron', 'Arrow']),
-    new icon('Caret-Left', [{ id: 1, style: 'Thin', path: Edge.Thin.ChevLeft }, { id: 2, style: 'Regular', path: Edge.Regular.ChevLeft }, { id: 3, style: 'Medium', path: Edge.Medium.ChevLeft }], 'Edge', null, ['Chevron', 'Arrow']),
-    new icon('Caret-Up', [{ id: 1, style: 'Thin', path: Edge.Thin.ChevUp }, { id: 2, style: 'Regular', path: Edge.Regular.ChevUp }, { id: 3, style: 'Medium', path: Edge.Medium.ChevUp }], 'Edge', null, ['Chevron', 'Arrow']),
-    new icon('Caret-Down', [{ id: 1, style: 'Thin', path: Edge.Thin.ChevDwn }, { id: 2, style: 'Regular', path: Edge.Regular.ChevDwn }, { id: 3, style: 'Medium', path: Edge.Medium.ChevDwn }], 'Edge', null, ['Chevron', 'Arrow']),
-    new icon('Download', [{ id: 1, style: 'Thin', path: Edge.Thin.Dload }, { id: 2, style: 'Regular', path: Edge.Regular.Dload }, { id: 3, style: 'Medium', path: Edge.Medium.Dload }], 'Edge', null),
-    new icon('Upload', [{ id: 1, style: 'Thin', path: Edge.Thin.Upload }, { id: 2, style: 'Regular', path: Edge.Regular.Upload }, { id: 3, style: 'Medium', path: Edge.Medium.Upload }], 'Edge', null),
-    new icon('Plus', [{ id: 1, style: 'Thin', path: Edge.Thin.Plus }, { id: 2, style: 'Regular', path: Edge.Regular.Plus }, { id: 3, style: 'Medium', path: Edge.Medium.Plus }], 'Edge', null, ['Add']),
-    new icon('Minus', [{ id: 1, style: 'Thin', path: Edge.Thin.Min }, { id: 2, style: 'Regular', path: Edge.Regular.Min }, { id: 3, style: 'Medium', path: Edge.Medium.Min }], 'Edge', null, ['Subtract']),
-    new icon('X', [{ id: 1, style: 'Thin', path: Edge.Thin.Close }, { id: 2, style: 'Regular', path: Edge.Regular.Close }, { id: 3, style: 'Medium', path: Edge.Medium.Close }], 'Edge', null, ['Close', 'Cancel', 'MultiPly']),
-    new icon('Check', [{ id: 1, style: 'Thin', path: Edge.Thin.CheckMrk }, { id: 2, style: 'Regular', path: Edge.Regular.CheckMrk }, { id: 3, style: 'Medium', path: Edge.Medium.CheckMrk }], 'Edge', null, ['Confirm', 'Approve']),
-    new icon('Code', [{ id: 1, style: 'Thin', path: Edge.Thin.Code }, { id: 2, style: 'Regular', path: Edge.Regular.Code }, { id: 3, style: 'Medium', path: Edge.Medium.Code }], 'Edge', null),
-    new icon('Menu-Alt-2', [{ id: 1, style: 'Thin', path: Edge.Thin.Dots }, { id: 2, style: 'Regular', path: Edge.Regular.Dots }, { id: 3, style: 'Medium', path: Edge.Medium.Dots }], 'Edge', null, ['Dots']),
-    new icon('Menu-Alt-1', [{ id: 1, style: 'Thin', path: Edge.Thin.DotsAlt }, { id: 2, style: 'Regular', path: Edge.Regular.DotsAlt }, { id: 3, style: 'Medium', path: Edge.Medium.DotsAlt }], 'Edge', null, ['Dots']),
-    new icon('Trend-Down', [{ id: 1, style: 'Thin', path: Edge.Thin.ChartDwn }, { id: 2, style: 'Regular', path: Edge.Regular.ChartDwn }, { id: 3, style: 'Medium', path: Edge.Medium.ChartDwn }], 'Edge', null),
-    new icon('Trend-Up', [{ id: 1, style: 'Thin', path: Edge.Thin.ChartUp }, { id: 2, style: 'Regular', path: Edge.Regular.ChartUp }, { id: 3, style: 'Medium', path: Edge.Medium.ChartUp }], 'Edge', null),
-    new icon('Menu', [{ id: 1, style: 'Thin', path: Edge.Thin.Menu }, { id: 2, style: 'Regular', path: Edge.Regular.Menu }, { id: 3, style: 'Medium', path: Edge.Medium.Menu }], 'Edge', null, ['Bars', 'Lines']),
-    new icon('User', [{ id: 1, style: 'Thin', path: Edge.Thin.User }, { id: 2, style: 'Regular', path: Edge.Regular.User }, { id: 3, style: 'Medium', path: Edge.Medium.User }], 'Edge', null),
-    new icon('Clock', [{ id: 1, style: 'Thin', path: Edge.Thin.Clock }, { id: 2, style: 'Regular', path: Edge.Regular.Clock }, { id: 3, style: 'Medium', path: Edge.Medium.Clock }], 'Edge', null, ['Time']),
-    new icon('Alarm', [{ id: 1, style: 'Thin', path: Edge.Thin.Alarm }, { id: 2, style: 'Regular', path: Edge.Regular.Alarm }, { id: 3, style: 'Medium', path: Edge.Medium.Alarm }], 'Edge', null, ['Time']),
-    new icon('File-Text', [{ id: 1, style: 'Thin', path: Edge.Thin.File }, { id: 2, style: 'Regular', path: Edge.Regular.File }, { id: 3, style: 'Medium', path: Edge.Medium.File }], 'Edge', null, ['Word', 'Document']),
-    new icon('File', [{ id: 1, style: 'Thin', path: Edge.Thin.FileAlt }, { id: 2, style: 'Regular', path: Edge.Regular.FileAlt }, { id: 3, style: 'Medium', path: Edge.Medium.FileAlt }], 'Edge', null),
-    new icon('Phone', [{ id: 1, style: 'Thin', path: Edge.Thin.Phone }, { id: 2, style: 'Regular', path: Edge.Regular.Phone }, { id: 3, style: 'Medium', path: Edge.Medium.Phone }], 'Edge', null),
-    new icon('Bell', [{ id: 1, style: 'Thin', path: Edge.Thin.Bell }, { id: 2, style: 'Regular', path: Edge.Regular.Bell }, { id: 3, style: 'Medium', path: Edge.Medium.Bell }], 'Edge', null, ['Notification']),
-    new icon('Archive', [{ id: 1, style: 'Thin', path: Edge.Thin.Archive }, { id: 2, style: 'Regular', path: Edge.Regular.Archive }, { id: 3, style: 'Medium', path: Edge.Medium.Archive }], 'Edge', null, ['Box']),
-    new icon('Play', [{ id: 1, style: 'Thin', path: Edge.Thin.Play }, { id: 2, style: 'Regular', path: Edge.Regular.Play }, { id: 3, style: 'Medium', path: Edge.Medium.Play }], 'Edge', null),
-    new icon('Pause', [{ id: 1, style: 'Thin', path: Edge.Thin.Pause }, { id: 2, style: 'Regular', path: Edge.Regular.Pause }, { id: 3, style: 'Medium', path: Edge.Medium.Pause }], 'Edge', null),
-    new icon('Image', [{ id: 1, style: 'Thin', path: Edge.Thin.Image }, { id: 2, style: 'Regular', path: Edge.Regular.Image }, { id: 3, style: 'Medium', path: Edge.Medium.Image }], 'Edge', null, ['Picture']),
-    new icon('Comments', [{ id: 1, style: 'Thin', path: Edge.Thin.Comments }, { id: 2, style: 'Regular', path: Edge.Regular.Comments }, { id: 3, style: 'Medium', path: Edge.Medium.Comments }], 'Edge', null, ['Chat', 'Speech Bubble', 'Message']),
-    new icon('Comment', [{ id: 1, style: 'Thin', path: Edge.Thin.Comment }, { id: 2, style: 'Regular', path: Edge.Regular.Comment }, { id: 3, style: 'Medium', path: Edge.Medium.Comment }], 'Edge', null, ['Chat', 'Speech Bubble', 'Message']),
-    new icon('Settings-Alt', [{ id: 1, style: 'Thin', path: Edge.Thin.Gear }, { id: 2, style: 'Regular', path: Edge.Regular.Gear }, { id: 3, style: 'Medium', path: Edge.Medium.Gear }], 'Edge', null, ['Gear']),
-    new icon('Settings', [{ id: 1, style: 'Thin', path: Edge.Thin.GearAlt }, { id: 2, style: 'Regular', path: Edge.Regular.GearAlt }, { id: 3, style: 'Medium', path: Edge.Medium.GearAlt }], 'Edge', null, ['Gear']),
-    new icon('Card', [{ id: 1, style: 'Thin', path: Edge.Thin.Card }, { id: 2, style: 'Regular', path: Edge.Regular.Card }, { id: 3, style: 'Medium', path: Edge.Medium.Card }], 'Edge', null, ['Credit Card', 'CC']),
-    new icon('Bookmark', [{ id: 1, style: 'Thin', path: Edge.Thin.Bookmark }, { id: 2, style: 'Regular', path: Edge.Regular.Bookmark }, { id: 3, style: 'Medium', path: Edge.Medium.Bookmark }], 'Edge', null),
-    new icon('Volume', [{ id: 1, style: 'Thin', path: Edge.Thin.Volume }, { id: 2, style: 'Regular', path: Edge.Regular.Volume }, { id: 3, style: 'Medium', path: Edge.Medium.Volume }], 'Edge', null, ['Speaker', 'Sound']),
-    new icon('Music Note', [{ id: 1, style: 'Thin', path: Edge.Thin.Music }, { id: 2, style: 'Regular', path: Edge.Regular.Music }, { id: 3, style: 'Medium', path: Edge.Medium.Music }], 'Edge', null),
-    new icon('Music Note-Alt', [{ id: 1, style: 'Thin', path: Edge.Thin.Note }, { id: 2, style: 'Regular', path: Edge.Regular.Note }, { id: 3, style: 'Medium', path: Edge.Medium.Note }], 'Edge', null),
-    new icon('Star', [{ id: 1, style: 'Thin', path: Edge.Thin.Star }, { id: 2, style: 'Regular', path: Edge.Regular.Star }, { id: 3, style: 'Medium', path: Edge.Medium.Star }], 'Edge', null, ['Rating']),
-    new icon('Heart', [{ id: 1, style: 'Thin', path: Edge.Thin.Star1 }, { id: 2, style: 'Regular', path: Edge.Regular.Star1 }, { id: 3, style: 'Medium', path: Edge.Medium.Star1 }], 'Edge', null, ['Love', 'Rate']),
-    new icon('Envelope', [{ id: 1, style: 'Thin', path: Edge.Thin.Email }, { id: 2, style: 'Regular', path: Edge.Regular.Email }, { id: 3, style: 'Medium', path: Edge.Medium.Email }], 'Edge', null, ['Email']),
-    new icon('Aeroplane', [{ id: 1, style: 'Thin', path: Edge.Thin.Plane }, { id: 2, style: 'Regular', path: Edge.Regular.Plane }, { id: 3, style: 'Medium', path: Edge.Medium.Plane }], 'Edge', null, ['Airplane']),
-    new icon('Plus-Circle', [{ id: 1, style: 'Thin', path: Edge.Thin.PlusCirc }, { id: 2, style: 'Regular', path: Edge.Regular.PlusCirc }, { id: 3, style: 'Medium', path: Edge.Medium.PlusCirc }], 'Edge', null, ['Add']),
-    new icon('Minus-Circle', [{ id: 1, style: 'Thin', path: Edge.Thin.MinCirc }, { id: 2, style: 'Regular', path: Edge.Regular.MinCirc }, { id: 3, style: 'Medium', path: Edge.Medium.MinCirc }], 'Edge', null, ['Subtract']),
-    new icon('Cancel-Circle', [{ id: 1, style: 'Thin', path: Edge.Thin.CloseCirc }, { id: 2, style: 'Regular', path: Edge.Regular.CloseCirc }, { id: 3, style: 'Medium', path: Edge.Medium.CloseCirc }], 'Edge', null, ['Close', 'X', 'MultiPly']),
-    new icon('Sun', [{ id: 1, style: 'Thin', path: Edge.Thin.Sun }, { id: 2, style: 'Regular', path: Edge.Regular.Sun }, { id: 3, style: 'Medium', path: Edge.Medium.Sun }], 'Edge', null, ['Light', 'Brightness', 'Day']),
-    new icon('Moon', [{ id: 1, style: 'Thin', path: Edge.Thin.Moon }, { id: 2, style: 'Regular', path: Edge.Regular.Moon }, { id: 3, style: 'Medium', path: Edge.Medium.Moon }], 'Edge', null, ['Dark', 'Night']),
-    new icon('Cloud', [{ id: 1, style: 'Thin', path: Edge.Thin.Cloud }, { id: 2, style: 'Regular', path: Edge.Regular.Cloud }, { id: 3, style: 'Medium', path: Edge.Medium.Cloud }], 'Edge', null),
-    new icon('Lightning', [{ id: 1, style: 'Thin', path: Edge.Thin.Bolt }, { id: 2, style: 'Regular', path: Edge.Regular.Bolt }, { id: 3, style: 'Medium', path: Edge.Medium.Bolt }], 'Edge', null, ['Shock', 'Bolt', 'Flash']),
-    new icon('Lightning-Alt', [{ id: 1, style: 'Thin', path: Edge.Thin.Lock }, { id: 2, style: 'Regular', path: Edge.Regular.BoltAlt }, { id: 3, style: 'Medium', path: Edge.Medium.BoltAlt }], 'Edge', null, ['Shock', 'Bolt', 'Flash']),
-    new icon('Lock', [{ id: 1, style: 'Thin', path: Edge.Thin.Lock }, { id: 2, style: 'Regular', path: Edge.Regular.Lock }, { id: 3, style: 'Medium', path: Edge.Medium.Lock }], 'Edge', null),
-    new icon('Unlock', [{ id: 1, style: 'Thin', path: Edge.Thin.LockOpn }, { id: 2, style: 'Regular', path: Edge.Regular.LockOpn }, { id: 3, style: 'Medium', path: Edge.Medium.LockOpn }], 'Edge', null),
-    new icon('Eye', [{ id: 1, style: 'Thin', path: Edge.Thin.Eye }, { id: 2, style: 'Regular', path: Edge.Regular.Eye }, { id: 3, style: 'Medium', path: Edge.Medium.Eye }], 'Edge', null, ['Password']),
-    new icon('Eye-Closed', [{ id: 1, style: 'Thin', path: Edge.Thin.EyeCls }, { id: 2, style: 'Regular', path: Edge.Regular.EyeCls }, { id: 3, style: 'Medium', path: Edge.Medium.EyeCls }], 'Edge', null, ['Password']),
-    new icon('Award', [{ id: 1, style: 'Thin', path: Edge.Thin.Award }, { id: 2, style: 'Regular', path: Edge.Regular.Award }, { id: 3, style: 'Medium', path: Edge.Medium.Award }], 'Edge', null, ['Medal', 'Badge']),
-    new icon('Award-Alt', [{ id: 1, style: 'Thin', path: Edge.Thin.AwardAlt }, { id: 2, style: 'Regular', path: Edge.Regular.AwardAlt }, { id: 3, style: 'Medium', path: Edge.Medium.AwardAlt }], 'Edge', null, ['Medal', 'Badge']),
-    new icon('Flag', [{ id: 1, style: 'Thin', path: Edge.Thin.Flag }, { id: 2, style: 'Regular', path: Edge.Regular.Flag }, { id: 3, style: 'Medium', path: Edge.Medium.Flag }], 'Edge', null),
-    new icon('Flag-Alt', [{ id: 1, style: 'Thin', path: Edge.Thin.FlagAlt }, { id: 2, style: 'Regular', path: Edge.Regular.FlagAlt }, { id: 3, style: 'Medium', path: Edge.Medium.FlagAlt }], 'Edge', null),
-    new icon('Pie-Chart', [{ id: 1, style: 'Thin', path: Edge.Thin.ChartPie }, { id: 2, style: 'Regular', path: Edge.Regular.ChartPie }, { id: 3, style: 'Medium', path: Edge.Medium.ChartPie }], 'Edge', null),
-    new icon('Line-Chart', [{ id: 1, style: 'Thin', path: Edge.Thin.ChartLine }, { id: 2, style: 'Regular', path: Edge.Regular.ChartLine }, { id: 3, style: 'Medium', path: Edge.Medium.ChartLine }], 'Edge', null),
-    new icon('Histogramm-Chart', [{ id: 1, style: 'Thin', path: Edge.Thin.ChartHisto }, { id: 2, style: 'Regular', path: Edge.Regular.ChartHisto }, { id: 3, style: 'Medium', path: Edge.Medium.ChartHisto }], 'Edge', null),
-    new icon('Alert', [{ id: 1, style: 'Thin', path: Edge.Thin.AlertCirc }, { id: 2, style: 'Regular', path: Edge.Regular.AlertCirc }, { id: 3, style: 'Medium', path: Edge.Medium.AlertCirc }], 'Edge', null, ['Attention']),
-    new icon('Question-Circle', [{ id: 1, style: 'Thin', path: Edge.Thin.QuesCirc }, { id: 2, style: 'Regular', path: Edge.Regular.QuesCirc }, { id: 3, style: 'Medium', path: Edge.Medium.QuesCirc }], 'Edge', null),
-    new icon('Camera', [{ id: 1, style: 'Thin', path: Edge.Thin.Camera }, { id: 2, style: 'Regular', path: Edge.Regular.Camera }, { id: 3, style: 'Medium', path: Edge.Medium.Camera }], 'Edge', null),
-    new icon('Present', [{ id: 1, style: 'Thin', path: Edge.Thin.Gift }, { id: 2, style: 'Regular', path: Edge.Regular.Gift }, { id: 3, style: 'Medium', path: Edge.Medium.Gift }], 'Edge', null, ['Gift']),
-    new icon('Search', [{ id: 1, style: 'Thin', path: Edge.Thin.Search }, { id: 2, style: 'Regular', path: Edge.Regular.Search }, { id: 3, style: 'Medium', path: Edge.Medium.Search }], 'Edge', null, ['Magnifying Glass']),
-    new icon('Zoom-In', [{ id: 1, style: 'Thin', path: Edge.Thin.MagnifyPlus }, { id: 2, style: 'Regular', path: Edge.Regular.MagnifyPlus }, { id: 3, style: 'Medium', path: Edge.Medium.MagnifyPlus }], 'Edge', null, ['Magnify']),
-    new icon('Zoom-Out', [{ id: 1, style: 'Thin', path: Edge.Thin.MagnifyMin }, { id: 2, style: 'Regular', path: Edge.Regular.MagnifyMin }, { id: 3, style: 'Medium', path: Edge.Medium.MagnifyMin }], 'Edge', null, ['Magnify']),
-    new icon('Power Button', [{ id: 1, style: 'Thin', path: Edge.Thin.Power }, { id: 2, style: 'Regular', path: Edge.Regular.Power }, { id: 3, style: 'Medium', path: Edge.Medium.Power }], 'Edge', null, ['On', 'Off']),
-    new icon('Wallet', [{ id: 1, style: 'Thin', path: Edge.Thin.Wallet }, { id: 2, style: 'Regular', path: Edge.Regular.Wallet }, { id: 3, style: 'Medium', path: Edge.Medium.Wallet }], 'Edge', null),
-    new icon('Home', [{ id: 1, style: 'Thin', path: Edge.Thin.Home }, { id: 2, style: 'Regular', path: Edge.Regular.Home }, { id: 3, style: 'Medium', path: Edge.Medium.Home }], 'Edge', null),
-    new icon('Refresh', [{ id: 1, style: 'Thin', path: Edge.Thin.Refresh }, { id: 2, style: 'Regular', path: Edge.Regular.Refresh }, { id: 3, style: 'Medium', path: Edge.Medium.Refresh }], 'Edge', null, ['Reload']),
-    new icon('Pencil', [{ id: 1, style: 'Thin', path: Edge.Thin.Pencil }, { id: 2, style: 'Regular', path: Edge.Regular.Pencil }, { id: 3, style: 'Medium', path: Edge.Medium.Pencil }], 'Edge', null, ['Edit']),
-    new icon('Shopping Cart', [{ id: 1, style: 'Thin', path: Edge.Thin.Cart }, { id: 2, style: 'Regular', path: Edge.Regular.Cart }, { id: 3, style: 'Medium', path: Edge.Medium.Cart }], 'Edge', null),
-    new icon('Monitor', [{ id: 1, style: 'Thin', path: Edge.Thin.Desktop }, { id: 2, style: 'Regular', path: Edge.Regular.Desktop }, { id: 3, style: 'Medium', path: Edge.Medium.Desktop }], 'Edge', null, ['Desktop', 'Television', 'iMac']),
-    new icon('Smartphone', [{ id: 1, style: 'Thin', path: Edge.Thin.Mobile }, { id: 2, style: 'Regular', path: Edge.Regular.Mobile }, { id: 3, style: 'Medium', path: Edge.Medium.Mobile }], 'Edge', null, ['Android', 'iPhone']),
-    new icon('Watch', [{ id: 1, style: 'Thin', path: Edge.Thin.Watch }, { id: 2, style: 'Regular', path: Edge.Regular.Watch }, { id: 3, style: 'Medium', path: Edge.Medium.Watch }], 'Edge', null),
-    new icon('Save', [{ id: 1, style: 'Thin', path: Edge.Thin.Save }, { id: 2, style: 'Regular', path: Edge.Regular.Save }, { id: 3, style: 'Medium', path: Edge.Medium.Save }], 'Edge', null, ['Floppy Disk']),
-    new icon('Printer', [{ id: 1, style: 'Thin', path: Edge.Thin.Print }, { id: 2, style: 'Regular', path: Edge.Regular.Print }, { id: 3, style: 'Medium', path: Edge.Medium.Print }], 'Edge', null),
-    new icon('Key', [{ id: 1, style: 'Thin', path: Edge.Thin.Key }, { id: 2, style: 'Regular', path: Edge.Regular.Key }, { id: 3, style: 'Medium', path: Edge.Medium.Key }], 'Edge', null),
-    new icon('Filter', [{ id: 1, style: 'Thin', path: Edge.Thin.Filter }, { id: 2, style: 'Regular', path: Edge.Regular.Filter }, { id: 3, style: 'Medium', path: Edge.Medium.Filter }], 'Edge', null, ['Funnel']),
-    new icon('Send', [{ id: 1, style: 'Thin', path: Edge.Thin.Send }, { id: 2, style: 'Regular', path: Edge.Regular.Send }, { id: 3, style: 'Medium', path: Edge.Medium.Send }], 'Edge', null),
-    new icon('Bank', [{ id: 1, style: 'Thin', path: Edge.Thin.Bank }, { id: 2, style: 'Regular', path: Edge.Regular.Bank }, { id: 3, style: 'Medium', path: Edge.Medium.Bank }], 'Edge', null, ['Temple']),
-    new icon('Video', [{ id: 1, style: 'Thin', path: Edge.Thin.Video }, { id: 2, style: 'Regular', path: Edge.Regular.Video }, { id: 3, style: 'Medium', path: Edge.Medium.Video }], 'Edge', null, ['Recorder']),
-    new icon('Graduation Hat', [{ id: 1, style: 'Thin', path: Edge.Thin.Education }, { id: 2, style: 'Regular', path: Edge.Regular.Education }, { id: 3, style: 'Medium', path: Edge.Medium.Education }], 'Edge', null),
-    new icon('Umbrella', [{ id: 1, style: 'Thin', path: Edge.Thin.Umbrella }, { id: 2, style: 'Regular', path: Edge.Regular.Umbrella }, { id: 3, style: 'Medium', path: Edge.Medium.Umbrella }], 'Edge', null),
-    new icon('Forward', [{ id: 1, style: 'Thin', path: Edge.Thin.Foward }, { id: 2, style: 'Regular', path: Edge.Regular.Foward }, { id: 3, style: 'Medium', path: Edge.Medium.Foward }], 'Edge', null, ['Share']),
-    new icon('Reply', [{ id: 1, style: 'Thin', path: Edge.Thin.Reply }, { id: 2, style: 'Regular', path: Edge.Regular.Reply }, { id: 3, style: 'Medium', path: Edge.Medium.Reply }], 'Edge', null),
-    new icon('Stack', [{ id: 1, style: 'Thin', path: Edge.Thin.Stack }, { id: 2, style: 'Regular', path: Edge.Regular.Stack }, { id: 3, style: 'Medium', path: Edge.Medium.Stack }], 'Edge', null, ['Layers']),
-    new icon('Attach', [{ id: 1, style: 'Thin', path: Edge.Thin.Attach }, { id: 2, style: 'Regular', path: Edge.Regular.Attach }, { id: 3, style: 'Medium', path: Edge.Medium.Attach }], 'Edge', null, ['Link']),
-    new icon('Shopping Bag', [{ id: 1, style: 'Thin', path: Edge.Thin.Bag }, { id: 2, style: 'Regular', path: Edge.Regular.Bag }, { id: 3, style: 'Medium', path: Edge.Medium.Bag }], 'Edge', null),
-    new icon('Shopping Basket', [{ id: 1, style: 'Thin', path: Edge.Thin.BagAlt }, { id: 2, style: 'Regular', path: Edge.Regular.BagAlt }, { id: 3, style: 'Medium', path: Edge.Medium.BagAlt }], 'Edge', null),
-    new icon('Clipboard', [{ id: 1, style: 'Thin', path: Edge.Thin.Clipboard }, { id: 2, style: 'Regular', path: Edge.Regular.Clipboard }, { id: 3, style: 'Medium', path: Edge.Medium.Clipboard }], 'Edge', null),
-    new icon('Clipboard-Alt', [{ id: 1, style: 'Thin', path: Edge.Thin.ClipAlt }, { id: 2, style: 'Regular', path: Edge.Regular.ClipAlt }, { id: 3, style: 'Medium', path: Edge.Medium.ClipAlt }], 'Edge', null),
-    new icon('Sort', [{ id: 1, style: 'Thin', path: Edge.Thin.Sort }, { id: 2, style: 'Regular', path: Edge.Regular.Sort }, { id: 3, style: 'Medium', path: Edge.Medium.Sort }], 'Edge', null, ['Arrows-up-down']),
-    new icon('Exchange', [{ id: 1, style: 'Thin', path: Edge.Thin.Exchange }, { id: 2, style: 'Regular', path: Edge.Regular.Exchange }, { id: 3, style: 'Medium', path: Edge.Medium.Exchange }], 'Edge', null, ['Arrows-left-right']),
-    new icon('Pin', [{ id: 1, style: 'Thin', path: Edge.Thin.Pin }, { id: 2, style: 'Regular', path: Edge.Regular.Pin }, { id: 3, style: 'Medium', path: Edge.Medium.Pin }], 'Edge', null),
-    new icon('Backspace', [{ id: 1, style: 'Thin', path: Edge.Thin.BackSpace }, { id: 2, style: 'Regular', path: Edge.Regular.BackSpace }, { id: 3, style: 'Medium', path: Edge.Medium.BackSpace }], 'Edge', null, ['Clear']),
-    new icon('Lightbulb', [{ id: 1, style: 'Thin', path: Edge.Thin.Lightbulb }, { id: 2, style: 'Regular', path: Edge.Regular.Lightbulb }, { id: 3, style: 'Medium', path: Edge.Medium.Lightbulb }], 'Edge', null),
-    new icon('Folder', [{ id: 1, style: 'Thin', path: Edge.Thin.Folder }, { id: 2, style: 'Regular', path: Edge.Regular.Folder }, { id: 3, style: 'Medium', path: Edge.Medium.Folder }], 'Edge', null),
-    new icon('Folder-Add', [{ id: 1, style: 'Thin', path: Edge.Thin.FolderAdd }, { id: 2, style: 'Regular', path: Edge.Regular.FolderAdd }, { id: 3, style: 'Medium', path: Edge.Medium.FolderAdd }], 'Edge', null),
-    new icon('Folder-Delete', [{ id: 1, style: 'Thin', path: Edge.Thin.FolderDel }, { id: 2, style: 'Regular', path: Edge.Regular.FolderDel }, { id: 3, style: 'Medium', path: Edge.Medium.FolderDel }], 'Edge', null),
-    new icon('Folder-Check', [{ id: 1, style: 'Thin', path: Edge.Thin.FolderChk }, { id: 2, style: 'Regular', path: Edge.Regular.FolderChk }, { id: 3, style: 'Medium', path: Edge.Medium.FolderChk }], 'Edge', null),
-    new icon('Calender', [{ id: 1, style: 'Thin', path: Edge.Thin.Calender }, { id: 2, style: 'Regular', path: Edge.Regular.Calender }, { id: 3, style: 'Medium', path: Edge.Medium.Calender }], 'Edge', null),
-    new icon('Calender-Check', [{ id: 1, style: 'Thin', path: Edge.Thin.CalenderChk }, { id: 2, style: 'Regular', path: Edge.Regular.CalenderChk }, { id: 3, style: 'Medium', path: Edge.Medium.CalenderChk }], 'Edge', null),
-    new icon('Hourglass', [{ id: 1, style: 'Thin', path: Edge.Thin.Sandwatch }, { id: 2, style: 'Regular', path: Edge.Regular.Sandwatch }, { id: 3, style: 'Medium', path: Edge.Medium.Sandwatch }], 'Edge', null, ['Sandwatch']),
-    new icon('Hourglass-Alt', [{ id: 1, style: 'Thin', path: Edge.Thin.SandwatchAlt }, { id: 2, style: 'Regular', path: Edge.Regular.SandwatchAlt }, { id: 3, style: 'Medium', path: Edge.Medium.SandwatchAlt }], 'Edge', null, ['Sandwatch']),
-    new icon('Globe', [{ id: 1, style: 'Thin', path: Edge.Thin.Planet }, { id: 2, style: 'Regular', path: Edge.Regular.Planet }, { id: 3, style: 'Medium', path: Edge.Medium.Planet }], 'Edge', null, ['World']),
-    new icon('Microphone', [{ id: 1, style: 'Thin', path: Edge.Thin.Micro }, { id: 2, style: 'Regular', path: Edge.Regular.Micro }, { id: 3, style: 'Medium', path: Edge.Medium.Micro }], 'Edge', null),
-    new icon('Copy', [{ id: 1, style: 'Thin', path: Edge.Thin.Copy }, { id: 2, style: 'Regular', path: Edge.Regular.Copy }, { id: 3, style: 'Medium', path: Edge.Medium.Copy }], 'Edge', null, ['Duplicate']),
-    new icon('Gamepad', [{ id: 1, style: 'Thin', path: Edge.Thin.Gamepad }, { id: 2, style: 'Regular', path: Edge.Regular.Gamepad }, { id: 3, style: 'Medium', path: Edge.Medium.Gamepad }], 'Edge', null, ['Controller', 'Joystick']),
-    new icon('Layout', [{ id: 1, style: 'Thin', path: Edge.Thin.Apps }, { id: 2, style: 'Regular', path: Edge.Regular.Apps }, { id: 3, style: 'Medium', path: Edge.Medium.Apps }], 'Edge', null, ['Menu', 'Grid', 'Squares']),
-    new icon('Book', [{ id: 1, style: 'Thin', path: Edge.Thin.Book }, { id: 2, style: 'Regular', path: Edge.Regular.Book }, { id: 3, style: 'Medium', path: Edge.Medium.Book }], 'Edge', null),
-    new icon('Battery', [{ id: 1, style: 'Thin', path: Edge.Thin.Battery }, { id: 2, style: 'Regular', path: Edge.Regular.Battery }, { id: 3, style: 'Medium', path: Edge.Medium.Battery }], 'Edge', null),
-    new icon('Battery-Charging', [{ id: 1, style: 'Thin', path: Edge.Thin.BattCharge }, { id: 2, style: 'Regular', path: Edge.Regular.BattCharge }, { id: 3, style: 'Medium', path: Edge.Medium.BattCharge }], 'Edge', null),
-    new icon('Mouse', [{ id: 1, style: 'Thin', path: Edge.Thin.Mouse }, { id: 2, style: 'Regular', path: Edge.Regular.Mouse }, { id: 3, style: 'Medium', path: Edge.Medium.Mouse }], 'Edge', null),
-    new icon('Traffic Cone', [{ id: 1, style: 'Thin', path: Edge.Thin.NoEntry }, { id: 2, style: 'Regular', path: Edge.Regular.NoEntry }, { id: 3, style: 'Medium', path: Edge.Medium.NoEntry }], 'Edge', null, ['No entry', 'VLC']),
-    new icon('Headphones', [{ id: 1, style: 'Thin', path: Edge.Thin.Headphones }, { id: 2, style: 'Regular', path: Edge.Regular.Headphones }, { id: 3, style: 'Medium', path: Edge.Medium.Headphones }], 'Edge', null),
-    new icon('Suitcase', [{ id: 1, style: 'Thin', path: Edge.Thin.Bag1 }, { id: 2, style: 'Regular', path: Edge.Regular.Bag1 }, { id: 3, style: 'Medium', path: Edge.Medium.Bag1 }], 'Edge', null),
-    new icon('Cloud-Download', [{ id: 1, style: 'Thin', path: Edge.Thin.CloudDL }, { id: 2, style: 'Regular', path: Edge.Regular.CloudDL }, { id: 3, style: 'Medium', path: Edge.Medium.CloudDL }], 'Edge', null),
-    new icon('Coins', [{ id: 1, style: 'Thin', path: Edge.Thin.Coins }, { id: 2, style: 'Regular', path: Edge.Regular.Coins }, { id: 3, style: 'Medium', path: Edge.Medium.Coins }], 'Edge', null, ['Money']),
-    new icon('Tag', [{ id: 1, style: 'Thin', path: Edge.Thin.Tag }, { id: 2, style: 'Regular', path: Edge.Regular.Tag }, { id: 3, style: 'Medium', path: Edge.Medium.Tag }], 'Edge', null, ['Money']),
-    new icon('Whiteboard', [{ id: 1, style: 'Thin', path: Edge.Thin.Presentation }, { id: 2, style: 'Regular', path: Edge.Regular.Presentation }, { id: 3, style: 'Medium', path: Edge.Medium.Presentation }], 'Edge', null, ['Presentation']),
-    new icon('Sliders', [{ id: 1, style: 'Thin', path: Edge.Thin.Sliders }, { id: 2, style: 'Regular', path: Edge.Regular.Sliders }, { id: 3, style: 'Medium', path: Edge.Medium.Sliders }], 'Edge', null, ['Tools', 'Customise', 'Settings']),
-    new icon('Cash', [{ id: 1, style: 'Thin', path: Edge.Thin.Cash }, { id: 2, style: 'Regular', path: Edge.Regular.Cash }, { id: 3, style: 'Medium', path: Edge.Medium.Cash }], 'Edge', null, ['Money', 'Currency', 'Banknote']),
-    new icon('Sitemap', [{ id: 1, style: 'Thin', path: Edge.Thin.Sitemap }, { id: 2, style: 'Regular', path: Edge.Regular.Sitemap }, { id: 3, style: 'Medium', path: Edge.Medium.Sitemap }], 'Edge', null),
-    new icon('Cup', [{ id: 1, style: 'Thin', path: Edge.Thin.Cup }, { id: 2, style: 'Regular', path: Edge.Regular.Cup }, { id: 3, style: 'Medium', path: Edge.Medium.Cup }], 'Edge', null),
-    new icon('Current-Location', [{ id: 1, style: 'Thin', path: Edge.Thin.Crosshair }, { id: 2, style: 'Regular', path: Edge.Regular.Crosshair }, { id: 3, style: 'Medium', path: Edge.Medium.Crosshair }], 'Edge', null, ['Mark', 'Crosshair', 'point', 'Target']),
-    new icon('Dashboard', [{ id: 1, style: 'Thin', path: Edge.Thin.Dash }, { id: 2, style: 'Regular', path: Edge.Regular.Dash }, { id: 3, style: 'Medium', path: Edge.Medium.Dash }], 'Edge', null),
-    new icon('Thumbs-Up', [{ id: 1, style: 'Thin', path: Edge.Thin.Like }, { id: 2, style: 'Regular', path: Edge.Regular.Like }, { id: 3, style: 'Medium', path: Edge.Medium.Like }], 'Edge', null, ['Like']),
-    new icon('Thumbs-Down', [{ id: 1, style: 'Thin', path: Edge.Thin.Dislike }, { id: 2, style: 'Regular', path: Edge.Regular.Dislike }, { id: 3, style: 'Medium', path: Edge.Medium.Dislike }], 'Edge', null, ['Dislike']),
-    new icon('Trash', [{ id: 1, style: 'Thin', path: Edge.Thin.Trash }, { id: 2, style: 'Regular', path: Edge.Regular.Trash }, { id: 3, style: 'Medium', path: Edge.Medium.Trash }], 'Edge', null, ['Bin']),
-    new icon('Trash-Alt', [{ id: 1, style: 'Thin', path: Edge.Thin.TrashAlt }, { id: 2, style: 'Regular', path: Edge.Regular.TrashAlt }, { id: 3, style: 'Medium', path: Edge.Medium.TrashAlt }], 'Edge', null, ['Bin']),
-    new icon('Location', [{ id: 1, style: 'Thin', path: Edge.Thin.Location }, { id: 2, style: 'Regular', path: Edge.Regular.Location }, { id: 3, style: 'Medium', path: Edge.Medium.Location }], 'Edge', null),
-    new icon('Expand', [{ id: 1, style: 'Thin', path: Edge.Thin.Focus }, { id: 2, style: 'Regular', path: Edge.Regular.Focus }, { id: 3, style: 'Medium', path: Edge.Medium.Focus }], 'Edge', null, ['Maximise', 'Focus']),
-    new icon('Smiley Face-Happy', [{ id: 1, style: 'Thin', path: Edge.Thin.SmileHappy }, { id: 2, style: 'Regular', path: Edge.Regular.SmileHappy }, { id: 3, style: 'Medium', path: Edge.Medium.SmileHappy }], 'Edge', null, ['Emoji']),
-    new icon('Smiley Face-Sad', [{ id: 1, style: 'Thin', path: Edge.Thin.SmileSad }, { id: 2, style: 'Regular', path: Edge.Regular.SmileSad }, { id: 3, style: 'Medium', path: Edge.Medium.SmileSad }], 'Edge', null, ['Emoji']),
-    new icon('Smiley Face-Confused', [{ id: 1, style: 'Thin', path: Edge.Thin.SmileConfused }, { id: 2, style: 'Regular', path: Edge.Regular.SmileConfused }, { id: 3, style: 'Medium', path: Edge.Medium.SmileConfused }], 'Edge', null, ['Emoji']),
-    new icon('Shield', [{ id: 1, style: 'Thin', path: Edge.Thin.Shield }, { id: 2, style: 'Regular', path: Edge.Regular.Shield }, { id: 3, style: 'Medium', path: Edge.Medium.Shield }], 'Edge', null),
-    new icon('Shield-Check', [{ id: 1, style: 'Thin', path: Edge.Thin.ShieldChk }, { id: 2, style: 'Regular', path: Edge.Regular.ShieldChk }, { id: 3, style: 'Medium', path: Edge.Medium.ShieldChk }], 'Edge', null, ['Secure']),
-    new icon('Link', [{ id: 1, style: 'Thin', path: Edge.Thin.Link }, { id: 2, style: 'Regular', path: Edge.Regular.Link }, { id: 3, style: 'Medium', path: Edge.Medium.Link }], 'Edge', null, ['Attach']),
-    new icon('Wifi', [{ id: 1, style: 'Thin', path: Edge.Thin.Wifi }, { id: 2, style: 'Regular', path: Edge.Regular.Wifi }, { id: 3, style: 'Medium', path: Edge.Medium.Wifi }], 'Edge', null),
-    new icon('Rocket', [{ id: 1, style: 'Thin', path: Edge.Thin.Rocket }, { id: 2, style: 'Regular', path: Edge.Regular.Rocket }, { id: 3, style: 'Medium', path: Edge.Medium.Rocket }], 'Edge', null),
-    new icon('Dollar Sign', [{ id: 1, style: 'Thin', path: Edge.Thin.Dollar }, { id: 2, style: 'Regular', path: Edge.Regular.Dollar }, { id: 3, style: 'Medium', path: Edge.Medium.Dollar }], 'Edge', null, ['Currency', 'Money']),
-    new icon('Euro Sign', [{ id: 1, style: 'Thin', path: Edge.Thin.Euro }, { id: 2, style: 'Regular', path: Edge.Regular.Euro }, { id: 3, style: 'Medium', path: Edge.Medium.Euro }], 'Edge', null, ['Currency', 'Money']),
-    new icon('Yen Sign', [{ id: 1, style: 'Thin', path: Edge.Thin.Yen }, { id: 2, style: 'Regular', path: Edge.Regular.Yen }, { id: 3, style: 'Medium', path: Edge.Medium.Yen }], 'Edge', null, ['Currency', 'Money']),
-    new icon('Pound Sign', [{ id: 1, style: 'Thin', path: Edge.Thin.Pound }, { id: 2, style: 'Regular', path: Edge.Regular.Pound }, { id: 3, style: 'Medium', path: Edge.Medium.Pound }], 'Edge', null, ['Currency', 'Money']),
-    new icon('Ruble Sign', [{ id: 1, style: 'Thin', path: Edge.Thin.Ruble }, { id: 2, style: 'Regular', path: Edge.Regular.Ruble }, { id: 3, style: 'Medium', path: Edge.Medium.Ruble }], 'Edge', null, ['Currency', 'Money']),
+//Feather Icons
+pushSVG('Airplay', Icons.Feather.Airplay, 'Feather Icons', 'Outline')
+pushSVG('Alert-Octagon', Icons.Feather.AlertOct, 'Feather Icons', 'Outline')
+pushSVG('Align-Centre', Icons.Feather.AlignC, 'Feather Icons', 'Outline')
+pushSVG('Align-Justify', Icons.Feather.AlignJ, 'Feather Icons', 'Outline')
+pushSVG('Align-Left', Icons.Feather.AlignL, 'Feather Icons', 'Outline')
+pushSVG('Align-Right', Icons.Feather.AlignR, 'Feather Icons', 'Outline')
+pushSVG('Anchor', Icons.Feather.Anchor, 'Feather Icons', 'Outline')
+pushSVG('Archive', Icons.Feather.Archive, 'Feather Icons', 'Outline', ['Box'])
+pushSVG('Arrow-Left-Circle', Icons.Feather.ArrLC, 'Feather Icons', 'Outline')
+pushSVG('Arrow-Right-Circle', Icons.Feather.ArrRC, 'Feather Icons', 'Outline')
+pushSVG('Arrow-Down-Circle', Icons.Feather.ArrDC, 'Feather Icons', 'Outline')
+pushSVG('Arrow-Up-Circle', Icons.Feather.ArrUC, 'Feather Icons', 'Outline')
+pushSVG('Arrow-Up-Left', Icons.Feather.ArrUL, 'Feather Icons', 'Outline')
+pushSVG('Arrow-Up-Right', Icons.Feather.ArrUR, 'Feather Icons', 'Outline')
+pushSVG('Arrow-Down-Left', Icons.Feather.ArrDL, 'Feather Icons', 'Outline')
+pushSVG('Arrow-Down-Right', Icons.Feather.ArrDR, 'Feather Icons', 'Outline')
+pushSVG('Aperture', Icons.Feather.Aperture, 'Feather Icons', 'Outline', ['Camera'])
+pushSVG('Award-2', Icons.Feather.AwardF, 'Feather Icons', 'Outline')
+pushSVG('Barchart', Icons.Feather.Barchart, 'Feather Icons', 'Outline')
+pushSVG('Barchart-2', Icons.Feather.Barchart2, 'Feather Icons', 'Outline')
+pushSVG('Battery-Charging', Icons.Feather.BatCharge, 'Feather Icons', 'Outline')
+pushSVG('Bold', Icons.Feather.Bold, 'Feather Icons', 'Outline')
+pushSVG('Book', Icons.Feather.BookF, 'Feather Icons', 'Outline')
+pushSVG('Chevron-Left', Icons.Feather.ChevL, 'Feather Icons', 'Outline')
+pushSVG('Chevron-Right', Icons.Feather.ChevR, 'Feather Icons', 'Outline')
+pushSVG('Chevron-Up', Icons.Feather.ChevUp, 'Feather Icons', 'Outline')
+pushSVG('Chevron-Down', Icons.Feather.ChevDown, 'Feather Icons', 'Outline')
+pushSVG('Circle', Icons.Feather.Circle, 'Feather Icons', 'Outline')
+pushSVG('Cloud-Drizzle', Icons.Feather.CloudDrizzle, 'Feather Icons', 'Outline')
+pushSVG('Cloud-Snow', Icons.Feather.CloudSnow, 'Feather Icons', 'Outline')
+pushSVG('Cloud-Rain', Icons.Feather.CloudRain, 'Feather Icons', 'Outline')
+pushSVG('Cloud-Lightining', Icons.Feather.CloudLight, 'Feather Icons', 'Outline')
+pushSVG('Code', Icons.Feather.Code, 'Feather Icons', 'Outline')
+pushSVG('Codepen', Icons.Feather.Codepen, 'Feather Icons', 'Outline')
+pushSVG('Codesandbox', Icons.Feather.Codesandbox, 'Feather Icons', 'Outline')
+pushSVG('Coffee', Icons.Feather.Coffee, 'Feather Icons', 'Outline', ['Cup'])
+pushSVG('Corner-Left-Down', Icons.Feather.CornerLD, 'Feather Icons', 'Outline')
+pushSVG('Corner-Right-Down', Icons.Feather.CornerRD, 'Feather Icons', 'Outline')
+pushSVG('Corner-Left-Up', Icons.Feather.CornerLU, 'Feather Icons', 'Outline')
+pushSVG('Corner-Right-Up', Icons.Feather.CornerRU, 'Feather Icons', 'Outline')
+pushSVG('Corner-Down-Left', Icons.Feather.CornerDL, 'Feather Icons', 'Outline')
+pushSVG('Corner-Down-Right', Icons.Feather.CornerDR, 'Feather Icons', 'Outline')
+pushSVG('Corner-Up-Left', Icons.Feather.CornerUL, 'Feather Icons', 'Outline')
+pushSVG('Corner-Up-Right', Icons.Feather.CornerUR, 'Feather Icons', 'Outline')
+pushSVG('Command', Icons.Feather.Command, 'Feather Icons', 'Outline')
+pushSVG('Crop', Icons.Feather.Crop, 'Feather Icons', 'Outline')
+pushSVG('Crosshair', Icons.Feather.Crosshair, 'Feather Icons', 'Outline')
+pushSVG('Database', Icons.Feather.DB, 'Feather Icons', 'Outline', ['DB'])
+pushSVG('Disc', Icons.Feather.Disc, 'Feather Icons', 'Outline')
+pushSVG('Dollar Sign', Icons.Feather.DollarS, 'Feather Icons', 'Outline', ['Money', 'Currency'])
+pushSVG('Droplet', Icons.Feather.Droplet, 'Feather Icons', 'Outline', ['Rain'])
+pushSVG('Edit-2', Icons.Feather.Edit2, 'Feather Icons', 'Outline')
+pushSVG('External Link', Icons.Feather.ExtLink, 'Feather Icons', 'Outline')
+pushSVG('Feather', Icons.Feather.Feather, 'Feather Icons', 'Outline')
+pushSVG('File-Plus', Icons.Feather.FilePlus, 'Feather Icons', 'Outline')
+pushSVG('File-Minus', Icons.Feather.FileMinus, 'Feather Icons', 'Outline')
+pushSVG('Film', Icons.Feather.Film, 'Feather Icons', 'Outline')
+pushSVG('Flag', Icons.Feather.Flag, 'Feather Icons', 'Outline')
+pushSVG('Framer', Icons.Feather.Framer, 'Feather Icons', 'Outline')
+pushSVG('Frown', Icons.Feather.Frown, 'Feather Icons', 'Outline', ['Simely', 'Face', 'Reaction'])
+pushSVG('Meh', Icons.Feather.Meh, 'Feather Icons', 'Outline', ['Simely', 'Face', 'Reaction'])
+pushSVG('Smile', Icons.Feather.Smile, 'Feather Icons', 'Outline', ['Face', 'Reaction'])
+pushSVG('Git Branch', Icons.Feather.GitBranch, 'Feather Icons', 'Outline', ['Github'])
+pushSVG('Git Commit', Icons.Feather.GitCommit, 'Feather Icons', 'Outline', ['Github'])
+pushSVG('Git Merge', Icons.Feather.GitMerge, 'Feather Icons', 'Outline', ['Github'])
+pushSVG('Git Pull', Icons.Feather.GitPull, 'Feather Icons', 'Outline', ['Github'])
+pushSVG('Gitlab', Icons.Feather.Gitlab, 'Feather Icons', 'Outline', ['Github'])
+pushSVG('Github', Icons.Feather.Github, 'Feather Icons', 'Outline')
+pushSVG('Globe', Icons.Feather.Globe, 'Feather Icons', 'Outline')
+pushSVG('Hard Drive', Icons.Feather.HardDrive, 'Feather Icons', 'Outline')
+pushSVG('Hash', Icons.Feather.Hash, 'Feather Icons', 'Outline')
+pushSVG('Help-Circle', Icons.Feather.HelpCirc, 'Feather Icons', 'Outline')
+pushSVG('Octagon', Icons.Feather.Hex, 'Feather Icons', 'Outline')
+pushSVG('Triangle', Icons.Feather.Triangle, 'Feather Icons', 'Outline')
+pushSVG('Inbox', Icons.Feather.Inbox, 'Feather Icons', 'Outline')
+pushSVG('Italic', Icons.Feather.Italic, 'Feather Icons', 'Outline')
+pushSVG('LayoutAlt', Icons.Feather.Layout, 'Feather Icons', 'Outline')
+pushSVG('Lifebuoy', Icons.Feather.LifeBouy, 'Feather Icons', 'Outline')
+pushSVG('Link', Icons.Feather.Link, 'Feather Icons', 'Outline')
+pushSVG('Link-2', Icons.Feather.Link2, 'Feather Icons', 'Outline')
+pushSVG('Loader', Icons.Feather.Loader, 'Feather Icons', 'Outline')
+pushSVG('Map', Icons.Feather.Map, 'Feather Icons', 'Outline')
+pushSVG('List', Icons.Feather.List, 'Feather Icons', 'Outline')
+pushSVG('Maximise-2', Icons.Feather.Maximise2, 'Feather Icons', 'Outline')
+pushSVG('Minimise2-', Icons.Feather.Minimise2, 'Feather Icons', 'Outline')
+pushSVG('Minus', Icons.Feather.Minus, 'Feather Icons', 'Outline')
+pushSVG('Minus-Circle', Icons.Feather.MinusCirc, 'Feather Icons', 'Outline')
+pushSVG('Plus-Circle', Icons.Feather.PlusCirc, 'Feather Icons', 'Outline')
+pushSVG('Minus-Square', Icons.Feather.MinusSquare, 'Feather Icons', 'Outline')
+pushSVG('X-Circle', Icons.Feather.XCirc, 'Feather Icons', 'Outline')
+pushSVG('X-Octagon', Icons.Feather.XOct, 'Feather Icons', 'Outline')
+pushSVG('Pause-Circle', Icons.Feather.PauseCirc, 'Feather Icons', 'Outline')
+pushSVG('Play-Circle', Icons.Feather.PlayCirc, 'Feather Icons', 'Outline')
+pushSVG('Mouse Pointer', Icons.Feather.MousePtr, 'Feather Icons', 'Outline')
+pushSVG('Stop-Circle', Icons.Feather.StopCirc, 'Feather Icons', 'Outline')
+pushSVG('Package', Icons.Feather.Package, 'Feather Icons', 'Outline')
+pushSVG('Percentage', Icons.Feather.Percent, 'Feather Icons', 'Outline')
+pushSVG('Pen Tool', Icons.Feather.PenTool, 'Feather Icons', 'Outline')
+pushSVG('Phone Call', Icons.Feather.PhoneCall, 'Feather Icons', 'Outline')
+pushSVG('Pocket', Icons.Feather.Pocket, 'Feather Icons', 'Outline')
+pushSVG('Radio', Icons.Feather.Radio, 'Feather Icons', 'Outline', ['Waves'])
+pushSVG('Refresh-Counter-Clockwise', Icons.Feather.RefreshCCW, 'Feather Icons', 'Outline')
+pushSVG('Refresh-Clockwise', Icons.Feather.RefreshCW, 'Feather Icons', 'Outline')
+pushSVG('Rotate-Clockwise', Icons.Feather.RotateCW, 'Feather Icons', 'Outline')
+pushSVG('Repeat', Icons.Feather.Repeat, 'Feather Icons', 'Outline')
+pushSVG('RSS', Icons.Feather.RSS, 'Feather Icons', 'Outline')
+pushSVG('Sciccors', Icons.Feather.Sciccors, 'Feather Icons', 'Outline')
+pushSVG('Sheild-Off', Icons.Feather.ShieldOff, 'Feather Icons', 'Outline')
+pushSVG('Sliders', Icons.Feather.Sliders, 'Feather Icons', 'Outline')
+pushSVG('Sidebar', Icons.Feather.Sidebar, 'Feather Icons', 'Outline')
+pushSVG('Speaker', Icons.Feather.Speaker, 'Feather Icons', 'Outline')
+pushSVG('Square', Icons.Feather.Square, 'Feather Icons', 'Outline')
+pushSVG('Sunrise', Icons.Feather.Sunrise, 'Feather Icons', 'Outline')
+pushSVG('Sunset', Icons.Feather.Sunset, 'Feather Icons', 'Outline')
+pushSVG('Tablet', Icons.Feather.Tablet, 'Feather Icons', 'Outline')
+pushSVG('TV', Icons.Feather.TV, 'Feather Icons', 'Outline')
+pushSVG('Tag', Icons.Feather.Tag, 'Feather Icons', 'Outline')
+pushSVG('Terminal', Icons.Feather.Terminal, 'Feather Icons', 'Outline')
+pushSVG('Themometer', Icons.Feather.Thermometer, 'Feather Icons', 'Outline')
+pushSVG('Target', Icons.Feather.Target, 'Feather Icons', 'Outline')
+pushSVG('Tool', Icons.Feather.Tool, 'Feather Icons', 'Outline')
+pushSVG('Trending-Up', Icons.Feather.TrendUp, 'Feather Icons', 'Outline')
+pushSVG('Trending-Down', Icons.Feather.TrendDW, 'Feather Icons', 'Outline')
+pushSVG('Truck', Icons.Feather.Truck, 'Feather Icons', 'Outline', ['Vehicle'])
+pushSVG('Type', Icons.Feather.Type, 'Feather Icons', 'Outline', ['I'])
+pushSVG('Underline', Icons.Feather.Underline, 'Feather Icons', 'Outline')
+pushSVG('Users', Icons.Feather.Users, 'Feather Icons', 'Outline')
+pushSVG('User-Check', Icons.Feather.UserCheck, 'Feather Icons', 'Outline')
+pushSVG('User-Minus', Icons.Feather.UserMinus, 'Feather Icons', 'Outline')
+pushSVG('User-X', Icons.Feather.UserX, 'Feather Icons', 'Outline')
+pushSVG('Video-Off', Icons.Feather.VideoOff, 'Feather Icons', 'Outline')
+pushSVG('Voicemail', Icons.Feather.Voicemail, 'Feather Icons', 'Outline')
+pushSVG('Volume', Icons.Feather.Volume, 'Feather Icons', 'Outline')
+pushSVG('Wifi', Icons.Feather.Wifi, 'Feather Icons', 'Outline')
+pushSVG('Wifi-Off', Icons.Feather.WifiOff, 'Feather Icons', 'Outline')
+pushSVG('Zapp-Off', Icons.Feather.ZapOff, 'Feather Icons', 'Outline', ['Lightining'])
 
-    //Clickons
-    new icon('Heart', [{ id: 1, style: 'Stroke', path: Clickons.Outline.Heart }, { id: 2, style: 'Fill', path: Clickons.Solid.Heart }], 'Clickons', 'General', ['Love', 'Rate']),
-    new icon('Star', [{ id: 1, style: 'Stroke', path: Clickons.Outline.Rate }, { id: 2, style: 'Fill', path: Clickons.Solid.Rate }], 'Clickons', 'General', ['Rate']),
-    new icon('Eye-Closed', [{ id: 1, style: 'Stroke', path: Clickons.Outline.Invisible }, { id: 2, style: 'Fill', path: Clickons.Solid.Invisible }], 'Clickons', 'General', ['Password']),
-    new icon('Eye', [{ id: 1, style: 'Stroke', path: Clickons.Outline.Visible }, { id: 2, style: 'Fill', path: Clickons.Solid.Visible }], 'Clickons', 'General', ['Password']),
-    new icon('Thumbs-Up', [{ id: 1, style: 'Stroke', path: Clickons.Outline.Like }, { id: 2, style: 'Fill', path: Clickons.Solid.Like }], 'Clickons', 'General', ['Like']),
-    new icon('Download', [{ id: 1, style: 'Stroke', path: Clickons.Outline.Dload }, { id: 2, style: 'Fill', path: Clickons.Solid.Dload }], 'Clickons', 'General'),
-    new icon('Copy', [{ id: 1, style: 'Stroke', path: Clickons.Outline.Copy }, { id: 2, style: 'Fill', path: Clickons.Solid.Copy }], 'Clickons', 'General', ['Duplicate']),
-    new icon('Pin', [{ id: 1, style: 'Stroke', path: Clickons.Outline.Pin }, { id: 2, style: 'Fill', path: Clickons.Solid.Pin }], 'Clickons', 'General'),
-    new icon('Cancel-Circle', [{ id: 1, style: 'Stroke', path: Clickons.Outline.Cancel }, { id: 2, style: 'Fill', path: Clickons.Solid.Cancel }], 'Clickons', 'General', ['Close', 'X', 'MultiPly']),
-    new icon('Check-Circle', [{ id: 1, style: 'Stroke', path: Clickons.Outline.Confirm }, { id: 2, style: 'Fill', path: Clickons.Solid.Confirm }], 'Clickons', 'General', ['Confirm']),
-    new icon('Flag', [{ id: 1, style: 'Stroke', path: Clickons.Outline.Flag }, { id: 2, style: 'Fill', path: Clickons.Solid.Flag }], 'Clickons', 'General'),
-    new icon('Sign-In', [{ id: 1, style: 'Stroke', path: Clickons.Outline.SignIn }, { id: 2, style: 'Fill', path: Clickons.Solid.SignIn }], 'Clickons', 'General', ['Login', 'Logout', 'Door']),
-    new icon('Sticker', [{ id: 1, style: 'Stroke', path: Clickons.Outline.Sticker }, { id: 2, style: 'Fill', path: Clickons.Solid.Sticker }], 'Clickons', 'General'),
-    new icon('Hourglass', [{ id: 1, style: 'Stroke', path: Clickons.Outline.Frame }, { id: 2, style: 'Fill', path: Clickons.Solid.Frame }], 'Clickons', 'General', ['Sandwatch']),
-    new icon('Power Button', [{ id: 1, style: 'Stroke', path: Clickons.Outline.OnOff }, { id: 2, style: 'Fill', path: Clickons.Solid.OnOff }], 'Clickons', 'General', ['On', 'Off']),
-    new icon('Fire', [{ id: 1, style: 'Stroke', path: Clickons.Outline.Fire }, { id: 2, style: 'Fill', path: Clickons.Solid.Fire }], 'Clickons', 'General', ['Flame']),
-    new icon('Smiley Face', [{ id: 1, style: 'Stroke', path: Clickons.Outline.Emoji }, { id: 2, style: 'Fill', path: Clickons.Solid.Emoji }], 'Clickons', 'General', ['Emoji']),
-    new icon('Expand', [{ id: 1, style: 'Stroke', path: Clickons.Outline.Max }, { id: 2, style: 'Fill', path: Clickons.Solid.Max }], 'Clickons', 'General', ['Maximise', 'Focus']),
-    new icon('Collapse', [{ id: 1, style: 'Stroke', path: Clickons.Outline.Min }, { id: 2, style: 'Fill', path: Clickons.Solid.Min }], 'Clickons', 'General', ['Minimise']),
-    new icon('Key', [{ id: 1, style: 'Stroke', path: Clickons.Outline.Key }, { id: 2, style: 'Fill', path: Clickons.Solid.Key }], 'Clickons', 'General'),
-    new icon('Cloud-Download', [{ id: 1, style: 'Stroke', path: Clickons.Outline.DloadCloud }, { id: 2, style: 'Fill', path: Clickons.Solid.DloadCloud }], 'Clickons', 'General'),
-    new icon('Cloud-Upload', [{ id: 1, style: 'Stroke', path: Clickons.Outline.UploadCloud }, { id: 2, style: 'Fill', path: Clickons.Solid.UploadCloud }], 'Clickons', 'General'),
-
-    //Navigation
-    new icon('Home', [{ id: 1, style: 'Stroke', path: Clickons.Outline.Home }, { id: 2, style: 'Fill', path: Clickons.Solid.Home }], 'Clickons', 'Navigation'),
-    new icon('Link', [{ id: 1, style: 'Stroke', path: Clickons.Outline.Link }, { id: 2, style: 'Fill', path: Clickons.Solid.Link }], 'Clickons', 'Navigation', ['Attach']),
-    new icon('Setings-Alt', [{ id: 1, style: 'Stroke', path: Clickons.Outline.Settings }, { id: 2, style: 'Fill', path: Clickons.Solid.Settings }], 'Clickons', 'Navigation', ['Gear']),
-    new icon('Bell', [{ id: 1, style: 'Stroke', path: Clickons.Outline.Notifications }, { id: 2, style: 'Fill', path: Clickons.Solid.Notifications }], 'Clickons', 'Navigation', ['Notifications']),
-    new icon('Layout', [{ id: 1, style: 'Stroke', path: Clickons.Outline.Feed }, { id: 2, style: 'Fill', path: Clickons.Solid.Feed }], 'Clickons', 'Navigation', ['Menu', 'Grid', 'Squares']),
-    new icon('Bookmark', [{ id: 1, style: 'Stroke', path: Clickons.Outline.Bookmarks }, { id: 2, style: 'Fill', path: Clickons.Solid.Bookmarks }], 'Clickons', 'Navigation'),
-    new icon('Explore', [{ id: 1, style: 'Stroke', path: Clickons.Outline.Explore }, { id: 2, style: 'Fill', path: Clickons.Solid.Explore }], 'Clickons', 'Navigation', ['Compass', 'Safari']),
-    new icon('Alert', [{ id: 1, style: 'Stroke', path: Clickons.Outline.Attention }, { id: 2, style: 'Fill', path: Clickons.Solid.Attention }], 'Clickons', 'Navigation', ['Attention']),
-    new icon('Question-Circle', [{ id: 1, style: 'Stroke', path: Clickons.Outline.Ask }, { id: 2, style: 'Fill', path: Clickons.Solid.Ask }], 'Clickons', 'Navigation'),
-    new icon('Trash', [{ id: 1, style: 'Stroke', path: Clickons.Outline.Trash }, { id: 2, style: 'Fill', path: Clickons.Solid.Trash }], 'Clickons', 'Navigation'),
-    new icon('Filter', [{ id: 1, style: 'Stroke', path: Clickons.Outline.Filter }, { id: 2, style: 'Fill', path: Clickons.Solid.Filter }], 'Clickons', 'Navigation', ['Funnel']),
-    new icon('Menu-Circle', [{ id: 1, style: 'Stroke', path: Clickons.Outline.Menu }, { id: 2, style: 'Fill', path: Clickons.Solid.Menu }], 'Clickons', 'Navigation', ['Dots']),
-    new icon('Toggle-On', [{ id: 1, style: 'Stroke', path: Clickons.Outline.Switch }, { id: 2, style: 'Fill', path: Clickons.Solid.Switch }], 'Clickons', 'Navigation', ['Switch']),
-    new icon('Mail Box', [{ id: 1, style: 'Stroke', path: Clickons.Outline.Mailbox }, { id: 2, style: 'Fill', path: Clickons.Solid.Mailbox }], 'Clickons', 'Navigation'),
-    new icon('Flash', [{ id: 1, style: 'Stroke', path: Clickons.Outline.Flash }, { id: 2, style: 'Fill', path: Clickons.Solid.Flash }], 'Clickons', 'Navigation', ['Shock', 'Bolt', 'Lightning']),
-    new icon('Flash-Off', [{ id: 1, style: 'Stroke', path: Clickons.Outline.FlashOff }, { id: 2, style: 'Fill', path: Clickons.Solid.FlashOff }], 'Clickons', 'Navigation', ['Shock', 'Bolt', 'Lightning']),
-    new icon('Sliders', [{ id: 1, style: 'Stroke', path: Clickons.Outline.Costumize }, { id: 2, style: 'Fill', path: Clickons.Solid.Costumize }], 'Clickons', 'Navigation', ['Tools', 'Customise', 'Settings']),
-    new icon('Tag', [{ id: 1, style: 'Stroke', path: Clickons.Outline.Favs }, { id: 2, style: 'Fill', path: Clickons.Solid.Favs }], 'Clickons', 'Navigation'),
-
-    //Media
-    new icon('Play', [{ id: 1, style: 'Stroke', path: Clickons.Outline.Play }, { id: 2, style: 'Fill', path: Clickons.Solid.Play }], 'Clickons', 'Media'),
-    new icon('Pause', [{ id: 1, style: 'Stroke', path: Clickons.Outline.Pause }, { id: 2, style: 'Fill', path: Clickons.Solid.Pause }], 'Clickons', 'Media'),
-    new icon('Stop', [{ id: 1, style: 'Stroke', path: Clickons.Outline.Stop }, { id: 2, style: 'Fill', path: Clickons.Solid.Stop }], 'Clickons', 'Media'),
-    new icon('Next', [{ id: 1, style: 'Stroke', path: Clickons.Outline.Rewind }, { id: 2, style: 'Fill', path: Clickons.Solid.Rewind }], 'Clickons', 'Media'),
-    new icon('Forward', [{ id: 1, style: 'Stroke', path: Clickons.Outline.Next }, { id: 2, style: 'Fill', path: Clickons.Solid.Next }], 'Clickons', 'Media'),
-    new icon('Volume-Up', [{ id: 1, style: 'Stroke', path: Clickons.Outline.Volume }, { id: 2, style: 'Fill', path: Clickons.Solid.Volume }], 'Clickons', 'Media', ['Speaker', 'Sound']),
-    new icon('Volume-Down', [{ id: 1, style: 'Stroke', path: Clickons.Outline.VolumeLow }, { id: 2, style: 'Fill', path: Clickons.Solid.VolumeLow }], 'Clickons', 'Media', ['Speaker', 'Sound']),
-    new icon('Volume-Off', [{ id: 1, style: 'Stroke', path: Clickons.Outline.SoundOff }, { id: 2, style: 'Fill', path: Clickons.Solid.SoundOff }], 'Clickons', 'Media', ['Speaker', 'Sound']),
-    new icon('Headphones', [{ id: 1, style: 'Stroke', path: Clickons.Outline.Headphones }, { id: 2, style: 'Fill', path: Clickons.Solid.Headphones }], 'Clickons', 'Media'),
-    new icon('Speakers', [{ id: 1, style: 'Stroke', path: Clickons.Outline.Speakers }, { id: 2, style: 'Fill', path: Clickons.Solid.Speakers }], 'Clickons', 'Media'),
-    new icon('Music Note', [{ id: 1, style: 'Stroke', path: Clickons.Outline.MusicNote }, { id: 2, style: 'Fill', path: Clickons.Solid.MusicNote }], 'Clickons', 'Media'),
-    new icon('Video', [{ id: 1, style: 'Stroke', path: Clickons.Outline.Video }, { id: 2, style: 'Fill', path: Clickons.Solid.Video }], 'Clickons', 'Media', ['Recorder']),
-    new icon('Video-Off', [{ id: 1, style: 'Stroke', path: Clickons.Outline.VideoOff }, { id: 2, style: 'Fill', path: Clickons.Solid.VideoOff }], 'Clickons', 'Media', ['Recorder']),
-    new icon('Microphone', [{ id: 1, style: 'Stroke', path: Clickons.Outline.Mic }, { id: 2, style: 'Fill', path: Clickons.Solid.Mic }], 'Clickons', 'Media'),
-    new icon('Microphone-Off', [{ id: 1, style: 'Stroke', path: Clickons.Outline.MicOff }, { id: 2, style: 'Fill', path: Clickons.Solid.MicOff }], 'Clickons', 'Media'),
-
-    // Files & Folders
-    new icon('Folder', [{ id: 1, style: 'Stroke', path: Clickons.Outline.Folder }, { id: 2, style: 'Fill', path: Clickons.Solid.Folder }], 'Clickons', 'Files & Folders'),
-    new icon('Folders', [{ id: 1, style: 'Stroke', path: Clickons.Outline.Folders }, { id: 2, style: 'Fill', path: Clickons.Solid.Folders }], 'Clickons', 'Files & Folders'),
-    new icon('Folder-Open', [{ id: 1, style: 'Stroke', path: Clickons.Outline.FolderOpen }, { id: 2, style: 'Fill', path: Clickons.Solid.FolderOpen }], 'Clickons', 'Files & Folders'),
-    new icon('Folder-Downloads', [{ id: 1, style: 'Stroke', path: Clickons.Outline.Dloads }, { id: 2, style: 'Fill', path: Clickons.Solid.Dloads }], 'Clickons', 'Files & Folders'),
-    new icon('Folder-Add', [{ id: 1, style: 'Stroke', path: Clickons.Outline.FolderAdd }, { id: 2, style: 'Fill', path: Clickons.Solid.FolderAdd }], 'Clickons', 'Files & Folders'),
-    new icon('Folder-Closed', [{ id: 1, style: 'Stroke', path: Clickons.Outline.FolderClosed }, { id: 2, style: 'Fill', path: Clickons.Solid.FolderClosed }], 'Clickons', 'Files & Folders'),
-    new icon('Folder-Search', [{ id: 1, style: 'Stroke', path: Clickons.Outline.FolderSearch }, { id: 2, style: 'Fill', path: Clickons.Solid.FolderSearch }], 'Clickons', 'Files & Folders'),
-    new icon('File', [{ id: 1, style: 'Stroke', path: Clickons.Outline.File }, { id: 2, style: 'Fill', path: Clickons.Solid.File }], 'Clickons', 'Files & Folders'),
-    new icon('Files', [{ id: 1, style: 'Stroke', path: Clickons.Outline.Docs }, { id: 2, style: 'Fill', path: Clickons.Solid.Docs }], 'Clickons', 'Files & Folders'),
-    new icon('File-Download', [{ id: 1, style: 'Stroke', path: Clickons.Outline.FileLoad }, { id: 2, style: 'Fill', path: Clickons.Solid.FileLoad }], 'Clickons', 'Files & Folders'),
-    new icon('File-Add', [{ id: 1, style: 'Stroke', path: Clickons.Outline.FileAdd }, { id: 2, style: 'Fill', path: Clickons.Solid.FileAdd }], 'Clickons', 'Files & Folders'),
-    new icon('File-Closed', [{ id: 1, style: 'Stroke', path: Clickons.Outline.FileClosed }, { id: 2, style: 'Fill', path: Clickons.Solid.FileClosed }], 'Clickons', 'Files & Folders'),
-    new icon('File-Search', [{ id: 1, style: 'Stroke', path: Clickons.Outline.FileSearch }, { id: 2, style: 'Fill', path: Clickons.Solid.FileSearch }], 'Clickons', 'Files & Folders'),
-    new icon('File-Text', [{ id: 1, style: 'Stroke', path: Clickons.Outline.FileWord }, { id: 2, style: 'Fill', path: Clickons.Solid.FileWord }], 'Clickons', 'Files & Folders', ['Word', 'Document']),
-    new icon('File-Broken', [{ id: 1, style: 'Stroke', path: Clickons.Outline.FileBroken }, { id: 2, style: 'Fill', path: Clickons.Solid.FileBroken }], 'Clickons', 'Files & Folders'),
-    new icon('Save', [{ id: 1, style: 'Stroke', path: Clickons.Outline.FileSave }, { id: 2, style: 'Fill', path: Clickons.Solid.FileSave }], 'Clickons', 'Files & Folders', ['Floppy Disk']),
-
-    //Maps & Travel
-    new icon('Location', [{ id: 1, style: 'Stroke', path: Clickons.Outline.Location }, { id: 2, style: 'Fill', path: Clickons.Solid.Location }], 'Clickons', 'Maps & Travel'),
-    new icon('Map', [{ id: 1, style: 'Stroke', path: Clickons.Outline.Map }, { id: 2, style: 'Fill', path: Clickons.Solid.Map }], 'Clickons', 'Maps & Travel'),
-    new icon('Compass', [{ id: 1, style: 'Stroke', path: Clickons.Outline.Compass }, { id: 2, style: 'Fill', path: Clickons.Solid.Compass }], 'Clickons', 'Maps & Travel'),
-    new icon('Current Location', [{ id: 1, style: 'Stroke', path: Clickons.Outline.Mark }, { id: 2, style: 'Fill', path: Clickons.Solid.Mark }], 'Clickons', 'Maps & Travel', ['Mark', 'Crosshair', 'point', 'Target']),
-    new icon('Map-Alt', [{ id: 1, style: 'Stroke', path: Clickons.Outline.Navigation }, { id: 2, style: 'Fill', path: Clickons.Solid.Navigation }], 'Clickons', 'Maps & Travel', ['Navigation']),
-    new icon('Trolley Bag', [{ id: 1, style: 'Stroke', path: Clickons.Outline.Bag }, { id: 2, style: 'Fill', path: Clickons.Solid.Bag }], 'Clickons', 'Maps & Travel', ['Travel', 'Luggage']),
-    new icon('Calender', [{ id: 1, style: 'Stroke', path: Clickons.Outline.Calender }, { id: 2, style: 'Fill', path: Clickons.Solid.Calender }], 'Clickons', 'Maps & Travel'),
-    new icon('Aeroplane', [{ id: 1, style: 'Stroke', path: Clickons.Outline.Airplane }, { id: 2, style: 'Fill', path: Clickons.Solid.Airplane }], 'Clickons', 'Maps & Travel', ['Airplane']),
-    new icon('Route', [{ id: 1, style: 'Stroke', path: Clickons.Outline.Route }, { id: 2, style: 'Fill', path: Clickons.Solid.Route }], 'Clickons', 'Maps & Travel'),
-    new icon('Passport', [{ id: 1, style: 'Stroke', path: Clickons.Outline.Passport }, { id: 2, style: 'Fill', path: Clickons.Solid.Passport }], 'Clickons', 'Maps & Travel'),
-
-    //Communication
-    new icon('Envelope', [{ id: 1, style: 'Stroke', path: Clickons.Outline.Mail }, { id: 2, style: 'Fill', path: Clickons.Solid.Mail }], 'Clickons', 'Communication', ['Mail']),
-    new icon('Envelope-Open', [{ id: 1, style: 'Stroke', path: Clickons.Outline.Read }, { id: 2, style: 'Fill', path: Clickons.Solid.Read }], 'Clickons', 'Communication', ['Mail']),
-    new icon('Cursor', [{ id: 1, style: 'Stroke', path: Clickons.Outline.Send }, { id: 2, style: 'Fill', path: Clickons.Solid.Send }], 'Clickons', 'Communication', ['Send']),
-    new icon('Message', [{ id: 1, style: 'Stroke', path: Clickons.Outline.Message }, { id: 2, style: 'Fill', path: Clickons.Solid.Message }], 'Clickons', 'Communication', ['Chat', 'Speech Bubble', 'Comment']),
-    new icon('Messages', [{ id: 1, style: 'Stroke', path: Clickons.Outline.Chat }, { id: 2, style: 'Fill', path: Clickons.Solid.Chat }], 'Clickons', 'Communication', ['Chat', 'Speech Bubble', 'Comment']),
-    new icon('Phone-Ringing', [{ id: 1, style: 'Stroke', path: Clickons.Outline.Call }, { id: 2, style: 'Fill', path: Clickons.Solid.Call }], 'Clickons', 'Communication'),
-    new icon('Phone-Disconnected', [{ id: 1, style: 'Stroke', path: Clickons.Outline.Disconnect }, { id: 2, style: 'Fill', path: Clickons.Solid.Disconnect }], 'Clickons', 'Communication', ['Call Rejected']),
-    new icon('Hashtag', [{ id: 1, style: 'Stroke', path: Clickons.Outline.Hashtag }, { id: 2, style: 'Fill', path: Clickons.Solid.Hashtag }], 'Clickons', 'Communication', ['Pound']),
-    new icon('Megaphone', [{ id: 1, style: 'Stroke', path: Clickons.Outline.Speaker }, { id: 2, style: 'Fill', path: Clickons.Solid.Speaker }], 'Clickons', 'Communication', ['Bullhorn', 'Loudspeaker']),
-    new icon('Forward', [{ id: 1, style: 'Stroke', path: Clickons.Outline.Forward }, { id: 2, style: 'Fill', path: Clickons.Solid.Forward }], 'Clickons', 'Communication', ['Share']),
-    new icon('Notebook', [{ id: 1, style: 'Stroke', path: Clickons.Outline.Notebook }, { id: 2, style: 'Fill', path: Clickons.Solid.Notebook }], 'Clickons', 'Communication'),
-    new icon('Edit', [{ id: 1, style: 'Stroke', path: Clickons.Outline.Pen }, { id: 2, style: 'Fill', path: Clickons.Solid.Pen }], 'Clickons', 'Communication', ['pen']),
-    new icon('Comment', [{ id: 1, style: 'Stroke', path: Clickons.Outline.Comment }, { id: 2, style: 'Fill', path: Clickons.Solid.Comment }], 'Clickons', 'Communication', ['Chat', 'Speech Bubble', 'Message']),
-    new icon('Share', [{ id: 1, style: 'Stroke', path: Clickons.Outline.Share }, { id: 2, style: 'Fill', path: Clickons.Solid.Share }], 'Clickons', 'Communication'),
-    new icon('At-Sign', [{ id: 1, style: 'Stroke', path: Clickons.Outline.AtSign }, { id: 2, style: 'Fill', path: Clickons.Solid.AtSign }], 'Clickons', 'Communication'),
-    new icon('Feather', [{ id: 1, style: 'Stroke', path: Clickons.Outline.Feather }, { id: 2, style: 'Fill', path: Clickons.Solid.Feather }], 'Clickons', 'Communication'),
-
-    //Education
-    new icon('Book', [{ id: 1, style: 'Stroke', path: Clickons.Outline.Book }, { id: 2, style: 'Fill', path: Clickons.Solid.Book }], 'Clickons', 'Education'),
-    new icon('Book-Open', [{ id: 1, style: 'Stroke', path: Clickons.Outline.BookOpen }, { id: 2, style: 'Fill', path: Clickons.Solid.BookOpen }], 'Clickons', 'Education'),
-    new icon('Graduation Hat', [{ id: 1, style: 'Stroke', path: Clickons.Outline.Hat }, { id: 2, style: 'Fill', path: Clickons.Solid.Hat }], 'Clickons', 'Education'),
-    new icon('Glasses', [{ id: 1, style: 'Stroke', path: Clickons.Outline.Glasses }, { id: 2, style: 'Fill', path: Clickons.Solid.Glasses }], 'Clickons', 'Education', ['Googles']),
-    new icon('Ruler', [{ id: 1, style: 'Stroke', path: Clickons.Outline.Ruler }, { id: 2, style: 'Fill', path: Clickons.Solid.Ruler }], 'Clickons', 'Education'),
-    new icon('Whiteboard', [{ id: 1, style: 'Stroke', path: Clickons.Outline.Stand }, { id: 2, style: 'Fill', path: Clickons.Solid.Stand }], 'Clickons', 'Education', ['Presentation']),
-    new icon('Award', [{ id: 1, style: 'Stroke', path: Clickons.Outline.Medal }, { id: 2, style: 'Fill', path: Clickons.Solid.Medal }], 'Clickons', 'Education', ['Medal', 'Badge']),
-    new icon('Cup', [{ id: 1, style: 'Stroke', path: Clickons.Outline.Cup }, { id: 2, style: 'Fill', path: Clickons.Solid.Cup }], 'Clickons', 'Education', ['Award']),
-    new icon('Globe', [{ id: 1, style: 'Stroke', path: Clickons.Outline.Globe }, { id: 2, style: 'Fill', path: Clickons.Solid.Globe }], 'Clickons', 'Education', ['World']),
-    new icon('Backpack', [{ id: 1, style: 'Stroke', path: Clickons.Outline.Backpack }, { id: 2, style: 'Fill', path: Clickons.Solid.Backpack }], 'Clickons', 'Education', ['Bag']),
-    new icon('Beaker', [{ id: 1, style: 'Stroke', path: Clickons.Outline.Beaker }, { id: 2, style: 'Fill', path: Clickons.Solid.Beaker }], 'Clickons', 'Education', ['Flask', 'Round Bottom']),
-    new icon('Atom', [{ id: 1, style: 'Stroke', path: Clickons.Outline.Atom }, { id: 2, style: 'Fill', path: Clickons.Solid.Atom }], 'Clickons', 'Education', ['Cosmos']),
-    new icon('Calculate', [{ id: 1, style: 'Stroke', path: Clickons.Outline.Calculate }, { id: 2, style: 'Fill', path: Clickons.Solid.Calculate }], 'Clickons', 'Education', ['Maths']),
-    new icon('Brain', [{ id: 1, style: 'Stroke', path: Clickons.Outline.Brain }, { id: 2, style: 'Fill', path: Clickons.Solid.Brain }], 'Clickons', 'Education'),
-    new icon('Microscope', [{ id: 1, style: 'Stroke', path: Clickons.Outline.Microscope }, { id: 2, style: 'Fill', path: Clickons.Solid.Microscope }], 'Clickons', 'Education'),
-
-    //Development
-    new icon('Code', [{ id: 1, style: 'Stroke', path: Clickons.Outline.Code }, { id: 2, style: 'Fill', path: Clickons.Solid.Code }], 'Clickons', 'Development'),
-    new icon('Cloud Storage', [{ id: 1, style: 'Stroke', path: Clickons.Outline.CloudStorage }, { id: 2, style: 'Fill', path: Clickons.Solid.CloudStorage }], 'Clickons', 'Development'),
-    new icon('Branching', [{ id: 1, style: 'Stroke', path: Clickons.Outline.Branching }, { id: 2, style: 'Fill', path: Clickons.Solid.Branching }], 'Clickons', 'Development'),
-    new icon('Head', [{ id: 1, style: 'Stroke', path: Clickons.Outline.Head }, { id: 2, style: 'Fill', path: Clickons.Solid.Head }], 'Clickons', 'Development'),
-    new icon('Server', [{ id: 1, style: 'Stroke', path: Clickons.Outline.Server }, { id: 2, style: 'Fill', path: Clickons.Solid.Server }], 'Clickons', 'Development', ['Storage', 'Drives']),
-    new icon('Processor', [{ id: 1, style: 'Stroke', path: Clickons.Outline.Chip }, { id: 2, style: 'Fill', path: Clickons.Solid.Chip }], 'Clickons', 'Development', ['CPU', 'Chip']),
-    new icon('Lightbulb', [{ id: 1, style: 'Stroke', path: Clickons.Outline.Bulb }, { id: 2, style: 'Fill', path: Clickons.Solid.Bulb }], 'Clickons', 'Development'),
-    new icon('Puzzle', [{ id: 1, style: 'Stroke', path: Clickons.Outline.Puzzle }, { id: 2, style: 'Fill', path: Clickons.Solid.Puzzle }], 'Clickons', 'Development', ['Jigsaw']),
-    new icon('Wrench', [{ id: 1, style: 'Stroke', path: Clickons.Outline.Fix }, { id: 2, style: 'Fill', path: Clickons.Solid.Fix }], 'Clickons', 'Development', ['Tool', 'Spanner', 'Fix']),
-    new icon('Shield-Check', [{ id: 1, style: 'Stroke', path: Clickons.Outline.Secure }, { id: 2, style: 'Fill', path: Clickons.Solid.Secure }], 'Clickons', 'Development', ['Secure']),
-    new icon('Shield-X', [{ id: 1, style: 'Stroke', path: Clickons.Outline.Unsecure }, { id: 2, style: 'Fill', path: Clickons.Solid.Unsecure }], 'Clickons', 'Development', ['Unsecure']),
-    new icon('Brackets', [{ id: 1, style: 'Stroke', path: Clickons.Outline.Brackets }, { id: 2, style: 'Fill', path: Clickons.Solid.Brackets }], 'Clickons', 'Development', ['Code']),
-
-    //Text
-    new icon('Text', [{ id: 1, style: 'Stroke', path: Clickons.Outline.Text }, { id: 2, style: 'Fill', path: Clickons.Solid.Text }], 'Clickons', 'Text'),
-    new icon('Bold', [{ id: 1, style: 'Stroke', path: Clickons.Outline.Bold }, { id: 2, style: 'Fill', path: Clickons.Solid.Bold }], 'Clickons', 'Text'),
-    new icon('Italicise', [{ id: 1, style: 'Stroke', path: Clickons.Outline.Italic }, { id: 2, style: 'Fill', path: Clickons.Solid.Italic }], 'Clickons', 'Text'),
-    new icon('Underline', [{ id: 1, style: 'Stroke', path: Clickons.Outline.Underline }, { id: 2, style: 'Fill', path: Clickons.Solid.Underline }], 'Clickons', 'Text'),
-    new icon('Strikethrough', [{ id: 1, style: 'Stroke', path: Clickons.Outline.Strikethrough }, { id: 2, style: 'Fill', path: Clickons.Solid.Strikethrough }], 'Clickons', 'Text'),
-    new icon('Heading', [{ id: 1, style: 'Stroke', path: Clickons.Outline.Heading }, { id: 2, style: 'Fill', path: Clickons.Solid.Heading }], 'Clickons', 'Text'),
-    new icon('Paragraph', [{ id: 1, style: 'Stroke', path: Clickons.Outline.Paragraph }, { id: 2, style: 'Fill', path: Clickons.Solid.Paragraph }], 'Clickons', 'Text'),
-    new icon('Quotation Marks', [{ id: 1, style: 'Stroke', path: Clickons.Outline.Quotes }, { id: 2, style: 'Fill', path: Clickons.Solid.Quotes }], 'Clickons', 'Text'),
-    new icon('Align-Center', [{ id: 1, style: 'Stroke', path: Clickons.Outline.AlignMiddle }, { id: 2, style: 'Fill', path: Clickons.Solid.AlignMiddle }], 'Clickons', 'Text'),
-    new icon('Align-Right', [{ id: 1, style: 'Stroke', path: Clickons.Outline.AlignRight }, { id: 2, style: 'Fill', path: Clickons.Solid.AlignRight }], 'Clickons', 'Text'),
-    new icon('Align-Left', [{ id: 1, style: 'Stroke', path: Clickons.Outline.AlignLeft }, { id: 2, style: 'Fill', path: Clickons.Solid.AlignLeft }], 'Clickons', 'Text'),
-    new icon('Indent-Left', [{ id: 1, style: 'Stroke', path: Clickons.Outline.IndentLeft }, { id: 2, style: 'Fill', path: Clickons.Solid.IndentLeft }], 'Clickons', 'Text'),
-    new icon('Indent-Right', [{ id: 1, style: 'Stroke', path: Clickons.Outline.IndentRight }, { id: 2, style: 'Fill', path: Clickons.Solid.IndentRight }], 'Clickons', 'Text'),
-    new icon('List', [{ id: 1, style: 'Stroke', path: Clickons.Outline.List }, { id: 2, style: 'Fill', path: Clickons.Solid.List }], 'Clickons', 'Text', ['Bullets']),
-    new icon('Backspace', [{ id: 1, style: 'Stroke', path: Clickons.Outline.Delete }, { id: 2, style: 'Fill', path: Clickons.Solid.Delete }], 'Clickons', 'Text', ['Clear']),
-    new icon('Text Block', [{ id: 1, style: 'Stroke', path: Clickons.Outline.TextBlock }, { id: 2, style: 'Fill', path: Clickons.Solid.TextBlock }], 'Clickons', 'Text'),
-
-    //Layout
-    new icon('Layout1', [{ id: 1, style: 'Stroke', path: Clickons.Outline.Layout1 }, { id: 2, style: 'Fill', path: Clickons.Solid.Layout1 }], 'Clickons', 'Layout', ['Columns']),
-    new icon('Layout2', [{ id: 1, style: 'Stroke', path: Clickons.Outline.Layout2 }, { id: 2, style: 'Fill', path: Clickons.Solid.Layout2 }], 'Clickons', 'Layout', ['Columns']),
-    new icon('Layout3', [{ id: 1, style: 'Stroke', path: Clickons.Outline.Layout3 }, { id: 2, style: 'Fill', path: Clickons.Solid.Layout3 }], 'Clickons', 'Layout', ['Columns']),
-    new icon('Layout4', [{ id: 1, style: 'Stroke', path: Clickons.Outline.Layout4 }, { id: 2, style: 'Fill', path: Clickons.Solid.Layout4 }], 'Clickons', 'Layout', ['Columns']),
-    new icon('Layout5', [{ id: 1, style: 'Stroke', path: Clickons.Outline.Layout5 }, { id: 2, style: 'Fill', path: Clickons.Solid.Layout5 }], 'Clickons', 'Layout'),
-    new icon('Layout6', [{ id: 1, style: 'Stroke', path: Clickons.Outline.Layout6 }, { id: 2, style: 'Fill', path: Clickons.Solid.Layout6 }], 'Clickons', 'Layout'),
-    new icon('Layout12', [{ id: 1, style: 'Stroke', path: Clickons.Outline.Layout12 }, { id: 2, style: 'Fill', path: Clickons.Solid.Layout12 }], 'Clickons', 'Layout'),
-    new icon('Layout11', [{ id: 1, style: 'Stroke', path: Clickons.Outline.Layout11 }, { id: 2, style: 'Fill', path: Clickons.Solid.Layout11 }], 'Clickons', 'Layout'),
-    new icon('Layout7', [{ id: 1, style: 'Stroke', path: Clickons.Outline.Layout7 }, { id: 2, style: 'Fill', path: Clickons.Solid.Layout7 }], 'Clickons', 'Layout'),
-    new icon('Layout8', [{ id: 1, style: 'Stroke', path: Clickons.Outline.Layout8 }, { id: 2, style: 'Fill', path: Clickons.Solid.Layout8 }], 'Clickons', 'Layout', ['Grid']),
-    new icon('Layout9', [{ id: 1, style: 'Stroke', path: Clickons.Outline.Layout9 }, { id: 2, style: 'Fill', path: Clickons.Solid.Layout9 }], 'Clickons', 'Layout', ['Grid']),
-    new icon('Layout10', [{ id: 1, style: 'Stroke', path: Clickons.Outline.Layout10 }, { id: 2, style: 'Fill', path: Clickons.Solid.Layout10 }], 'Clickons', 'Layout', ['Grid']),
-
-    //Arrows
-    new icon('Caret-Right', [{ id: 1, style: 'Stroke', path: Clickons.Outline.CaretRight }, { id: 2, style: 'Fill', path: Clickons.Solid.CaretRight }], 'Clickons', 'Arrows', ['Chevron', 'Play', 'Arrow']),
-    new icon('Arrow2', [{ id: 1, style: 'Stroke', path: Clickons.Outline.Arrow2 }, { id: 2, style: 'Fill', path: Clickons.Solid.Arrow2 }], 'Clickons', 'Arrows'),
-    new icon('Right', [{ id: 1, style: 'Stroke', path: Clickons.Outline.Right }, { id: 2, style: 'Fill', path: Clickons.Solid.Right }], 'Clickons', 'Arrows', ['Arrow']),
-    new icon('Arrow4', [{ id: 1, style: 'Stroke', path: Clickons.Outline.Arrow4 }, { id: 2, style: 'Fill', path: Clickons.Solid.Arrow4 }], 'Clickons', 'Arrows'),
-    new icon('Arrow5', [{ id: 1, style: 'Stroke', path: Clickons.Outline.Arrow5 }, { id: 2, style: 'Fill', path: Clickons.Solid.Arrow5 }], 'Clickons', 'Arrows'),
-    new icon('Arrow6', [{ id: 1, style: 'Stroke', path: Clickons.Outline.AnglesRight }, { id: 2, style: 'Fill', path: Clickons.Solid.AnglesRight }], 'Clickons', 'Arrows'),
-    new icon('Arrow-Right', [{ id: 1, style: 'Stroke', path: Clickons.Outline.ArrowRight }, { id: 2, style: 'Fill', path: Clickons.Solid.ArrowRight }], 'Clickons', 'Arrows'),
-    new icon('Arrow-Cicle-Right', [{ id: 1, style: 'Stroke', path: Clickons.Outline.ArrCircRight }, { id: 2, style: 'Fill', path: Clickons.Solid.ArrCircRight }], 'Clickons', 'Arrows'),
-    new icon('Reload', [{ id: 1, style: 'Stroke', path: Clickons.Outline.RefreshClock }, { id: 2, style: 'Fill', path: Clickons.Solid.RefreshClock }], 'Clickons', 'Arrows', ['Refresh']),
-    new icon('Refresh', [{ id: 1, style: 'Stroke', path: Clickons.Outline.RotateClock }, { id: 2, style: 'Fill', path: Clickons.Solid.RotateClock }], 'Clickons', 'Arrows', ['Reload']),
-    new icon('Arc-Right', [{ id: 1, style: 'Stroke', path: Clickons.Outline.ArcRight }, { id: 2, style: 'Fill', path: Clickons.Solid.ArcRight }], 'Clickons', 'Arrows'),
-    new icon('Arrow-Up-Right', [{ id: 1, style: 'Stroke', path: Clickons.Outline.ArrUpRight }, { id: 2, style: 'Fill', path: Clickons.Solid.ArrUpRight }], 'Clickons', 'Arrows'),
-    new icon('Expand', [{ id: 1, style: 'Stroke', path: Clickons.Outline.ArrowsOut }, { id: 2, style: 'Fill', path: Clickons.Solid.ArrowsOut }], 'Clickons', 'Arrows', ['Maximise']),
-    new icon('Collapse', [{ id: 1, style: 'Stroke', path: Clickons.Outline.ArrowsIn }, { id: 2, style: 'Fill', path: Clickons.Solid.ArrowsIn }], 'Clickons', 'Arrows', ['Minimise']),
-
-    //Design
-    new icon('Transform', [{ id: 1, style: 'Stroke', path: Clickons.Outline.Transform }, { id: 2, style: 'Fill', path: Clickons.Solid.Transform }], 'Clickons', 'Design'),
-    new icon('Perspective', [{ id: 1, style: 'Stroke', path: Clickons.Outline.Perspective }, { id: 2, style: 'Fill', path: Clickons.Solid.Perspective }], 'Clickons', 'Design'),
-    new icon('Crop', [{ id: 1, style: 'Stroke', path: Clickons.Outline.Crop }, { id: 2, style: 'Fill', path: Clickons.Solid.Crop }], 'Clickons', 'Design'),
-    new icon('Image', [{ id: 1, style: 'Stroke', path: Clickons.Outline.Image }, { id: 2, style: 'Fill', path: Clickons.Solid.Image }], 'Clickons', 'Design'),
-    new icon('Contrast', [{ id: 1, style: 'Stroke', path: Clickons.Outline.Contrast }, { id: 2, style: 'Fill', path: Clickons.Solid.Contrast }], 'Clickons', 'Design'),
-    new icon('Pathfinder', [{ id: 1, style: 'Stroke', path: Clickons.Outline.Pathfinder }, { id: 2, style: 'Fill', path: Clickons.Solid.Pathfinder }], 'Clickons', 'Design', ['Copy', 'Duplicate']),
-    new icon('Scale', [{ id: 1, style: 'Stroke', path: Clickons.Outline.Scale }, { id: 2, style: 'Fill', path: Clickons.Solid.Scale }], 'Clickons', 'Design'),
-    new icon('3D', [{ id: 1, style: 'Stroke', path: Clickons.Outline._3D }, { id: 2, style: 'Fill', path: Clickons.Solid._3D }], 'Clickons', 'Design'),
-    new icon('Stack', [{ id: 1, style: 'Stroke', path: Clickons.Outline.Layers }, { id: 2, style: 'Fill', path: Clickons.Solid.Layers }], 'Clickons', 'Design', ['Layers']),
-    new icon('Palette', [{ id: 1, style: 'Stroke', path: Clickons.Outline.Palette }, { id: 2, style: 'Fill', path: Clickons.Solid.Palette }], 'Clickons', 'Design', ['Cookie']),
-    new icon('Reflect', [{ id: 1, style: 'Stroke', path: Clickons.Outline.Reflect }, { id: 2, style: 'Fill', path: Clickons.Solid.Reflect }], 'Clickons', 'Design'),
-    new icon('Rotate', [{ id: 1, style: 'Stroke', path: Clickons.Outline.Rotate }, { id: 2, style: 'Fill', path: Clickons.Solid.Rotate }], 'Clickons', 'Design'),
-    new icon('Horizontal-Align-Center', [{ id: 1, style: 'Stroke', path: Clickons.Outline.HorizontalAlignCenter }, { id: 2, style: 'Fill', path: Clickons.Solid.HorizontalAlignCenter }], 'Clickons', 'Design'),
-    new icon('Vertical-Align-Center', [{ id: 1, style: 'Stroke', path: Clickons.Outline.VerticalAlignCenter }, { id: 2, style: 'Fill', path: Clickons.Solid.VerticalAlignCenter }], 'Clickons', 'Design'),
-    new icon('Horizontal-Align-Left', [{ id: 1, style: 'Stroke', path: Clickons.Outline.HorizontalLeftAlign }, { id: 2, style: 'Fill', path: Clickons.Solid.HorizontalLeftAlign }], 'Clickons', 'Design'),
-    new icon('Vertical-Align-Bottom', [{ id: 1, style: 'Stroke', path: Clickons.Outline.VerticalAlignBottom }, { id: 2, style: 'Fill', path: Clickons.Solid.VerticalAlignBottom }], 'Clickons', 'Design'),
-    new icon('Horizontal-Align-Right', [{ id: 1, style: 'Stroke', path: Clickons.Outline.HorizontalRightAlign }, { id: 2, style: 'Fill', path: Clickons.Solid.HorizontalRightAlign }], 'Clickons', 'Design'),
-    new icon('Vertical-Align-Top', [{ id: 1, style: 'Stroke', path: Clickons.Outline.VerticalAlignTop }, { id: 2, style: 'Fill', path: Clickons.Solid.VerticalAlignTop }], 'Clickons', 'Design'),
-
-    //Tools
-    new icon('Pipette', [{ id: 1, style: 'Stroke', path: Clickons.Outline.Pipette }, { id: 2, style: 'Fill', path: Clickons.Solid.Pipette }], 'Clickons', 'Tools'),
-    new icon('Eraser', [{ id: 1, style: 'Stroke', path: Clickons.Outline.Eraser }, { id: 2, style: 'Fill', path: Clickons.Solid.Eraser }], 'Clickons', 'Tools'),
-    new icon('Paint Bucket', [{ id: 1, style: 'Stroke', path: Clickons.Outline.Paint }, { id: 2, style: 'Fill', path: Clickons.Solid.Paint }], 'Clickons', 'Tools'),
-    new icon('Cursor', [{ id: 1, style: 'Stroke', path: Clickons.Outline.Cursor }, { id: 2, style: 'Fill', path: Clickons.Solid.Cursor }], 'Clickons', 'Tools'),
-    new icon('Search', [{ id: 1, style: 'Stroke', path: Clickons.Outline.Zoom }, { id: 2, style: 'Fill', path: Clickons.Solid.Zoom }], 'Clickons', 'Tools', ['Magnifying Glass']),
-    new icon('Text Tool', [{ id: 1, style: 'Stroke', path: Clickons.Outline.TextTool }, { id: 2, style: 'Fill', path: Clickons.Solid.TextTool }], 'Clickons', 'Tools'),
-    new icon('Pen Tool', [{ id: 1, style: 'Stroke', path: Clickons.Outline.PenTool }, { id: 2, style: 'Fill', path: Clickons.Solid.PenTool }], 'Clickons', 'Tools'),
-    new icon('Move', [{ id: 1, style: 'Stroke', path: Clickons.Outline.Move }, { id: 2, style: 'Fill', path: Clickons.Solid.Move }], 'Clickons', 'Tools'),
-    new icon('Brush', [{ id: 1, style: 'Stroke', path: Clickons.Outline.Brush }, { id: 2, style: 'Fill', path: Clickons.Solid.Brush }], 'Clickons', 'Tools'),
-    new icon('Pencil', [{ id: 1, style: 'Stroke', path: Clickons.Outline.Pencil }, { id: 2, style: 'Fill', path: Clickons.Solid.Pencil }], 'Clickons', 'Tools'),
-
-    //Weather
-    new icon('Sun', [{ id: 1, style: 'Stroke', path: Clickons.Outline.Sun }, { id: 2, style: 'Fill', path: Clickons.Solid.Sun }], 'Clickons', 'Weather', ['Light', 'Brightness', 'Day']),
-    new icon('Moon', [{ id: 1, style: 'Stroke', path: Clickons.Outline.Moon }, { id: 2, style: 'Fill', path: Clickons.Solid.Moon }], 'Clickons', 'Weather', ['Dark', 'Night']),
-    new icon('Humidity', [{ id: 1, style: 'Stroke', path: Clickons.Outline.Humidity }, { id: 2, style: 'Fill', path: Clickons.Solid.Humidity }], 'Clickons', 'Weather', ['Dark', 'Night']),
-    new icon('Themomether', [{ id: 1, style: 'Stroke', path: Clickons.Outline.Temp }, { id: 2, style: 'Fill', path: Clickons.Solid.Temp }], 'Clickons', 'Weather', ['Temperature']),
-    new icon('Snowflake', [{ id: 1, style: 'Stroke', path: Clickons.Outline.Snowflake }, { id: 2, style: 'Fill', path: Clickons.Solid.Snowflake }], 'Clickons', 'Weather'),
-    new icon('Lightning', [{ id: 1, style: 'Stroke', path: Clickons.Outline.Lightning }, { id: 2, style: 'Fill', path: Clickons.Solid.Lightning }], 'Clickons', 'Weather', ['Shock', 'Bolt', 'Flash']),
-    new icon('Umbrella', [{ id: 1, style: 'Stroke', path: Clickons.Outline.Umbrella }, { id: 2, style: 'Fill', path: Clickons.Solid.Umbrella }], 'Clickons', 'Weather'),
-    new icon('Wind', [{ id: 1, style: 'Stroke', path: Clickons.Outline.Wind }, { id: 2, style: 'Fill', path: Clickons.Solid.Wind }], 'Clickons', 'Weather'),
-    new icon('Cloud', [{ id: 1, style: 'Stroke', path: Clickons.Outline.Cloud }, { id: 2, style: 'Fill', path: Clickons.Solid.Cloud }], 'Clickons', 'Weather'),
-    new icon('Cloud-Thunder', [{ id: 1, style: 'Stroke', path: Clickons.Outline.Thunder }, { id: 2, style: 'Fill', path: Clickons.Solid.Thunder }], 'Clickons', 'Weather'),
-    new icon('Cloud-Snow', [{ id: 1, style: 'Stroke', path: Clickons.Outline.Snow }, { id: 2, style: 'Fill', path: Clickons.Solid.Snow }], 'Clickons', 'Weather'),
-    new icon('Cloud-Rain', [{ id: 1, style: 'Stroke', path: Clickons.Outline.Rain }, { id: 2, style: 'Fill', path: Clickons.Solid.Rain }], 'Clickons', 'Weather'),
-    new icon('Stars', [{ id: 1, style: 'Stroke', path: Clickons.Outline.Stars }, { id: 2, style: 'Fill', path: Clickons.Solid.Stars }], 'Clickons', 'Weather'),
-    new icon('Sunset', [{ id: 1, style: 'Stroke', path: Clickons.Outline.Sunset }, { id: 2, style: 'Fill', path: Clickons.Solid.Sunset }], 'Clickons', 'Weather', ['Brightness']),
-    new icon('Hurricane', [{ id: 1, style: 'Stroke', path: Clickons.Outline.Hurricane }, { id: 2, style: 'Fill', path: Clickons.Solid.Hurricane }], 'Clickons', 'Weather', ['Wind']),
-    new icon('Eclipse', [{ id: 1, style: 'Stroke', path: Clickons.Outline.Eclipse }, { id: 2, style: 'Fill', path: Clickons.Solid.Eclipse }], 'Clickons', 'Weather', ['Moon']),
-
-    //People
-    new icon('User', [{ id: 1, style: 'Stroke', path: Clickons.Outline.UserCirc }, { id: 2, style: 'Fill', path: Clickons.Solid.UserCirc }], 'Clickons', 'People'),
-    new icon('User-Circle', [{ id: 1, style: 'Stroke', path: Clickons.Outline.User }, { id: 2, style: 'Fill', path: Clickons.Solid.User }], 'Clickons', 'People'),
-    new icon('User-Block', [{ id: 1, style: 'Stroke', path: Clickons.Outline.Ban }, { id: 2, style: 'Fill', path: Clickons.Solid.Ban }], 'Clickons', 'People'),
-    new icon('User-Add', [{ id: 1, style: 'Stroke', path: Clickons.Outline.Add }, { id: 2, style: 'Fill', path: Clickons.Solid.Add }], 'Clickons', 'People'),
-    new icon('User-Approve', [{ id: 1, style: 'Stroke', path: Clickons.Outline.Approve }, { id: 2, style: 'Fill', path: Clickons.Solid.Approve }], 'Clickons', 'People'),
-    new icon('User-Edit', [{ id: 1, style: 'Stroke', path: Clickons.Outline.Edit }, { id: 2, style: 'Fill', path: Clickons.Solid.Edit }], 'Clickons', 'People'),
-    new icon('Scan', [{ id: 1, style: 'Stroke', path: Clickons.Outline.Scan }, { id: 2, style: 'Fill', path: Clickons.Solid.Scan }], 'Clickons', 'People', ['FaceID']),
-    new icon('Users', [{ id: 1, style: 'Stroke', path: Clickons.Outline.Users }, { id: 2, style: 'Fill', path: Clickons.Solid.Users }], 'Clickons', 'People'),
-    new icon('Users-1', [{ id: 1, style: 'Stroke', path: Clickons.Outline.Users1 }, { id: 2, style: 'Fill', path: Clickons.Solid.Users1 }], 'Clickons', 'People'),
-    new icon('Male', [{ id: 1, style: 'Stroke', path: Clickons.Outline.Male }, { id: 2, style: 'Fill', path: Clickons.Solid.Male }], 'Clickons', 'People', ['Person', 'People']),
-    new icon('Female', [{ id: 1, style: 'Stroke', path: Clickons.Outline.Female }, { id: 2, style: 'Fill', path: Clickons.Solid.Female }], 'Clickons', 'People', ['Person', 'People']),
-    new icon('Deal', [{ id: 1, style: 'Stroke', path: Clickons.Outline.Deal }, { id: 2, style: 'Fill', path: Clickons.Solid.Deal }], 'Clickons', 'People', ['Person', 'People']),
-
-    //System & Devices
-    new icon('Smartphone', [{ id: 1, style: 'Stroke', path: Clickons.Outline.Mobile }, { id: 2, style: 'Fill', path: Clickons.Solid.Mobile }], 'Clickons', 'System & Devices', ['Android', 'iPhone']),
-    new icon('Monitor', [{ id: 1, style: 'Stroke', path: Clickons.Outline.Monitor }, { id: 2, style: 'Fill', path: Clickons.Solid.Monitor }], 'Clickons', 'System & Devices', ['Desktop', 'Television', 'iMac']),
-    new icon('Mouse', [{ id: 1, style: 'Stroke', path: Clickons.Outline.Mouse }, { id: 2, style: 'Fill', path: Clickons.Solid.Mouse }], 'Clickons', 'System & Devices'),
-    new icon('Keyboard', [{ id: 1, style: 'Stroke', path: Clickons.Outline.Keyboard }, { id: 2, style: 'Fill', path: Clickons.Solid.Keyboard }], 'Clickons', 'System & Devices'),
-    new icon('Earbuds', [{ id: 1, style: 'Stroke', path: Clickons.Outline.Earbuds }, { id: 2, style: 'Fill', path: Clickons.Solid.Earbuds }], 'Clickons', 'System & Devices', ['Headphones']),
-    new icon('Camera', [{ id: 1, style: 'Stroke', path: Clickons.Outline.Camera }, { id: 2, style: 'Fill', path: Clickons.Solid.Camera }], 'Clickons', 'System & Devices'),
-    new icon('Modem', [{ id: 1, style: 'Stroke', path: Clickons.Outline.Modem }, { id: 2, style: 'Fill', path: Clickons.Solid.Modem }], 'Clickons', 'System & Devices', ['Hotspot']),
-    new icon('Clock', [{ id: 1, style: 'Stroke', path: Clickons.Outline.Time }, { id: 2, style: 'Fill', path: Clickons.Solid.Time }], 'Clickons', 'System & Devices'),
-    new icon('Devices', [{ id: 1, style: 'Stroke', path: Clickons.Outline.Devices }, { id: 2, style: 'Fill', path: Clickons.Solid.Devices }], 'Clickons', 'System & Devices', ['Monitor']),
-    new icon('Lock', [{ id: 1, style: 'Stroke', path: Clickons.Outline.Lock }, { id: 2, style: 'Fill', path: Clickons.Solid.Lock }], 'Clickons', 'System & Devices'),
-    new icon('Unlock', [{ id: 1, style: 'Stroke', path: Clickons.Outline.Unlock }, { id: 2, style: 'Fill', path: Clickons.Solid.Unlock }], 'Clickons', 'System & Devices'),
-    new icon('Battery', [{ id: 1, style: 'Stroke', path: Clickons.Outline.Battery }, { id: 2, style: 'Fill', path: Clickons.Solid.Battery }], 'Clickons', 'System & Devices'),
-    new icon('Wifi', [{ id: 1, style: 'Stroke', path: Clickons.Outline.Wifi }, { id: 2, style: 'Fill', path: Clickons.Solid.Wifi }], 'Clickons', 'System & Devices'),
-    new icon('Connection', [{ id: 1, style: 'Stroke', path: Clickons.Outline.Connection }, { id: 2, style: 'Fill', path: Clickons.Solid.Connection }], 'Clickons', 'System & Devices', ['Signal']),
-    new icon('Load', [{ id: 1, style: 'Stroke', path: Clickons.Outline.Load }, { id: 2, style: 'Fill', path: Clickons.Solid.Load }], 'Clickons', 'System & Devices'),
-    new icon('Gamepad', [{ id: 1, style: 'Stroke', path: Clickons.Outline.Gamepad }, { id: 2, style: 'Fill', path: Clickons.Solid.Gamepad }], 'Clickons', 'System & Devices', ['Controller', 'Joystick']),
-    new icon('Sim Card', [{ id: 1, style: 'Stroke', path: Clickons.Outline.Card }, { id: 2, style: 'Fill', path: Clickons.Solid.Card }], 'Clickons', 'System & Devices'),
-    new icon('Printer', [{ id: 1, style: 'Stroke', path: Clickons.Outline.Print }, { id: 2, style: 'Fill', path: Clickons.Solid.Print }], 'Clickons', 'System & Devices'),
-    new icon('Hard Drive', [{ id: 1, style: 'Stroke', path: Clickons.Outline.Storage }, { id: 2, style: 'Fill', path: Clickons.Solid.Storage }], 'Clickons', 'System & Devices', ['Storage']),
-
-    //Finance & Ecommerce
-    new icon('Coin', [{ id: 1, style: 'Stroke', path: Clickons.Outline.Coin }, { id: 2, style: 'Fill', path: Clickons.Solid.Coin }], 'Clickons', 'Finance & Ecommerce', ['Money', 'Cash']),
-    new icon('Money Bag', [{ id: 1, style: 'Stroke', path: Clickons.Outline.CoinsBag }, { id: 2, style: 'Fill', path: Clickons.Solid.CoinsBag }], 'Clickons', 'Finance & Ecommerce', ['Money', 'Cash']),
-    new icon('Coins', [{ id: 1, style: 'Stroke', path: Clickons.Outline.Coins }, { id: 2, style: 'Fill', path: Clickons.Solid.Coins }], 'Clickons', 'Finance & Ecommerce', ['Money', 'Cash']),
-    new icon('Wallet', [{ id: 1, style: 'Stroke', path: Clickons.Outline.Wallet }, { id: 2, style: 'Fill', path: Clickons.Solid.Wallet }], 'Clickons', 'Finance & Ecommerce'),
-    new icon('Shopping Bag', [{ id: 1, style: 'Stroke', path: Clickons.Outline.ShoppingBag }, { id: 2, style: 'Fill', path: Clickons.Solid.ShoppingBag }], 'Clickons', 'Finance & Ecommerce'),
-    new icon('Bank', [{ id: 1, style: 'Stroke', path: Clickons.Outline.Bank }, { id: 2, style: 'Fill', path: Clickons.Solid.Bank }], 'Clickons', 'Finance & Ecommerce', ['Temple']),
-    new icon('Safe', [{ id: 1, style: 'Stroke', path: Clickons.Outline.Safe }, { id: 2, style: 'Fill', path: Clickons.Solid.Safe }], 'Clickons', 'Finance & Ecommerce'),
-    new icon('Receipt', [{ id: 1, style: 'Stroke', path: Clickons.Outline.Receipt }, { id: 2, style: 'Fill', path: Clickons.Solid.Receipt }], 'Clickons', 'Finance & Ecommerce'),
-    new icon('Order', [{ id: 1, style: 'Stroke', path: Clickons.Outline.Order }, { id: 2, style: 'Fill', path: Clickons.Solid.Order }], 'Clickons', 'Finance & Ecommerce'),
-    new icon('Shopping Cart', [{ id: 1, style: 'Stroke', path: Clickons.Outline.Basket }, { id: 2, style: 'Fill', path: Clickons.Solid.Basket }], 'Clickons', 'Finance & Ecommerce'),
-    new icon('Cash', [{ id: 1, style: 'Stroke', path: Clickons.Outline.Money }, { id: 2, style: 'Fill', path: Clickons.Solid.Money }], 'Clickons', 'Finance & Ecommerce', ['Money', 'Currency', 'Banknote']),
-    new icon('Store', [{ id: 1, style: 'Stroke', path: Clickons.Outline.Store }, { id: 2, style: 'Fill', path: Clickons.Solid.Store }], 'Clickons', 'Finance & Ecommerce'),
-)
-
-export const version = 2.0;
+//Edge
+pushSVG('Battery Charging', Icons.Edge.BattCharge, 'Edge Icons', 'Outline')
+pushSVG('CalenderAlt', Icons.Edge.Calender, 'Edge Icons', 'Outline', ['Agenda'])
+pushSVG('Calender-Check', Icons.Edge.CalenderCHK, 'Edge Icons', 'Outline')
+pushSVG('Cash', Icons.Edge.Cash, 'Edge Icons', 'Outline', ['Money', 'Currency'])
+pushSVG('Euro', Icons.Edge.Euro, 'Edge Icons', 'Outline', ['Money', 'Currency'])
+pushSVG('Pound', Icons.Edge.Pound, 'Edge Icons', 'Outline', ['Money', 'Currency'])
+pushSVG('Ruble', Icons.Edge.Ruble, 'Edge Icons', 'Outline', ['Money', 'Currency'])
+pushSVG('Yen', Icons.Edge.Yen, 'Edge Icons', 'Outline', ['Money', 'Currency'])
+pushSVG('Coins', Icons.Edge.Coins, 'Edge Icons', 'Outline', ['Money', 'Currency'])
+pushSVG('Chart-Histogram', Icons.Edge.ChartHis, 'Edge Icons', 'Outline')
+pushSVG('Chart-Line', Icons.Edge.ChartLine, 'Edge Icons', 'Outline')
+pushSVG('Presentation', Icons.Edge.Presentation, 'Edge Icons', 'Outline')
+pushSVG('Sitemap', Icons.Edge.Sitemap, 'Edge Icons', 'Outline')
+pushSVG('Comment-r', Icons.Edge.CommentR, 'Edge Icons', 'Outline', ['Chat'])
+pushSVG('Comments', Icons.Edge.Comments, 'Edge Icons', 'Outline', ['Chat'])
+pushSVG('Cup', Icons.Edge.Cup, 'Edge Icons', 'Outline')
+pushSVG('Dashboard', Icons.Edge.Dash, 'Edge Icons', 'Outline')
+pushSVG('Flag-Alt', Icons.Edge.FlagAlt, 'Edge Icons', 'Outline')
+pushSVG('Folder-Check', Icons.Edge.FolderCheck, 'Edge Icons', 'Outline')
+pushSVG('Gear', Icons.Edge.Gear, 'Edge Icons', 'Outline')
+pushSVG('Link-r', Icons.Edge.Linkr, 'Edge Icons', 'Outline')
+pushSVG('No Entry', Icons.Edge.NoEntry, 'Edge Icons', 'Outline', ['Cone'])
+pushSVG('Plane', Icons.Edge.Plane, 'Edge Icons', 'Outline')
+pushSVG('Rocket', Icons.Edge.Rocket, 'Edge Icons', 'Outline')
+pushSVG('Phone-r', Icons.Edge.Phoner, 'Edge Icons', 'Outline')
+pushSVG('Question-Circle', Icons.Edge.QtnCirc, 'Edge Icons', 'Outline')
+pushSVG('Shield-Check', Icons.Edge.SheildChk, 'Edge Icons', 'Outline')
 
 //Extract Categories from Icons
-export const categories = [...new Set(icons.map((icon) => {
-    if (icon.category && icon.category !== null)
-        return icon.category
-}))];
+export const categories = [...new Set(icons.map((icon) => icon.category))];
 
 export default icons

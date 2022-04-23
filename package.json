@@ -1,6 +1,6 @@
 {
-    "name": "craftwork-icons",
-    "version": "2.0.0",
+    "name": "basil-icons",
+    "version": "1.0.0",
     "description": "Collection of beautiful icons from Craftwork",
     "repository": {
         "type": "git",
@@ -11,10 +11,7 @@
     "keywords": [
         "icons",
         "figma",
-        "basil",
-        "clickons",
-        "edge",
-        "craftwork"
+        "basil"
     ],
     "scripts": {
         "build": "webpack --mode=production",

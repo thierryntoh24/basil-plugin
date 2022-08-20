@@ -1,10 +1,10 @@
 # Craftwork Icons Plugin
 
-Craftwork icons plugin provides a free and growing collection of the cuttiest open source icons from [Craftwork](https://craftwork.desisgn).
+Craftwork icons plugin provides a free and growing collection of awesome open source icons from [Craftwork](https://craftwork.desisgn).
 
 ![Cover](Screenshot.png)
 
-Over 650 and growing icons in 3 packs and various commonly used categories to help you in search of what you need.
+Over 930 and growing icons in 4 packs and various commonly used categories to help you in search of what you need.
 
 ### Install the [Craftwork Icons Plugin](https://www.figma.com/community/plugin/1047665302404244638) in Figma.
 

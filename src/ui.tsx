@@ -35,8 +35,8 @@ function App() {
   return (
     <div className="wrapper-div">
       <SearchInput
-        key={activePack}
-        
+        key={Math.floor(Math.random() * 100)}
+
         value={query}
         onChange={(event) => setQuery(event.target.value)}
 
@@ -63,6 +63,7 @@ function App() {
                   <>
                     <p style={{ paddingLeft: 8, fontSize: 14 }}>{category}</p>
                     <div
+                      key={category}
                       style={{
                         display: "grid",
                         gridTemplateColumns: "repeat(6, 1fr)",
@@ -72,6 +73,7 @@ function App() {
                       {results.filter((icon) => (icon.pack === activePack) && (icon.category == category)).map((icon) => icon.paths.filter(path =>
                         path.style === isSelected).map(path => (
                           <IconButton
+                            key={path.id}
                             name={icon.name}
                             contents={path.path}
                             id={path.id}
@@ -88,9 +90,9 @@ function App() {
             {
               results ? (
                 [...new Set(results.map(icon => icon.pack))].map(pack => (<>
-                  <p style={{ paddingLeft: 8, fontSize: 14 }}>{pack}</p>
+                  <p key={pack} style={{ paddingLeft: 8, fontSize: 14 }}>{pack}</p>
 
-                  <div
+                  <div key={pack}
                     style={{
                       display: "grid",
                       gridTemplateColumns: "repeat(6, 1fr)",
@@ -99,6 +101,7 @@ function App() {
                   >
                     {results.filter(icon => icon.pack === pack).map((icon) => icon.paths.map(path => (
                       <IconButton
+                        key={path.id}
                         name={icon.name}
                         contents={path.path}
                         id={path.id}

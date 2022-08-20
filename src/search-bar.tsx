@@ -1,6 +1,6 @@
 import * as React from "react";
 import icons from "./icons";
-import { Basil, Edge } from "../icons/icons";
+import { Basil, Edge } from "../icons/index";
 
 interface SearchInputProps extends React.HTMLProps<HTMLDivElement> {
   value: string
@@ -20,6 +20,7 @@ function SearchInput({ value, packs, activePack, isSelected, onChange, setSelect
       'Basil': ['Outline', 'Solid'],
       'Edge': ['Regular', 'Thin', 'Medium'],
       'Clickons': ['Stroke', 'Fill'],
+      'Circum': ['Thin'],
     }
 
   let state: string;
@@ -29,7 +30,7 @@ function SearchInput({ value, packs, activePack, isSelected, onChange, setSelect
       <div className="tabs">
         {
           packs.map(pack => (<>
-            <div className={`pack ${activePack === pack ? state = 'active' : null}`} onClick={() => { setActivePack(pack); setSelected(styles[pack][0]); }}>
+            <div key={pack} className={`pack ${activePack === pack ? state = 'active' : null}`} onClick={() => { setActivePack(pack); setSelected(styles[pack][0]); }}>
               {`${pack} (${icons.filter(icon => icon.pack === pack).length})`}
             </div>
           </>
@@ -60,7 +61,7 @@ function SearchInput({ value, packs, activePack, isSelected, onChange, setSelect
             isDropped && (
               <div className="style-options">
                 {styles[activePack].map(style => (
-                  <div className='option' onClick={() => {
+                  <div key={style} className='option' onClick={() => {
                     setIsDropped(!isDropped);
                     setSelected(style)
                   }}>

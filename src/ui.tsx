@@ -92,7 +92,7 @@ function App() {
                 [...new Set(results.map(icon => icon.pack))].map(pack => (<>
                   <p key={pack} style={{ paddingLeft: 8, fontSize: 14 }}>{pack}</p>
 
-                  <div key={pack}
+                  <div
                     style={{
                       display: "grid",
                       gridTemplateColumns: "repeat(6, 1fr)",

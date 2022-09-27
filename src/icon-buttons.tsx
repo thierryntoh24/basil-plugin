@@ -9,17 +9,6 @@ interface IconButtonProps {
   category: string
 }
 
-const postIconData = async (iconData: IconButtonProps, callback: (error: string | null) => void) => {
-  await axios({
-    method: 'POST',
-    url: `https://416.io/external/figma/ping`,
-    data: { iconData }
-  }).then(response => {
-    if (response.status !== 200) callback(`Unable to ping endpoint! ::: ${response.status}`)
-    else console.info('Pinged succefully')
-  }).catch(error => callback(`Unable to ping endpoint!, ${error.message}`))
-}
-
 /**interface for individual icon button */
 function IconButton({ name, contents, id, pack, category }: IconButtonProps) {
   return (
@@ -27,8 +16,7 @@ function IconButton({ name, contents, id, pack, category }: IconButtonProps) {
       key={name}
       aria-label={name}
       onClick={async () => {
-        parent.postMessage({ pluginMessage: { type: name, pack: pack, id: id, category: category } }, "*");
-        await postIconData({name, contents, id, pack, category}, error => { if (error) console.log(error)})
+        parent.postMessage({ pluginMessage: { type: name, pack: pack, id: id, category: category } }, "*")
       }}
     >
       <svg
